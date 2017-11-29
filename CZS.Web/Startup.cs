@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CZS.Web.Data;
+using DotNetify;
+using DotNetify.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CZS_Web
+namespace CZS.Web
 {
     public class Startup
     {
@@ -22,6 +22,12 @@ namespace CZS_Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddMemoryCache();
+            services.AddSignalR();
+            services.AddDotNetify();
             services.AddMvc();
         }
 
@@ -54,6 +60,11 @@ namespace CZS_Web
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            app.UseWebSockets();
+            app.UseSignalR(routes => routes.MapDotNetifyHub());
+            app.UseDotNetify(config =>
+                config.UseFilter<AuthorizeFilter>());
         }
     }
 }

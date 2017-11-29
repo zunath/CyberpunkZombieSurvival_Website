@@ -22,6 +22,11 @@
       "from": "@types/react-dom@15.5.1",
       "resolved": "https://registry.npmjs.org/@types/react-dom/-/react-dom-15.5.1.tgz"
     },
+    "@types/react-fontawesome": {
+      "version": "1.6.1",
+      "from": "@types/react-fontawesome@latest",
+      "resolved": "https://registry.npmjs.org/@types/react-fontawesome/-/react-fontawesome-1.6.1.tgz"
+    },
     "@types/react-hot-loader": {
       "version": "3.0.3",
       "from": "@types/react-hot-loader@3.0.3",
@@ -793,6 +798,30 @@
       "from": "domain-task@3.0.3",
       "resolved": "https://registry.npmjs.org/domain-task/-/domain-task-3.0.3.tgz"
     },
+    "dotnetify": {
+      "version": "2.0.8-beta",
+      "from": "https://registry.npmjs.org/dotnetify/-/dotnetify-2.0.8-beta.tgz",
+      "resolved": "https://registry.npmjs.org/dotnetify/-/dotnetify-2.0.8-beta.tgz",
+      "dependencies": {
+        "create-react-class": {
+          "version": "15.6.2",
+          "from": "create-react-class@>=15.6.2 <16.0.0",
+          "resolved": "https://registry.npmjs.org/create-react-class/-/create-react-class-15.6.2.tgz"
+        },
+        "prop-types": {
+          "version": "15.6.0",
+          "from": "prop-types@>=15.6.0 <16.0.0",
+          "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.6.0.tgz",
+          "dependencies": {
+            "fbjs": {
+              "version": "0.8.16",
+              "from": "fbjs@>=0.8.16 <0.9.0",
+              "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.8.16.tgz"
+            }
+          }
+        }
+      }
+    },
     "ee-first": {
       "version": "1.1.1",
       "from": "ee-first@1.1.1",
@@ -959,6 +988,11 @@
       "version": "1.0.2",
       "from": "flatten@>=1.0.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/flatten/-/flatten-1.0.2.tgz"
+    },
+    "font-awesome": {
+      "version": "4.7.0",
+      "from": "https://registry.npmjs.org/font-awesome/-/font-awesome-4.7.0.tgz",
+      "resolved": "https://registry.npmjs.org/font-awesome/-/font-awesome-4.7.0.tgz"
     },
     "for-in": {
       "version": "1.0.2",
@@ -1317,6 +1351,11 @@
       "version": "3.2.1",
       "from": "jquery@3.2.1",
       "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.2.1.tgz"
+    },
+    "jquery-deferred": {
+      "version": "0.3.1",
+      "from": "jquery-deferred@>=0.3.1 <0.4.0",
+      "resolved": "https://registry.npmjs.org/jquery-deferred/-/jquery-deferred-0.3.1.tgz"
     },
     "js-base64": {
       "version": "2.1.9",
@@ -2136,6 +2175,11 @@
       "version": "15.6.1",
       "from": "react-dom@15.6.1",
       "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.6.1.tgz"
+    },
+    "react-fontawesome": {
+      "version": "1.6.1",
+      "from": "react-fontawesome@latest",
+      "resolved": "https://registry.npmjs.org/react-fontawesome/-/react-fontawesome-1.6.1.tgz"
     },
     "react-hot-loader": {
       "version": "3.0.0-beta.7",

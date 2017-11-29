@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs":  true, 
     "baseUrl": ".",
     "module": "es2015",
     "moduleResolution": "node",
@@ -9,8 +10,8 @@
     "sourceMap": true,
     "skipDefaultLibCheck": true,
     "strict": true,
-    "lib": ["es6", "dom"],
-    "types": ["webpack-env"]
+    "lib": [ "es6", "dom" ],
+    "types": [ "webpack-env" ]
   },
   "exclude": [
       "bin",
