@@ -6,14 +6,14 @@ export default class Home extends React.Component<RouteComponentProps<{}>, any> 
     
     constructor(props: any) {
         super(props);
-        dotnetify.react.connect('TestData', this);
-        this.state = { testValue: 'test' }
+        dotnetify.react.connect('HomeViewModel', this);
+        this.state = { TestValue: '' }
     }
 
     public render() {
         return <div>
 
-            <h1>{this.state.testValue}</h1>
+            <h1>{this.state.TestValue}</h1>
 
             <h1>Hello, world!</h1>
             <p>Welcome to your new single-page application, built with:</p>
