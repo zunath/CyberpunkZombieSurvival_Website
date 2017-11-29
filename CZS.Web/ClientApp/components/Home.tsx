@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import * as dotnetify from 'dotnetify';
 
-
-export default class Home extends React.Component<RouteComponentProps<{}>, {}> {
-
+export default class Home extends React.Component<RouteComponentProps<{}>, any> {
+    
     constructor(props: any) {
         super(props);
-        this.state = { TestValue : ''}
+        dotnetify.react.connect('TestData', this);
+        this.state = { testValue: 'test' }
     }
 
     public render() {
         return <div>
-            
+
+            <h1>{this.state.testValue}</h1>
+
             <h1>Hello, world!</h1>
             <p>Welcome to your new single-page application, built with:</p>
             <ul>

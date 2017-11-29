@@ -29,7 +29,9 @@ module.exports = (env) => {
                 'redux',
                 'redux-thunk',
                 'react-router-redux',
-                'jquery'
+                'jquery',
+                'dotnetify',
+                'font-awesome/css/font-awesome.css'
             ],
         },
         output: {

@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowJs":  true, 
     "baseUrl": ".",
     "module": "es2015",
     "moduleResolution": "node",
