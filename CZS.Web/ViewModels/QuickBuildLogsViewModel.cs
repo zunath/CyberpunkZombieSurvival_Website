@@ -6,13 +6,13 @@ using DotNetify;
 
 namespace CZS.Web.ViewModels
 {
-    public class QuickBuildLogViewModel: BaseVM
+    public class QuickBuildLogsViewModel: BaseVM
     {
         public IEnumerable<StructureQuickBuildAudit> QuickBuildLogs { get; set; }
 
         public string QuickBuildLogs_itemkey => nameof(StructureQuickBuildAudit.StructureQuickBuildId);
 
-        public QuickBuildLogViewModel(DataContext db)
+        public QuickBuildLogsViewModel(DataContext db)
         {
             QuickBuildLogs = db.StructureQuickBuildAudit.OrderBy(o => o.DateBuilt).ToList();
         }

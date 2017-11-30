@@ -6,13 +6,13 @@ using DotNetify;
 
 namespace CZS.Web.ViewModels
 {
-    public class ConnectionLogViewModel: BaseVM
+    public class ConnectionLogsViewModel: BaseVM
     {
         public IEnumerable<ClientLogEvents> ConnectionLogs { get; set; }
 
         public string ConnectionLogs_itemkey => nameof(ClientLogEvents.ClientLogEventId);
 
-        public ConnectionLogViewModel(DataContext db)
+        public ConnectionLogsViewModel(DataContext db)
         {
             ConnectionLogs = db.ClientLogEvents.OrderBy(o => o.DateOfEvent).ToList();
         }
