@@ -22,8 +22,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\About.tsx" />
+    <None Remove="ClientApp\components\admin\logs\Logs.tsx" />
+    <None Remove="ClientApp\components\admin\logs\QuickBuildLog.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\components\admin\dm-management\" />
+    <Folder Include="ClientApp\components\admin\loot-table-editor\" />
+    <Folder Include="ClientApp\components\admin\quest-editor\" />
     <Folder Include="Data\" />
     <Folder Include="Wiki\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\About.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\logs\ConnectionLog.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\logs\ChatLog.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\logs\Logs.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\logs\QuickBuildLog.tsx" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

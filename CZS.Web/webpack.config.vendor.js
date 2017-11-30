@@ -19,6 +19,7 @@ module.exports = (env) => {
             vendor: [
                 'bootstrap',
                 'bootstrap/dist/css/bootstrap.css',
+                'react-bootstrap',
                 'domain-task',
                 'event-source-polyfill',
                 'history',

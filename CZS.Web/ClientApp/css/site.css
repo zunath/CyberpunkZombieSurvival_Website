@@ -64,3 +64,15 @@
         text-overflow: ellipsis;
     }
 }
+
+.center {
+    text-align: center;
+}
+
+.greenText {
+    color: #2d792d;
+}
+
+.redText {
+    color: #dc1c17;
+}
