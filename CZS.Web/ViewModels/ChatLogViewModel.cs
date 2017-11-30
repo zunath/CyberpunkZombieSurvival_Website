@@ -12,9 +12,9 @@ namespace CZS.Web.ViewModels
 
         public string ChatLogs_itemkey => nameof(ChatLog.ChatLogId);
 
-        public ChatLogViewModel(DataContext dataContext)
+        public ChatLogViewModel(DataContext db)
         {
-            ChatLogs = dataContext.ChatLog.ToList();
+            ChatLogs = db.ChatLog.OrderBy(o => o.DateSent).ToList();
         }
     }
 }

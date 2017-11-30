@@ -8,12 +8,13 @@ namespace CZS.Web.ViewModels
 {
     public class QuickBuildLogViewModel: BaseVM
     {
-        public List<StructureQuickBuildAudit> QuickBuildLogs { get; set; }
+        public IEnumerable<StructureQuickBuildAudit> QuickBuildLogs { get; set; }
 
         public string QuickBuildLogs_itemkey => nameof(StructureQuickBuildAudit.StructureQuickBuildId);
 
-        public QuickBuildLogViewModel()
+        public QuickBuildLogViewModel(DataContext db)
         {
+            QuickBuildLogs = db.StructureQuickBuildAudit.OrderBy(o => o.DateBuilt).ToList();
         }
     }
 }

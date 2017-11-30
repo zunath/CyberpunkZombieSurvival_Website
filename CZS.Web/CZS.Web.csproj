@@ -23,8 +23,10 @@
 
   <ItemGroup>
     <None Remove="ClientApp\components\About.tsx" />
+    <None Remove="ClientApp\components\Admin.tsx" />
     <None Remove="ClientApp\components\admin\logs\Logs.tsx" />
     <None Remove="ClientApp\components\admin\logs\QuickBuildLog.tsx" />
+    <None Remove="ClientApp\components\Header.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,11 +38,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\Admin.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Downloads.tsx" />
     <TypeScriptCompile Include="ClientApp\components\About.tsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\logs\ConnectionLog.tsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\logs\ChatLog.tsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\logs\Logs.tsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\logs\QuickBuildLog.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Header.tsx" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

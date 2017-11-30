@@ -8,12 +8,13 @@ namespace CZS.Web.ViewModels
 {
     public class ConnectionLogViewModel: BaseVM
     {
-        public List<ClientLogEvents> ConnectionLogs { get; set; }
+        public IEnumerable<ClientLogEvents> ConnectionLogs { get; set; }
 
         public string ConnectionLogs_itemkey => nameof(ClientLogEvents.ClientLogEventId);
 
-        public ConnectionLogViewModel()
+        public ConnectionLogViewModel(DataContext db)
         {
+            ConnectionLogs = db.ClientLogEvents.OrderBy(o => o.DateOfEvent).ToList();
         }
     }
 }
