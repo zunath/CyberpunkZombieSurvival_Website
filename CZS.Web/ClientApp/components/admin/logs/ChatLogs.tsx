@@ -57,7 +57,7 @@ export default class ChatLogs extends React.Component<any, any> {
                                                                         {obj.SenderAccountName}
                                                                     </td>
                                                                     <td>
-                                                                        {obj.SenderPlayerId === null ? obj.SenderDMName : obj.SenderPlayerId}
+                                                                        {obj.SenderPlayerName === null ? obj.SenderDMName : obj.SenderPlayerName}
                                                                     </td>
                                                                     <td>
                                                                         {obj.SenderCDKey}
@@ -66,10 +66,10 @@ export default class ChatLogs extends React.Component<any, any> {
                                                                         {obj.ReceiverAccountName}
                                                                     </td>
                                                                     <td>
-                                                                        {obj.ReceiverPlayerId === null ? obj.ReceiverDMName : obj.ReceiverPlayerId}
+                                                                        {obj.ReceiverPlayerName === null ? obj.ReceiverDMName : obj.ReceiverPlayerName}
                                                                     </td>
                                                                     <td>
-                                                                        {obj.ReceiverCdkey}
+                                                                        {obj.ReceiverCDKey}
                                                                     </td>
                                                                     <td>
                                                                         {obj.Message}

@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CZS.Web.Data;
-using CZS.Web.Data.Entities;
 using DotNetify;
 
 namespace CZS.Web.ViewModels.BaseViewModels
 {
-    public abstract class PaginateBaseVM<T>: BaseVM
+    public abstract class PaginateBaseVM: BaseVM
     {
         private readonly int _recordsPerPage;
 
-        private IEnumerable<T> FullItems { get; }
+        private IEnumerable<dynamic> FullItems { get; }
 
-        protected PaginateBaseVM(IEnumerable<T> fullItems,
+        protected PaginateBaseVM(IEnumerable<dynamic> fullItems,
             string itemKeyName,
             int recordsPerPage = 15)
         {
@@ -22,7 +20,7 @@ namespace CZS.Web.ViewModels.BaseViewModels
             PaginatedItems_itemkey = itemKeyName;
         }
 
-        public IEnumerable<T> PaginatedItems
+        public IEnumerable<dynamic> PaginatedItems
         {
             get
             {
@@ -67,13 +65,13 @@ namespace CZS.Web.ViewModels.BaseViewModels
         };
 
 
-        private IEnumerable<T> Paginate(IEnumerable<T> chatLogs)
+        private IEnumerable<dynamic> Paginate(IEnumerable<dynamic> items)
         {
             if (ChangedProperties.ContainsKey(nameof(SelectedPage)))
-                return chatLogs.Skip(_recordsPerPage * (SelectedPage)).Take(_recordsPerPage);
+                return items.Skip(_recordsPerPage * (SelectedPage)).Take(_recordsPerPage);
             else
             {
-                var enumerable = chatLogs as IList<T> ?? chatLogs.ToList();
+                var enumerable = items as IList<dynamic> ?? items.ToList();
                 var pageCount = (int)Math.Ceiling(enumerable.Count / (double)_recordsPerPage);
                 Pagination = Enumerable.Range(1, pageCount).ToArray();
                 return enumerable.Take(_recordsPerPage);

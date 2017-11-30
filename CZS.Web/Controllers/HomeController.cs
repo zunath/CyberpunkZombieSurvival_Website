@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using CZS.Web.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CZS.Web.Controllers
