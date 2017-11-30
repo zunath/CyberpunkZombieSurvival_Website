@@ -1,7 +1,6 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import * as dotnetify from 'dotnetify';
-import { Row, Table } from "reactstrap";
 
 export default class ConnectionLogs extends React.Component<any, any> {
     vm: any;
@@ -27,12 +26,8 @@ export default class ConnectionLogs extends React.Component<any, any> {
         return (
             <div>
                 
-                <Row>
-                    <h2 className="center">Connection Logs</h2>
-                </Row>
-
-                <Row>
-                    <Table striped>
+                <div className="row">
+                    <table className="table striped bordered">
                         <thead>
                         <tr>
                             <th>Date</th>
@@ -48,10 +43,10 @@ export default class ConnectionLogs extends React.Component<any, any> {
                                                                         {obj.DateOfEvent}
                                                                     </td>
                                                                     <td>
-                                                                        {this.getTypeOfLogin(obj.ClientLogEventTypeID)}
+                                                                        {this.getTypeOfLogin(obj.ClientLogEventTypeId)}
                                                                     </td>
                                                                     <td>
-                                                                        {obj.PlayerID}
+                                                                        {obj.PlayerId}
                                                                     </td>
                                                                     <td>
                                                                         {obj.CDKey}
@@ -61,8 +56,8 @@ export default class ConnectionLogs extends React.Component<any, any> {
                                                                     </td>
                                                                 </tr>)}
                         </tbody>
-                    </Table>
-                </Row>
+                    </table>
+                </div>
             
             </div>
         );

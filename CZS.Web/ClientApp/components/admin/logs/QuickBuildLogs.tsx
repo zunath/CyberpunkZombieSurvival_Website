@@ -1,5 +1,4 @@
 ﻿import * as React from 'react';
-import { Grid, Row, Table } from "reactstrap";
 import * as dotnetify from 'dotnetify';
 
 export default class QuickBuildLogs extends React.Component<any, any> {
@@ -17,13 +16,9 @@ export default class QuickBuildLogs extends React.Component<any, any> {
 
     render() {
         return <div>
-
-            <Row>
-                <h2 className="center">Quick Build Logs</h2>
-            </Row>
-
-            <Row>
-                <Table striped>
+            
+            <div className="row">
+                <table className="table striped bordered">
                     <thead>
                         <tr>
                             <th>PC Territory Flag ID</th>
@@ -50,8 +45,8 @@ export default class QuickBuildLogs extends React.Component<any, any> {
                             </tr>;
                         })}
                     </tbody>
-                </Table>
-            </Row>
+                </table>
+            </div>
         </div>;
     }
 }

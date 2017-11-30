@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Header from './Header';
-import { Grid, Row, Col, Table, Button, Container } from 'reactstrap';
+import Footer from './Footer';
 
 export class Layout extends React.Component<{}, {}> {
 
@@ -9,11 +9,15 @@ export class Layout extends React.Component<{}, {}> {
         return <div>
             <Header />
 
-            <Container>
-                <Row>
+            <div className="row">&nbsp;</div>
+
+            <div className="container-fluid">
+                <div className="row">
                     {this.props.children}
-                </Row>
-            </Container>
+                </div>
+            </div>
+
+            <Footer />
             
         </div>;
     }

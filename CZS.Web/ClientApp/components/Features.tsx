@@ -1,13 +1,12 @@
 ﻿import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import * as dotnetify from 'dotnetify';
 
-export default class About extends React.Component<any, any> {
+export default class Features extends React.Component<any, any> {
     vm: any;
 
     constructor(props: any) {
         super(props);
-        this.vm = dotnetify.react.connect('AboutViewModel', this);
+        this.vm = dotnetify.react.connect('FeaturesViewModel', this);
         this.state = {  }
     }
     
@@ -15,10 +14,10 @@ export default class About extends React.Component<any, any> {
         this.vm.$destroy();
     }
 
-    public render() {
+    render() {
         return (
             <div>
-                About
+                <h2 className="center">Features</h2>
             </div>
         );
 

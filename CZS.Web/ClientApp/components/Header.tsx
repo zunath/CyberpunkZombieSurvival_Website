@@ -1,7 +1,6 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import * as dotnetify from 'dotnetify';
-import { Row, Col, Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 
 export default class Header extends React.Component<any, any> {
     vm: any;
@@ -19,29 +18,35 @@ export default class Header extends React.Component<any, any> {
     public render() {
         return (
             <div>
-                <Navbar color="faded" light>
-                    <NavbarBrand href="/">Cyberpunk Zombie Survival</NavbarBrand>
-                    <Nav>
-                        <NavItem>
-                            <NavLink href="/about">About</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="/downloads">Downloads</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="https://discord.gg/sg45eY8" target="_blank">Discord (Chat)</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="http://czs.boards.net/" target="_blank">Forums</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="https://github.com/zunath/CyberpunkZombieSurvival_JVM" target="_blank">Source Code</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="/admin">Admin</NavLink>
-                        </NavItem>
-                    </Nav>
-                </Navbar>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <a className="navbar-brand" href="#">Cyberpunk Zombie Survival</a>
+
+                    <div className="collapse navbar-collapse">
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item">
+                                <a className="nav-link" href="/features">Features</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/downloads">Downloads</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="https://discord.gg/sg45eY8" target="_blank">Discord (Chat)</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="http://czs.wikia.com/" target="_blank">Wiki</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="http://czs.boards.net/" target="_blank">Forums</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="https://github.com/zunath/CyberpunkZombieSurvival_JVM" target="_blank">Source Code</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/admin">Admin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
         );
 

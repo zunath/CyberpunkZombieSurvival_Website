@@ -1,7 +1,6 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import * as dotnetify from 'dotnetify';
-import { Row, Col, Button, Card, CardBody, CardTitle, CardText } from 'reactstrap'
 
 export default class Admin extends React.Component<any, any> {
 
@@ -21,58 +20,64 @@ export default class Admin extends React.Component<any, any> {
         return (
             <div>
 
-                <Row>
-                    <h2 className="center">Admin Toolkit</h2>
-                </Row>
+                <h2 className="center">Admin Toolkit</h2>
 
-                <Row>
-                    <Col>
-                        <Card>
-                            <CardBody className="center">
-                                <CardTitle>Logs</CardTitle>
-                                <CardText>Search through log information collected on the server.</CardText>
+                <div className="row">
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-body center">
+                                <h4 className="card-title">Logs</h4>
+                                <p className="card-text">Search through log information collected on the server.</p>
 
-                                <Button href="/admin/logs">View Logs</Button>
-                            </CardBody>
+                                <a className="btn btn-primary" href="/admin/logs" role="button">
+                                    View Logs
+                                </a>
+                            </div>
 
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card>
-                            <CardBody className="center">
-                                <CardTitle>DM Management</CardTitle>
-                                <CardText>Add, remove, activate, or deactivate accounts from logging in as Dungeon Masters.</CardText>
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-body center">
+                                <h4 className="card-title">DM Management</h4>
+                                <p className="card-text">Add, remove, activate, or deactivate accounts from logging in as Dungeon Masters.</p>
 
-                                <Button href="/admin/dm-management">Manage DMs</Button>
-                            </CardBody>
+                                <a className="btn btn-primary" href="/admin/dm-management" role="button">
+                                    Manage DMs
+                                </a>
+                            </div>
 
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card>
-                            <CardBody className="center">
-                                <CardTitle>Loot Tables</CardTitle>
-                                <CardText>Adjust the items found in loot sites.</CardText>
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-body center">
+                                <h4 className="card-title">Loot Tables</h4>
+                                <p className="card-text">Adjust the items found in loot sites.</p>
 
-                                <Button href="/admin/loot-table-editor">Manage Loot Tables</Button>
-                            </CardBody>
+                                <a className="btn btn-primary" href="/admin/loot-table-editor" role="button">
+                                    Manage Loot Tables
+                                </a>
+                            </div>
 
-                        </Card>
-                    </Col>
+                        </div>
+                    </div>
 
-                    <Col>
-                        <Card>
-                            <CardBody className="center">
-                                <CardTitle>Quest Editor</CardTitle>
-                                <CardText>Add, remove, and edit quest information.</CardText>
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-body center">
+                                <h4 className="card-title">Quest Editor</h4>
+                                <p className="card-text">Add, remove, and edit quest information.</p>
 
-                                <Button href="/admin/quest-editor">Edit Quests</Button>
-                            </CardBody>
+                                <button className="btn btn-primary" href="/admin/quest-editor" role="button">
+                                    Edit Quests
+                                </button>
+                            </div>
 
-                        </Card>
-                    </Col>
+                        </div>
+                    </div>
 
-                </Row>
+                </div>
 
 
             </div>

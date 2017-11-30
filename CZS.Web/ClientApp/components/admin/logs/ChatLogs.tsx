@@ -1,7 +1,5 @@
 ﻿import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import * as dotnetify from 'dotnetify';
-import { Row, Table } from "reactstrap";
 
 export default class ChatLogs extends React.Component<any, any> {
     vm: any;
@@ -20,12 +18,8 @@ export default class ChatLogs extends React.Component<any, any> {
         return (
             <div>
                 
-                <Row>
-                    <h2 className="center">Chat Logs</h2>
-                </Row>
-
-                <Row>
-                    <Table striped>
+                <div className="row">
+                    <table className="table">
                         <thead>
                             <tr>
                                 <th>Sender Account</th>
@@ -45,7 +39,7 @@ export default class ChatLogs extends React.Component<any, any> {
                                                                         {obj.SenderAccountName}
                                                                     </td>
                                                                     <td>
-                                                                        {obj.SenderPlayerID === null ? obj.SenderDMName : obj.SenderPlayerID}
+                                                                        {obj.SenderPlayerId === null ? obj.SenderDMName : obj.SenderPlayerId}
                                                                     </td>
                                                                     <td>
                                                                         {obj.SenderCDKey}
@@ -54,10 +48,10 @@ export default class ChatLogs extends React.Component<any, any> {
                                                                         {obj.ReceiverAccountName}
                                                                     </td>
                                                                     <td>
-                                                                        {obj.ReceiverPlayerID === null ? obj.ReceiverDMName : obj.ReceiverPlayerID}
+                                                                        {obj.ReceiverPlayerId === null ? obj.ReceiverDMName : obj.ReceiverPlayerId}
                                                                     </td>
                                                                     <td>
-                                                                        {obj.ReceiverCDKey}
+                                                                        {obj.ReceiverCdkey}
                                                                     </td>
                                                                     <td>
                                                                         {obj.Message}
@@ -67,8 +61,8 @@ export default class ChatLogs extends React.Component<any, any> {
                                                                     </td>
                                                                 </tr>)}
                         </tbody>
-                    </Table>
-                </Row>
+                    </table>
+                </div>
             
             </div>
         );

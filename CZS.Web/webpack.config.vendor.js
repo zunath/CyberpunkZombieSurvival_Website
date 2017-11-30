@@ -18,8 +18,6 @@ module.exports = (env) => {
         entry: {
             vendor: [
                 'bootstrap',
-                'bootstrap/dist/css/bootstrap.css',
-                'reactstrap',
                 'domain-task',
                 'event-source-polyfill',
                 'history',
@@ -45,8 +43,7 @@ module.exports = (env) => {
             new webpack.ProvidePlugin({
                     $: 'jquery',
                     jQuery: 'jquery',
-                    'window.jQuery': 'jquery',
-                    Popper: ['popper.js', 'default']
+                    'window.jQuery': 'jquery'
                 }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
             new webpack.NormalModuleReplacementPlugin(/\/iconv-loader$/, require.resolve('node-noop')), // Workaround for https://github.com/andris9/encoding/issues/16
             new webpack.DefinePlugin({

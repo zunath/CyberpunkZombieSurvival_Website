@@ -2,7 +2,7 @@
 
 namespace CZS.Web.ViewModels
 {
-    public class AboutViewModel: BaseVM
+    public class FeaturesViewModel: BaseVM
     {
     }
 }

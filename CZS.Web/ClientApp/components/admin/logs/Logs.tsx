@@ -1,9 +1,7 @@
 ﻿import * as React from 'react';
-import { Nav, NavItem, NavLink, TabContent, TabPane, Row, Col } from 'reactstrap';
 import ChatLogs from './ChatLogs';
 import ConnectionLogs from './ConnectionLogs';
 import QuickBuildLogs from './QuickBuildLogs';
-import classnames from 'classnames';
 
 export default class Logs extends React.Component<any, any> {
 
@@ -25,52 +23,30 @@ export default class Logs extends React.Component<any, any> {
 
     render() {
         return <div>
-            <Nav tabs>
-                <NavItem>
-                    <NavLink
-                        className={classnames({ active: this.state.activeTab === '1' })}
-                        onClick={() => { this.toggle('1'); }}>
-                        Chat Logs
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink
-                        className={classnames({ active: this.state.activeTab === '2' })}
-                        onClick={() => { this.toggle('2'); }}>
-                        Connection Logs
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink
-                        className={classnames({ active: this.state.activeTab === '3' })}
-                        onClick={() => { this.toggle('3'); }}>
-                        Quick Build Logs
-                    </NavLink>
-                </NavItem>
-            </Nav>
-            <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="1">
-                    <Row>
-                        <Col>
-                            <ChatLogs />
-                        </Col>
-                    </Row>
-                </TabPane>
-                <TabPane tabId="2">
-                    <Row>
-                        <Col>
-                            <ConnectionLogs />
-                        </Col>
-                    </Row>
-                </TabPane>
-                <TabPane tabId="3">
-                    <Row>
-                        <Col>
-                            <QuickBuildLogs />
-                        </Col>
-                    </Row>
-                </TabPane>
-            </TabContent>
+            <ul className="nav nav-tabs" role="tablist">
+                <li className="nav-item">
+                    <a className="nav-link" data-toggle="tab" href="#nav-chatlogs" role="tab">Chat Logs</a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" data-toggle="tab" href="#nav-connectionlogs" role="tab">Connection Logs</a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" data-toggle="tab" href="#nav-quickbuildlogs" role="tab">Quick Build Logs</a>
+                </li>
+            </ul>
+
+            <div className="tab-content">
+                <div className="tab-pane active" id="nav-chatlogs" role="tabpanel">
+                    <ChatLogs />
+                </div>
+                <div className="tab-pane" id="nav-connectionlogs" role="tabpanel">
+                    <ConnectionLogs />
+                </div>
+                <div className="tab-pane" id="nav-quickbuildlogs" role="tabpanel">
+                    <QuickBuildLogs />
+                </div>
+            </div>
+            
 
 
         </div>;
