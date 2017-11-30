@@ -18,7 +18,7 @@ export default class QuickBuildLogs extends React.Component<any, any> {
         return <div>
             
             <div className="row">
-                <table className="table striped bordered">
+                <table className="table table-responsive">
                     <thead>
                         <tr>
                             <th>PC Territory Flag ID</th>

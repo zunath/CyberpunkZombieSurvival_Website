@@ -14,7 +14,7 @@ namespace CZS.Web.ViewModels
 
         public ConnectionLogsViewModel(DataContext db)
         {
-            ConnectionLogs = db.ClientLogEvents.OrderBy(o => o.DateOfEvent).ToList();
+            ConnectionLogs = db.ClientLogEvents.OrderByDescending(o => o.DateOfEvent).ToList();
         }
     }
 }

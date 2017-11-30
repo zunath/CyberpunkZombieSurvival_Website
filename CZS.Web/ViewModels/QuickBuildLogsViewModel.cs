@@ -14,7 +14,7 @@ namespace CZS.Web.ViewModels
 
         public QuickBuildLogsViewModel(DataContext db)
         {
-            QuickBuildLogs = db.StructureQuickBuildAudit.OrderBy(o => o.DateBuilt).ToList();
+            QuickBuildLogs = db.StructureQuickBuildAudit.OrderByDescending(o => o.DateBuilt).ToList();
         }
     }
 }

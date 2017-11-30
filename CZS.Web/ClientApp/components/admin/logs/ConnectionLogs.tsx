@@ -27,7 +27,7 @@ export default class ConnectionLogs extends React.Component<any, any> {
             <div>
                 
                 <div className="row">
-                    <table className="table striped bordered">
+                    <table className="table table-responsive">
                         <thead>
                         <tr>
                             <th>Date</th>
