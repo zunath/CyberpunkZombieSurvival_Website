@@ -1,14 +1,20 @@
 ﻿import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import * as dotnetify from 'dotnetify';
+import ReactPaginate from 'react-paginate';
 
 export default class ConnectionLogs extends React.Component<any, any> {
     vm: any;
+    dispatchState: any;
 
     constructor(props: any) {
         super(props);
         this.vm = dotnetify.react.connect('ConnectionLogsViewModel', this);
-        this.state = { ConnectionLogs: [] }
+
+        this.dispatchState = state => this.vm.$dispatch(state);
+
+        this.state = { PaginatedItems: [], Pages: 1, SelectedPage: 0 }
+
+        this.pageChanged = this.pageChanged.bind(this);
     }
 
     componentWillUnmount() {
@@ -20,6 +26,16 @@ export default class ConnectionLogs extends React.Component<any, any> {
             return <span className="greenText">Log In</span>;
         else
             return <span className="redText">Log Out</span>;
+    }
+
+    pageChanged(page) {
+        const pageIndex: number = page.selected;
+
+        this.setState({
+            SelectedPage: pageIndex
+        });
+
+        this.dispatchState({ ChangePage: pageIndex });
     }
 
     render() {
@@ -38,7 +54,7 @@ export default class ConnectionLogs extends React.Component<any, any> {
                         </tr>
                         </thead>
                         <tbody>
-                            {this.state.ConnectionLogs.map(obj => <tr key={obj.ClientLogEventId}>
+                            {this.state.PaginatedItems.map(obj => <tr key={obj.ClientLogEventId}>
                                                                     <td>
                                                                         {obj.DateOfEvent}
                                                                     </td>
@@ -49,7 +65,7 @@ export default class ConnectionLogs extends React.Component<any, any> {
                                                                         {obj.PlayerId}
                                                                     </td>
                                                                     <td>
-                                                                        {obj.CDKey}
+                                                                        {obj.Cdkey}
                                                                     </td>
                                                                     <td>
                                                                         {obj.AccountName}
@@ -58,7 +74,21 @@ export default class ConnectionLogs extends React.Component<any, any> {
                         </tbody>
                     </table>
                 </div>
-            
+
+                <ReactPaginate
+                    pageCount={this.state.Pages}
+                    pageRangeDisplayed={10}
+                    marginPagesDisplayed={3}
+                    pageClassName="page-item"
+                    nextClassName="page-item"
+                    previousClassName="page-item"
+                    pageLinkClassName="page-link"
+                    nextLinkClassName="page-link"
+                    previousLinkClassName="page-link"
+                    containerClassName="pagination pagination-lg pull-right"
+                    onPageChange={this.pageChanged}
+                >
+                </ReactPaginate>
             </div>
         );
 

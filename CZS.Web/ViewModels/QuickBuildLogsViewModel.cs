@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using CZS.Web.Data;
 using CZS.Web.Data.Entities;
-using DotNetify;
+using CZS.Web.ViewModels.BaseViewModels;
 
 namespace CZS.Web.ViewModels
 {
-    public class QuickBuildLogsViewModel: BaseVM
+    public class QuickBuildLogsViewModel: PaginateBaseVM<StructureQuickBuildAudit>
     {
-        public IEnumerable<StructureQuickBuildAudit> QuickBuildLogs { get; set; }
-
-        public string QuickBuildLogs_itemkey => nameof(StructureQuickBuildAudit.StructureQuickBuildId);
-
         public QuickBuildLogsViewModel(DataContext db)
+            : base(db.StructureQuickBuildAudit.OrderByDescending(o => o.DateBuilt),
+                  nameof(StructureQuickBuildAudit.StructureQuickBuildId))
         {
-            QuickBuildLogs = db.StructureQuickBuildAudit.OrderByDescending(o => o.DateBuilt).ToList();
         }
     }
 }

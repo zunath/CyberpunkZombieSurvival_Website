@@ -12,7 +12,7 @@ export default class ChatLogs extends React.Component<any, any> {
 
         this.dispatchState = state => this.vm.$dispatch(state);
 
-        this.state = { ChatLogs: [], Pages: 1, SelectedPage: 0 }
+        this.state = { PaginatedItems: [], Pages: 1, SelectedPage: 0 }
 
         this.pageChanged = this.pageChanged.bind(this);
     }
@@ -33,10 +33,6 @@ export default class ChatLogs extends React.Component<any, any> {
     }
 
     render() {
-
-        const handleGetNextPage = () => this.vm.$dispatch({NextPage: {} });
-        const handleGetPreviousPage = () => this.vm.$dispatch({PreviousPage: {} });
-
         
         return (
             <div>
@@ -56,7 +52,7 @@ export default class ChatLogs extends React.Component<any, any> {
                         </thead>
                         <tbody>
                                 
-                            {this.state.ChatLogs.map(obj => <tr key={obj.ChatLogId}>
+                            {this.state.PaginatedItems.map(obj => <tr key={obj.ChatLogId}>
                                                                     <td>
                                                                         {obj.SenderAccountName}
                                                                     </td>

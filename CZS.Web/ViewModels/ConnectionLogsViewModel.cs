@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using CZS.Web.Data;
 using CZS.Web.Data.Entities;
-using DotNetify;
+using CZS.Web.ViewModels.BaseViewModels;
 
 namespace CZS.Web.ViewModels
 {
-    public class ConnectionLogsViewModel: BaseVM
+    public class ConnectionLogsViewModel: PaginateBaseVM<ClientLogEvents>
     {
-        public IEnumerable<ClientLogEvents> ConnectionLogs { get; set; }
-
-        public string ConnectionLogs_itemkey => nameof(ClientLogEvents.ClientLogEventId);
-
         public ConnectionLogsViewModel(DataContext db)
+            :base(db.ClientLogEvents.OrderByDescending(o => o.DateOfEvent),
+                 nameof(ClientLogEvents.ClientLogEventId))
         {
-            ConnectionLogs = db.ClientLogEvents.OrderByDescending(o => o.DateOfEvent).ToList();
         }
     }
 }

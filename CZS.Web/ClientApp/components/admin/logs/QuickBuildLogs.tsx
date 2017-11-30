@@ -1,17 +1,34 @@
 ﻿import * as React from 'react';
 import * as dotnetify from 'dotnetify';
+import ReactPaginate from 'react-paginate';
 
 export default class QuickBuildLogs extends React.Component<any, any> {
     vm: any;
+    dispatchState: any;
 
     constructor(props: any) {
         super(props);
         this.vm = dotnetify.react.connect('QuickBuildLogsViewModel', this);
-        this.state = { QuickBuildLogs: [] };
+
+        this.dispatchState = state => this.vm.$dispatch(state);
+
+        this.state = { PaginatedItems: [], Pages: 1, SelectedPage: 0 };
+
+        this.pageChanged = this.pageChanged.bind(this);
     }
 
     componentWillUnmount() {
         this.vm.$destroy();
+    }
+
+    pageChanged(page) {
+        const pageIndex: number = page.selected;
+
+        this.setState({
+            SelectedPage: pageIndex
+        });
+
+        this.dispatchState({ ChangePage: pageIndex });
     }
 
     render() {
@@ -28,7 +45,7 @@ export default class QuickBuildLogs extends React.Component<any, any> {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.QuickBuildLogs.map(obj => {
+                        {this.state.PaginatedItems.map(obj => {
                             return <tr>
                                 <td>
                                     {obj.PCTerritoryFlagID}
@@ -47,6 +64,21 @@ export default class QuickBuildLogs extends React.Component<any, any> {
                     </tbody>
                 </table>
             </div>
+
+            <ReactPaginate
+                pageCount={this.state.Pages}
+                pageRangeDisplayed={10}
+                marginPagesDisplayed={3}
+                pageClassName="page-item"
+                nextClassName="page-item"
+                previousClassName="page-item"
+                pageLinkClassName="page-link"
+                nextLinkClassName="page-link"
+                previousLinkClassName="page-link"
+                containerClassName="pagination pagination-lg pull-right"
+                onPageChange={this.pageChanged}
+            >
+            </ReactPaginate>
         </div>;
     }
 }
