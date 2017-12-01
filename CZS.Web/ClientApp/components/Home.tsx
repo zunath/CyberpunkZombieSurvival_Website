@@ -12,9 +12,13 @@ export default class Home extends React.Component<any, any> {
             <div>
 
                 <h1 className="center">Welcome to Cyberpunk Zombie Survival!</h1>
-                <h4 className="center">A NeverWinter Nights Server</h4>
+                <h3 className="center">A NeverWinter Nights Server</h3>
+                <h5 className="center">
+                    Direct Connect: czs.eastus.cloudapp.azure.com:5121
+                </h5>
 
-                <Carousel showArrows={true}>
+
+                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} useKeyboardArrows={true} stopOnHover={true}>
                     <div>
                         <img src={SS1} alt="Screenshot 1"/>
                     </div>

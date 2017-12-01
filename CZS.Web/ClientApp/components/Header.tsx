@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as dotnetify from 'dotnetify';
 
 export default class Header extends React.Component<any, any> {
@@ -19,33 +19,35 @@ export default class Header extends React.Component<any, any> {
         return (
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-                    <a className="navbar-brand" href="#">Cyberpunk Zombie Survival</a>
+
+                    <Link className="navbar-brand" to="/">
+                        Cyberpunk Zombie Survival <br />
+                    </Link>
 
                     <div className="navbar">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link" href="/features">Features</a>
+                                <Link className="nav-link" to="/features">Features</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/downloads">Downloads</a>
+                                <Link className="nav-link" to="/downloads">Downloads</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="https://discord.gg/sg45eY8" target="_blank">Discord (Chat)</a>
+                                <Link className="nav-link" to="https://discord.gg/sg45eY8" target="_blank">Discord (Chat)</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="http://czs.wikia.com/" target="_blank">Wiki</a>
+                                <Link className="nav-link" to="http://czs.wikia.com/" target="_blank">Wiki</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="http://czs.boards.net/" target="_blank">Forums</a>
+                                <Link className="nav-link" to="http://czs.boards.net/" target="_blank">Forums</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="https://github.com/zunath/CyberpunkZombieSurvival_JVM" target="_blank">Source Code</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/admin">Admin</a>
+                                <Link className="nav-link" to="https://github.com/zunath/CyberpunkZombieSurvival_JVM" target="_blank">Source Code</Link>
                             </li>
                         </ul>
                     </div>
+
+
                 </nav>
             </div>
         );

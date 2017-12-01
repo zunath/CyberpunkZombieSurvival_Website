@@ -17,12 +17,7 @@ export const routes =
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/features" component={Features} />
-            <Route exact path="/admin" component={Admin} />
             <Route exact path="/downloads" component={Downloads} />
-            <Route exact path="/admin/logs" component={Logs} />
-            <Route exact path="/admin/chat-logs" component={ChatLogs} />
-            <Route exact path="/admin/connection-logs" component={ConnectionLogs} />
-            <Route exact path="/admin/quick-build-logs" component={QuickBuildLogs} />
             <Route component={NotFound} />
         </Switch>
     </Layout>;
