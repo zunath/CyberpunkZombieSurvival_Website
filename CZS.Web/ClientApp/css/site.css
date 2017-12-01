@@ -21,3 +21,8 @@
 body {
     position: relative;
 }
+
+.scrollable {
+    height: 200px;
+    overflow-y: scroll;
+}

@@ -48,6 +48,8 @@
     <TypeScriptCompile Include="ClientApp\components\Footer.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Header.tsx" />
     <TypeScriptCompile Include="ClientApp\components\NotFound.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\AbilityViewer.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SkillViewer.tsx" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
