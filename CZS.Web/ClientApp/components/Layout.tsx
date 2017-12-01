@@ -11,7 +11,7 @@ export class Layout extends React.Component<{}, {}> {
 
             <div className="row">&nbsp;</div>
 
-            <div className="container-fluid">
+            <div className="container">
                 <div className="row">
                     {this.props.children}
                 </div>
