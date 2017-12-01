@@ -9,3 +9,15 @@
 .redText {
     color: #dc1c17;
 }
+
+.sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 4rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+}
+
+body {
+    position: relative;
+}

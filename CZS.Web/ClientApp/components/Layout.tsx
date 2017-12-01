@@ -4,7 +4,7 @@ import Footer from './Footer';
 
 export class Layout extends React.Component<{}, {}> {
 
-    
+
     render() {
         return <div>
             <Header />
@@ -12,13 +12,13 @@ export class Layout extends React.Component<{}, {}> {
             <div className="row">&nbsp;</div>
 
             <div className="container">
-                <div className="row">
-                    {this.props.children}
-                </div>
+
+                {this.props.children}
+
             </div>
 
             <Footer />
-            
+
         </div>;
     }
 }
