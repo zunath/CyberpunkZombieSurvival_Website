@@ -31,39 +31,33 @@ export default class Features extends React.Component<any, any> {
                 <div className="row">
                     <div className="col-3">
 
-                        <div className="list-group sidebar" id="topics">
-
-                            <a href="/features#story" className="list-group-item list-group-item-action">
-                                Story
-                            </a>
-                            <a href="/features#survival" className="list-group-item list-group-item-action">
-                                Survival
-                            </a>
-                            <a href="/features#character-progression" className="list-group-item list-group-item-action">
-                                Character Progression
-                            </a>
-                            <a href="/features#structure-building" className="list-group-item list-group-item-action">
-                                Structure Building
-                            </a>
-                            <a href="/features#magic-and-abilities-system" className="list-group-item list-group-item-action">
-                                Magic + Abilities System
-                            </a>
-                            <a href="/features#crafting" className="list-group-item list-group-item-action">
-                                Crafting
-                            </a>
+                        <div className="sidebar">
+                            <h4 className="center">Quick Links</h4>
+                            <div className="list-group" id="topics">
+                                <a href="/features#survival" className="list-group-item list-group-item-action">
+                                    Survival
+                                </a>
+                                <a href="/features#character-progression" className="list-group-item list-group-item-action">
+                                    Character Progression
+                                </a>
+                                <a href="/features#structure-building" className="list-group-item list-group-item-action">
+                                    Structure Building
+                                </a>
+                                <a href="/features#magic-and-abilities-system" className="list-group-item list-group-item-action">
+                                    Magic + Abilities System
+                                </a>
+                                <a href="/features#crafting" className="list-group-item list-group-item-action">
+                                    Crafting
+                                </a>
+                            </div>
                         </div>
+                        
 
                     </div>
 
                     <div className="col-9">
                         <div data-spy="scroll" data-target="#topics" data-offset="0">
-                            <h4 className="center" id="story">Story</h4>
-                            <p>
-
-                            </p>
-
-                            <hr />
-
+                            
                             <h4 className="center" id="survival">Survival</h4>
                             <p>
                                 Cyberpunk Zombie Survival is a survival game first and foremost. This means a few things...
@@ -143,7 +137,7 @@ export default class Features extends React.Component<any, any> {
                                 You can also recover mana quicker by using crafted "Mana Kits".
                             </p>
 
-                            <AbilityViewer />
+                            <AbilityViewer abilities={this.state.Abilities} />
 
                             <hr />
 

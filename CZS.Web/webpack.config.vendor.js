@@ -9,7 +9,7 @@ module.exports = (env) => {
 
     const sharedConfig = {
         stats: { modules: false },
-        resolve: { extensions: [ '.js' ] },
+        resolve: { extensions: [ '.js', '.js.map' ] },
         module: {
             rules: [
                 { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
@@ -17,7 +17,8 @@ module.exports = (env) => {
         },
         entry: {
             vendor: [
-                'bootstrap',
+                'jquery',
+                'bootstrap/dist/js/bootstrap.bundle.js',
                 'domain-task',
                 'event-source-polyfill',
                 'history',
@@ -28,9 +29,9 @@ module.exports = (env) => {
                 'redux',
                 'redux-thunk',
                 'react-router-redux',
-                'jquery',
                 'dotnetify',
-                'font-awesome/css/font-awesome.css'
+                'font-awesome/css/font-awesome.css',
+                'react-responsive-carousel/lib/styles/carousel.css'
             ],
         },
         output: {

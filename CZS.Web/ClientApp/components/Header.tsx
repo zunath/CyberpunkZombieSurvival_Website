@@ -21,8 +21,8 @@ export default class Header extends React.Component<any, any> {
                 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                     <a className="navbar-brand" href="#">Cyberpunk Zombie Survival</a>
 
-                    <div className="collapse navbar-collapse">
-                        <ul className="navbar-nav mr-auto">
+                    <div className="navbar">
+                        <ul className="navbar-nav">
                             <li className="nav-item">
                                 <a className="nav-link" href="/features">Features</a>
                             </li>

@@ -1,42 +1,38 @@
 import * as React from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import * as SS1 from '../images/CZS_Screenshot_2.png';
+import * as SS2 from '../images/CZS_Screenshot_1.png';
+import * as SS3 from '../images/CZS_Screenshot_3.png';
+import * as SS4 from '../images/CZS_Screenshot_4.png';
+import * as SS5 from '../images/CZS_Screenshot_5.png';
 
 export default class Home extends React.Component<any, any> {
     render() {
         return (
             <div>
 
-                <h2 className="center">Welcome to Cyberpunk Zombie Survival!</h2>
+                <h1 className="center">Welcome to Cyberpunk Zombie Survival!</h1>
+                <h4 className="center">A NeverWinter Nights Server</h4>
 
-                <div className="row"> 
-                    <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-                        <ol className="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div className="carousel-inner">
-                            <div className="carousel-item active">
-                                <img className="d-block w-100" src="" alt="First slide" />
-                            </div>
-                            <div className="carousel-item">
-                                <img className="d-block w-100" src="" alt="Second slide" />
-                            </div>
-                            <div className="carousel-item">
-                                <img className="d-block w-100" src="" alt="Third slide" />
-                            </div>
-                        </div>
-                        <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span className="sr-only">Previous</span>
-                        </a>
-                        <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span className="sr-only">Next</span>
-                        </a>
+                <Carousel showArrows={true}>
+                    <div>
+                        <img src={SS1} alt="Screenshot 1"/>
+                    </div>
+                    <div>
+                        <img src={SS2} alt="Screenshot 2"/>
+                    </div>
+                    <div>
+                        <img src={SS3} alt="Screenshot 3"/>
+                    </div>
+                    <div>
+                        <img src={SS4} alt="Screenshot 4"/>
+                    </div>
+                    <div>
+                        <img src={SS5} alt="Screenshot 5"/>
                     </div>
 
-                </div>
-                
+                </Carousel>
+
             </div>
         );
 

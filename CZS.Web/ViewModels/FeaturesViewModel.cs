@@ -38,7 +38,9 @@ namespace CZS.Web.ViewModels
                 {
                     AbilityID = x.AbilityId,
                     x.Name,
-                    x.Description
+                    x.Description,
+                    ManaCost = x.BaseManaCost,
+                    CategoryName = x.AbilityCategory.Name
                 }).ToList();
         }
     }
