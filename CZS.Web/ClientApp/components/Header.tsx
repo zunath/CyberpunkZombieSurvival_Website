@@ -8,16 +8,19 @@ export default class Header extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.vm = dotnetify.react.connect('HeaderViewModel', this);
-        this.state = {}
+        this.state = { Username: '' }
     }
 
     componentWillUnmount() {
         this.vm.$destroy();
     }
 
-    public render() {
+    render() {
         return (
             <div>
+
+                Username: {this.state.Username}
+
                 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 
                     <Link className="navbar-brand" to="/">
@@ -44,6 +47,16 @@ export default class Header extends React.Component<any, any> {
                             <li className="nav-item">
                                 <Link className="nav-link" to="https://github.com/zunath/CyberpunkZombieSurvival_JVM" target="_blank">Source Code</Link>
                             </li>
+
+                            {this.state.Username === '' || this.state.Username === null || this.state.Username === undefined ?
+
+                                <li className="nav-item pull-right">
+                                    <a className="nav-link" href="/Discord/Login">Login (With Discord)</a>
+                                </li> :
+                                <li className="nav-item pull-right">
+                                    <Link className="nav-link" to="#">{this.state.Username}</Link>
+                                </li>
+                            }
                         </ul>
                     </div>
 

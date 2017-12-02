@@ -52,7 +52,7 @@ export default class ChatLogs extends React.Component<any, any> {
                         </thead>
                         <tbody>
                                 
-                            {this.state.PaginatedItems.map(obj => <tr key={obj.ChatLogId}>
+                            {this.state.PaginatedItems.map(obj => <tr key={obj.ChatLogID}>
                                                                     <td>
                                                                         {obj.SenderAccountName}
                                                                     </td>

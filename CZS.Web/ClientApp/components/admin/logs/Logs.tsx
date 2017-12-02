@@ -1,4 +1,5 @@
 ﻿import * as React from 'react';
+import { Link } from 'react-router-dom';
 import ChatLogs from './ChatLogs';
 import ConnectionLogs from './ConnectionLogs';
 import QuickBuildLogs from './QuickBuildLogs';
@@ -25,13 +26,13 @@ export default class Logs extends React.Component<any, any> {
         return <div>
             <ul className="nav nav-tabs" role="tablist">
                 <li className="nav-item active">
-                    <a className="nav-link" data-toggle="tab" href="#nav-chatlogs" role="tab">Chat Logs</a>
+                    <Link className="nav-link" data-toggle="tab" to="#nav-chatlogs" role="tab">Chat Logs</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" data-toggle="tab" href="#nav-connectionlogs" role="tab">Connection Logs</a>
+                    <Link className="nav-link" data-toggle="tab" to="#nav-connectionlogs" role="tab">Connection Logs</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" data-toggle="tab" href="#nav-quickbuildlogs" role="tab">Quick Build Logs</a>
+                    <Link className="nav-link" data-toggle="tab" to="#nav-quickbuildlogs" role="tab">Quick Build Logs</Link>
                 </li>
             </ul>
 

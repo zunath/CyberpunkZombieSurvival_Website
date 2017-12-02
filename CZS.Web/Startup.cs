@@ -1,12 +1,17 @@
+using System;
 using CZS.Web.Data;
+using CZS.Web.Services;
+using CZS.Web.Services.Contracts;
 using DotNetify;
 using DotNetify.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CZS.Web
 {
@@ -22,7 +27,7 @@ namespace CZS.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMemoryCache();
+            services.AddDistributedMemoryCache();
             services.AddSignalR();
             services.AddDotNetify();
 
@@ -30,8 +35,20 @@ namespace CZS.Web
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")),
                 ServiceLifetime.Transient,
                 ServiceLifetime.Transient);
-            
+
             services.AddMvc();
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".CZS.Web.Session";
+                options.IdleTimeout = TimeSpan.FromDays(7);
+            });
+
+
+            services.AddTransient<IDiscordAPIService, DiscordAPIService>();
+            services.AddTransient<IUserSessionService, UserSessionService>();
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
         }
 
@@ -54,11 +71,12 @@ namespace CZS.Web
 
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseMvc(routes =>
             {
-                //routes.MapRoute(
-                //    name: "default",
-                //    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
 
@@ -76,6 +94,7 @@ namespace CZS.Web
             app.UseSignalR(routes => routes.MapDotNetifyHub());
             app.UseDotNetify(config =>
                 config.UseFilter<AuthorizeFilter>());
+
         }
     }
 }

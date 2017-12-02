@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Carousel } from 'react-responsive-carousel';
+import { Link } from 'react-router-dom';
 import * as SS1 from '../images/CZS_Screenshot_2.png';
 import * as SS2 from '../images/CZS_Screenshot_1.png';
 import * as SS3 from '../images/CZS_Screenshot_3.png';
@@ -14,7 +15,7 @@ export default class Home extends React.Component<any, any> {
                 <h1 className="center">Welcome to Cyberpunk Zombie Survival!</h1>
                 <h3 className="center">A NeverWinter Nights Server</h3>
                 <h5 className="center">
-                    Direct Connect: czs.eastus.cloudapp.azure.com:5121
+                    Direct Connect: czs.eastus.cloudapp.azure.com:5121 <Link to="/downloads"><i>(Download Files)</i></Link>
                 </h5>
 
 

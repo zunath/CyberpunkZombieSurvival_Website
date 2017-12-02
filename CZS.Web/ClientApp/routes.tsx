@@ -13,11 +13,24 @@ import NotFound from './components/NotFound';
 
 export const routes =
     <Layout>
-        <Switch> 
+        <Switch>
+
+            /* Client Routes */
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/features" component={Features} />
+            <Route exact path="/admin" component={Admin} />
             <Route exact path="/downloads" component={Downloads} />
+            <Route exact path="/admin/logs" component={Logs} />
+            <Route exact path="/admin/chat-logs" component={ChatLogs} />
+            <Route exact path="/admin/connection-logs" component={ConnectionLogs} />
+            <Route exact path="/admin/quick-build-logs" component={QuickBuildLogs} />
+
+
+            /* Server Routes */
+            <Route path="/Discord/Login" />
+            <Route path="/Discord/Callback" />
+
             <Route component={NotFound} />
         </Switch>
     </Layout>;

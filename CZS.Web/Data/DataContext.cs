@@ -83,6 +83,7 @@ namespace CZS.Web.Data
         public virtual DbSet<StructureCategories> StructureCategories { get; set; }
         public virtual DbSet<StructureQuickBuildAudit> StructureQuickBuildAudit { get; set; }
         public virtual DbSet<TerritoryFlagPermissions> TerritoryFlagPermissions { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<ZombieClothes> ZombieClothes { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
@@ -2145,6 +2146,29 @@ namespace CZS.Web.Data
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(64);
+            });
+
+            modelBuilder.Entity<Users>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.Property(e => e.AccessToken).IsRequired();
+
+                entity.Property(e => e.DiscordUserId).HasColumnName("DiscordUserID");
+
+                entity.Property(e => e.Discriminator)
+                    .IsRequired()
+                    .HasMaxLength(4);
+
+                entity.Property(e => e.Email).IsRequired();
+
+                entity.Property(e => e.RefreshToken).IsRequired();
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(32);
             });
 
             modelBuilder.Entity<ZombieClothes>(entity =>
