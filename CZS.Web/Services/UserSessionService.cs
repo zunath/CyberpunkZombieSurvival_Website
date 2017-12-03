@@ -13,14 +13,14 @@ namespace CZS.Web.Services
             _contextAccessor = contextAccessor;
         }
 
-        public long UserID
+        public UserSession UserSession
         {
             get
             {
-                long userID = _contextAccessor.HttpContext.Session.Get<long>("UserID");
-                return userID <= 0 ? -1 : userID;
+                UserSession userSession = _contextAccessor.HttpContext.Session.Get<UserSession>("UserSession");
+                return userSession;
             }
-            set => _contextAccessor.HttpContext.Session.Set("UserID", value);
+            set => _contextAccessor.HttpContext.Session.Set("UserSession", value);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace CZS.Web.Services
     public class DiscordAPIService: IDiscordAPIService
     {
         private const string DiscordRoot = "https://discordapp.com/";
+        private const string DiscordCDNRoot = "https://cdn.discordapp.com/";
         private const string RedirectURL = "http://localhost:52894/Discord/Callback";
         private readonly string _clientID;
         private readonly string _secret;
@@ -71,6 +72,7 @@ namespace CZS.Web.Services
             user.Discriminator = json["discriminator"].Value<string>();
             user.Email = json["email"].Value<string>();
             user.DiscordUserId = json["id"].Value<long>();
+            user.AvatarHash = json["avatar"].Value<string>();
             
             var existingUser = _db.Users.SingleOrDefault(x => x.DiscordUserId == user.DiscordUserId);
             if (existingUser == null)
@@ -86,13 +88,18 @@ namespace CZS.Web.Services
                 existingUser.Discriminator = user.Discriminator;
                 existingUser.Email = user.Email;
                 existingUser.DiscordUserId = user.DiscordUserId;
+                existingUser.AvatarHash = user.AvatarHash;
 
                 user.UserId = existingUser.UserId;
             }
             
             _db.SaveChanges();
 
-            _userSession.UserID = user.UserId;
+            _userSession.UserSession = new UserSession
+            {
+                UserID = user.UserId,
+                DiscordAPIToken = user.AccessToken
+            };
 
             return "/";
         }
@@ -105,6 +112,11 @@ namespace CZS.Web.Services
             var response = await client.GetAsync($"{DiscordRoot}api/" + path);
             var responseString = await response.Content.ReadAsStringAsync();
             return JObject.Parse(responseString);
+        }
+
+        public string GetUserAvatarURL(long discordUserID, string avatarHash)
+        {
+            return DiscordCDNRoot + $"avatars/{discordUserID}/{avatarHash}.png";
         }
     }
 }

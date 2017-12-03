@@ -2169,6 +2169,9 @@ namespace CZS.Web.Data
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(32);
+
+                entity.Property(e => e.AvatarHash).IsRequired();
+
             });
 
             modelBuilder.Entity<ZombieClothes>(entity =>

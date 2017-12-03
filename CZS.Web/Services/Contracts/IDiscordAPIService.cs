@@ -8,5 +8,6 @@ namespace CZS.Web.Services.Contracts
         string BuildAuthorizeURL();
         Task<string> HandleCallbackAsync(string code, string error);
         Task<JObject> MakeAPICallAsync(string path, string token);
+        string GetUserAvatarURL(long discordUserID, string avatarHash);
     }
 }

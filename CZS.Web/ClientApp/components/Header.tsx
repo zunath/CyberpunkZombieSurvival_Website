@@ -8,7 +8,7 @@ export default class Header extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.vm = dotnetify.react.connect('HeaderViewModel', this);
-        this.state = { Username: '' }
+        this.state = { Username: '', AvatarURL: '' }
     }
 
     componentWillUnmount() {
@@ -30,31 +30,52 @@ export default class Header extends React.Component<any, any> {
                     <div className="navbar">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/features">Features</Link>
+                                <Link className="nav-link" to="/features">
+                                    <i className="fa fa-info-circle fa-lg" /> Features
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/downloads">Downloads</Link>
+                                <Link className="nav-link" to="/downloads">
+                                    <i className="fa fa-download fa-lg" /> Downloads
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="https://discord.gg/sg45eY8" target="_blank">Discord (Chat)</Link>
+                                <Link className="nav-link" to="https://discord.gg/sg45eY8" target="_blank">
+                                    <i className="fa fa-commenting-o fa-lg" /> Discord (Chat)
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="http://czs.wikia.com/" target="_blank">Wiki</Link>
+                                <Link className="nav-link" to="http://czs.wikia.com/" target="_blank">
+                                    <i className="fa fa-wikipedia-w fa-lg" /> Wiki
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="http://czs.boards.net/" target="_blank">Forums</Link>
+                                <Link className="nav-link" to="http://czs.boards.net/" target="_blank">
+                                    <i className="fa fa-th-list fa-lg" /> Forums
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="https://github.com/zunath/CyberpunkZombieSurvival_JVM" target="_blank">Source Code</Link>
+                                <Link className="nav-link" to="https://github.com/zunath/CyberpunkZombieSurvival_JVM" target="_blank">
+                                    <i className="fa fa-code fa-lg" /> Source Code
+                                </Link>
                             </li>
 
                             {this.state.Username === '' || this.state.Username === null || this.state.Username === undefined ?
 
                                 <li className="nav-item pull-right">
-                                    <a className="nav-link" href="/Discord/Login">Login (With Discord)</a>
+                                    <a className="nav-link" href="/Discord/Login">
+                                        <i className="fa fa-sign-in fa-lg" /> Login (With Discord)
+                                    </a>
                                 </li> :
-                                <li className="nav-item pull-right">
-                                    <Link className="nav-link" to="#">{this.state.Username}</Link>
+                                <li className="nav-item dropdown">
+                                    <a id="userDropdown" className="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                        <i className="fa fa-user fa-lg" /> {this.state.Username}
+                                    </a>
+                                    <div className="dropdown-menu">
+                                        <a className="dropdown-item" href="#">
+                                            Profile
+                                        </a>
+                                    </div>
                                 </li>
                             }
                         </ul>

@@ -2,6 +2,6 @@
 {
     public interface IUserSessionService
     {
-        long UserID { get; set; }
+        UserSession UserSession { get; set; }
     }
 }

@@ -38,9 +38,9 @@ export default class Downloads extends React.Component<any, any> {
                                         {obj.Description}
                                     </td>
                                     <td>
-                                        <button className="btn btn-outline-primary" href={obj.Url}>
+                                        <a className="btn btn-outline-primary" href={obj.Url}>
                                             Download
-                                        </button>
+                                        </a>
 
                                     </td>
                                 </tr>
