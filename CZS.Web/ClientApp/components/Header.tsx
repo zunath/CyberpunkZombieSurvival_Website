@@ -68,13 +68,13 @@ export default class Header extends React.Component<any, any> {
                                     </a>
                                 </li> :
                                 <li className="nav-item dropdown">
-                                    <a id="userDropdown" className="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                    <Link id="userDropdown" className="nav-link dropdown-toggle" to="#" data-toggle="dropdown" role="button">
                                         <i className="fa fa-user fa-lg" /> {this.state.Username}
-                                    </a>
+                                    </Link>
                                     <div className="dropdown-menu">
-                                        <a className="dropdown-item" href="#">
+                                        <Link className="dropdown-item" to="#">
                                             Profile
-                                        </a>
+                                        </Link>
                                     </div>
                                 </li>
                             }

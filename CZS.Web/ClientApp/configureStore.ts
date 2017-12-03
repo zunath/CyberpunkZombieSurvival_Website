@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import { routerReducer } from 'react-router-redux';
 import * as Store from './store';
 
-export default function configureStore(initialState?: Store.ApplicationState) {
+export default function configureStore(initialState?: Store.IApplicationState) {
     const windowIfDefined = typeof window === 'undefined' ? null : window as any;
 
     const rootReducer = buildRootReducer(Store.reducers);
@@ -25,5 +25,5 @@ export default function configureStore(initialState?: Store.ApplicationState) {
 }
 
 function buildRootReducer(allReducers) {
-    return combineReducers<Store.ApplicationState>(Object.assign({}, allReducers, { routing: routerReducer }));
+    return combineReducers<Store.IApplicationState>(Object.assign({}, allReducers, { routing: routerReducer }));
 }
