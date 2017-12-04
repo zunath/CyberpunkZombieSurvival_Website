@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using CZS.Web.Data;
 using DotNetify;
 using DotNetify.Security;
@@ -45,6 +46,7 @@ namespace CZS.Web
                 {
                     options.LoginPath = "/Authorization/Login";
                     options.LogoutPath = "/Authorization/Logout";
+                    options.AccessDeniedPath = "/";
                 })
 
                 .AddDiscord(options =>
@@ -53,10 +55,17 @@ namespace CZS.Web
                         .GetValue<string>("DiscordOAuthClientID");
                     options.ClientSecret = Configuration.GetSection("AppSettings")
                         .GetValue<string>("DiscordOAuthClientSecret");
-                    options.CallbackPath = "/Authorization/Authenticated/";
+                    options.CallbackPath = "/Authorization/Authenticated";
                     options.Scope.Add("identify email");
                     options.ClaimActions.Add(new JsonKeyClaimAction("Discriminator", typeof(string).ToString(), "discriminator"));
                     options.ClaimActions.Add(new JsonKeyClaimAction("Avatar", typeof(string).ToString(), "avatar"));
+
+                    options.Events.OnRemoteFailure = (context) =>
+                    {
+                        context.Response.Redirect("/");
+                        context.HandleResponse();
+                        return Task.FromResult(0);
+                    };
                 });
 
             services.AddMvc();
