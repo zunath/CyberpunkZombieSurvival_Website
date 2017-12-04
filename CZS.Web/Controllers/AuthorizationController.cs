@@ -37,7 +37,7 @@ namespace CZS.Web.Controllers
             Users user = new Users
             {
                 Username = claims.Where(x => x.Type == ClaimTypes.Name).Select(x => x.Value).Single(),
-                DiscordUserId = Convert.ToInt64(claims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).Single()),
+                DiscordUserId = claims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).Single(),
                 Email = claims.Where(x => x.Type == ClaimTypes.Email).Select(x => x.Value).Single(),
                 Discriminator = claims.Where(x => x.Type == "Discriminator").Select(x => x.Value).Single(),
                 AvatarHash = claims.Where(x => x.Type == "Avatar").Select(x => x.Value).Single()

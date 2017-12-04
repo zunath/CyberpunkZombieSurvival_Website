@@ -12,11 +12,11 @@ namespace CZS.Web.ViewModels
         public HeaderViewModel(DataContext db, IHttpContextAccessor httpContextAccessor)
         {
             var context = httpContextAccessor.HttpContext;
-            long discordUserID = Convert.ToInt64(context.User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).SingleOrDefault());
+            string discordUserID = context.User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).SingleOrDefault();
 
-            if (discordUserID > 0)
+            if (!string.IsNullOrWhiteSpace(discordUserID))
             {
-                var user = db.Users.Single(x => x.DiscordUserId == Convert.ToInt64(discordUserID));
+                var user = db.Users.Single(x => x.DiscordUserId == discordUserID);
                 Username = user.Username;
             }
 
