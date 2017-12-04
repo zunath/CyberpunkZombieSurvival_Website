@@ -21,7 +21,7 @@ namespace CZS.Web.Controllers
 
         public IActionResult Login()
         {
-            return Challenge(new AuthenticationProperties {RedirectUri = "/Authorization/Authenticated"}, "Discord");
+            return Challenge(new AuthenticationProperties {RedirectUri = "/Authorization/Authorized"}, "Discord");
         }
 
         public IActionResult Logout()
@@ -29,11 +29,11 @@ namespace CZS.Web.Controllers
             return SignOut(new AuthenticationProperties { RedirectUri = "/" },
                 CookieAuthenticationDefaults.AuthenticationScheme);
         }
-        
-        public IActionResult Authenticated()
+
+        public IActionResult Authorized()
         {
             var claims = User.Claims.ToList();
-            
+
             Users user = new Users
             {
                 Username = claims.Where(x => x.Type == ClaimTypes.Name).Select(x => x.Value).Single(),
@@ -58,7 +58,7 @@ namespace CZS.Web.Controllers
 
                 user.UserId = existingUser.UserId;
             }
-            
+
             _db.SaveChanges();
 
             return Redirect("/");

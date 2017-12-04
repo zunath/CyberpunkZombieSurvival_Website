@@ -46,15 +46,12 @@ namespace CZS.Web
                 {
                     options.LoginPath = "/Authorization/Login";
                     options.LogoutPath = "/Authorization/Logout";
-                    options.AccessDeniedPath = "/";
                 })
 
                 .AddDiscord(options =>
                 {
-                    options.ClientId = Configuration.GetSection("AppSettings")
-                        .GetValue<string>("DiscordOAuthClientID");
-                    options.ClientSecret = Configuration.GetSection("AppSettings")
-                        .GetValue<string>("DiscordOAuthClientSecret");
+                    options.ClientId = Configuration.GetValue<string>("DiscordOAuthClientID");
+                    options.ClientSecret = Configuration.GetValue<string>("DiscordOAuthClientSecret");
                     options.CallbackPath = "/Authorization/Authenticated";
                     options.Scope.Add("identify email");
                     options.ClaimActions.Add(new JsonKeyClaimAction("Discriminator", typeof(string).ToString(), "discriminator"));
@@ -62,7 +59,11 @@ namespace CZS.Web
 
                     options.Events.OnRemoteFailure = (context) =>
                     {
-                        context.Response.Redirect("/");
+                        if (context.Failure.Message.Contains("access_denied"))
+                        {
+                            context.Response.Redirect("/");
+                        }
+
                         context.HandleResponse();
                         return Task.FromResult(0);
                     };
