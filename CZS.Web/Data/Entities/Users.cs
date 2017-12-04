@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CZS.Web.Data.Entities
+﻿namespace CZS.Web.Data.Entities
 {
     public partial class Users
     {
@@ -10,8 +8,5 @@ namespace CZS.Web.Data.Entities
         public string AvatarHash { get; set; }
         public string Discriminator { get; set; }
         public string Email { get; set; }
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
-        public DateTime DateOfExpiration { get; set; }
     }
 }

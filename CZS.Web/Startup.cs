@@ -1,9 +1,8 @@
-using System;
 using CZS.Web.Data;
-using CZS.Web.Services;
-using CZS.Web.Services.Contracts;
 using DotNetify;
 using DotNetify.Security;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -36,20 +35,34 @@ namespace CZS.Web
                 ServiceLifetime.Transient,
                 ServiceLifetime.Transient);
 
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                })
+
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Authorization/Login";
+                    options.LogoutPath = "/Authorization/Logout";
+                })
+
+                .AddDiscord(options =>
+                {
+                    options.ClientId = Configuration.GetSection("AppSettings")
+                        .GetValue<string>("DiscordOAuthClientID");
+                    options.ClientSecret = Configuration.GetSection("AppSettings")
+                        .GetValue<string>("DiscordOAuthClientSecret");
+                    options.CallbackPath = "/Authorization/Authenticated/";
+                    options.Scope.Add("identify email");
+                    options.ClaimActions.Add(new JsonKeyClaimAction("Discriminator", typeof(string).ToString(), "discriminator"));
+                    options.ClaimActions.Add(new JsonKeyClaimAction("Avatar", typeof(string).ToString(), "avatar"));
+                });
+
             services.AddMvc();
 
-            services.AddSession(options =>
-            {
-                options.Cookie.Name = ".CZS.Web.Session";
-                options.IdleTimeout = TimeSpan.FromDays(7);
-            });
-
-
-            services.AddTransient<IDiscordAPIService, DiscordAPIService>();
-            services.AddTransient<IUserSessionService, UserSessionService>();
-
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,7 +84,7 @@ namespace CZS.Web
 
             app.UseStaticFiles();
 
-            app.UseSession();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -93,7 +106,10 @@ namespace CZS.Web
             app.UseWebSockets();
             app.UseSignalR(routes => routes.MapDotNetifyHub());
             app.UseDotNetify(config =>
-                config.UseFilter<AuthorizeFilter>());
+            {
+                config.UseFilter<AuthorizeFilter>();
+
+            });
 
         }
     }

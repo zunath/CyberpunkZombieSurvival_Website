@@ -1,5 +1,4 @@
-﻿using CZS.Web.Services.Contracts;
-using DotNetify;
+﻿using DotNetify;
 
 namespace CZS.Web.ViewModels
 {

@@ -2153,9 +2153,7 @@ namespace CZS.Web.Data
                 entity.HasKey(e => e.UserId);
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.Property(e => e.AccessToken).IsRequired();
-
+                
                 entity.Property(e => e.DiscordUserId).HasColumnName("DiscordUserID");
 
                 entity.Property(e => e.Discriminator)
@@ -2163,8 +2161,6 @@ namespace CZS.Web.Data
                     .HasMaxLength(4);
 
                 entity.Property(e => e.Email).IsRequired();
-
-                entity.Property(e => e.RefreshToken).IsRequired();
 
                 entity.Property(e => e.Username)
                     .IsRequired()

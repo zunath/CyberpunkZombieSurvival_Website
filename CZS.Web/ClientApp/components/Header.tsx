@@ -1,25 +1,34 @@
 ﻿import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as dotnetify from 'dotnetify';
+import Logout from './Logout';
 
 export default class Header extends React.Component<any, any> {
     vm: any;
+    dispatchState: any;
 
     constructor(props: any) {
         super(props);
         this.vm = dotnetify.react.connect('HeaderViewModel', this);
+        this.dispatchState = state => this.vm.$dispatch(state);
+
         this.state = { Username: '', AvatarURL: '' }
+
+        this.confirmLogout = this.confirmLogout.bind(this);
     }
 
     componentWillUnmount() {
         this.vm.$destroy();
     }
+    
+    confirmLogout() {
+        window.location.replace('/Authorization/Logout');
+    }
 
     render() {
         return (
             <div>
-
-                Username: {this.state.Username}
+                <Logout callback={this.confirmLogout} />
 
                 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 
@@ -63,7 +72,7 @@ export default class Header extends React.Component<any, any> {
                             {this.state.Username === '' || this.state.Username === null || this.state.Username === undefined ?
 
                                 <li className="nav-item pull-right">
-                                    <a className="nav-link" href="/Discord/Login">
+                                    <a className="nav-link" href="/Authorization/Login">
                                         <i className="fa fa-sign-in fa-lg" /> Login (With Discord)
                                     </a>
                                 </li> :
@@ -73,7 +82,10 @@ export default class Header extends React.Component<any, any> {
                                     </Link>
                                     <div className="dropdown-menu">
                                         <Link className="dropdown-item" to="#">
-                                            Profile
+                                            <i className="fa fa-user" /> Profile
+                                        </Link>
+                                        <Link className="dropdown-item" to="#" data-toggle="modal" data-target="#logoutModal">
+                                            <i className="fa fa-sign-out" /> Log Out
                                         </Link>
                                     </div>
                                 </li>

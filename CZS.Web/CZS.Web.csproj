@@ -8,9 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.Discord" Version="2.0.0-rc2-0535" />
+    <PackageReference Include="AspNet.Security.OAuth.Validation" Version="2.0.0-rc1-final" />
     <PackageReference Include="DotNetify.SignalR" Version="2.2.2-pre" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +36,8 @@
     <Folder Include="ClientApp\components\admin\dm-management\" />
     <Folder Include="ClientApp\components\admin\loot-table-editor\" />
     <Folder Include="ClientApp\components\admin\quest-editor\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Services\Contracts\" />
     <Folder Include="Wiki\" />
   </ItemGroup>
 
