@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -72,12 +74,17 @@ namespace CZS.Web
             services.AddMvc();
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Dev / Prod specific options.
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -90,10 +97,13 @@ namespace CZS.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                var rewriterOptions = new RewriteOptions()
+                    .AddRedirectToHttps();
+                app.UseRewriter(rewriterOptions);
             }
 
+            // MVC / Routing / Authentication
             app.UseStaticFiles();
-
             app.UseAuthentication();
             app.UseMvc(routes =>
             {
@@ -113,6 +123,7 @@ namespace CZS.Web
                 });
             });
 
+            // Dotnetify / SignalR / WebSockets
             app.UseWebSockets();
             app.UseSignalR(routes => routes.MapDotNetifyHub());
             app.UseDotNetify(config =>
