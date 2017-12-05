@@ -1,4 +1,5 @@
-﻿using CZS.Web.Models.Contracts;
+﻿using CZS.Web.Constants;
+using CZS.Web.Models.Contracts;
 using DotNetify;
 
 namespace CZS.Web.ViewModels
@@ -10,12 +11,19 @@ namespace CZS.Web.ViewModels
             if (currentUser.IsAuthenticated)
             {
                 Username = currentUser.Username;
+                Role = currentUser.Role;
             }
         }
 
         public string Username
         {
             get => Get<string>();
+            set => Set(value);
+        }
+
+        public RoleType Role
+        {
+            get => Get<RoleType>();
             set => Set(value);
         }
     }

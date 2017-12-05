@@ -12,7 +12,7 @@ export default class Header extends React.Component<any, any> {
         this.vm = dotnetify.react.connect('HeaderViewModel', this);
         this.dispatchState = state => this.vm.$dispatch(state);
 
-        this.state = { Username: '', AvatarURL: '' }
+        this.state = { Username: '', Role: '' }
 
         this.confirmLogout = this.confirmLogout.bind(this);
     }
@@ -20,12 +20,25 @@ export default class Header extends React.Component<any, any> {
     componentWillUnmount() {
         this.vm.$destroy();
     }
-    
+
     confirmLogout() {
         window.location.replace('/Authorization/Logout');
     }
 
     render() {
+
+        const self = this;
+        function renderAdmin() {
+
+            if (self.state.Role === 1 || self.state.Role === 2) {
+                return <li className="nav-item">
+                    <Link className="nav-link" to="/Admin">
+                        <i className="fa fa-cogs fa-lg" /> Admin
+                    </Link>
+                </li>;
+            }
+        }
+
         return (
             <div>
                 <Logout callback={this.confirmLogout} />
@@ -68,6 +81,8 @@ export default class Header extends React.Component<any, any> {
                                     <i className="fa fa-code fa-lg" /> Source Code
                                 </Link>
                             </li>
+
+                            {renderAdmin()}
 
                             {this.state.Username === '' || this.state.Username === null || this.state.Username === undefined ?
 
