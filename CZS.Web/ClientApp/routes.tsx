@@ -25,12 +25,6 @@ export const routes =
             <Route exact path="/admin/chat-logs" component={ChatLogs} />
             <Route exact path="/admin/connection-logs" component={ConnectionLogs} />
             <Route exact path="/admin/quick-build-logs" component={QuickBuildLogs} />
-
-
-            /* Server Routes */
-            <Route path="/Discord/Login" />
-            <Route path="/Discord/Callback" />
-
             <Route component={NotFound} />
         </Switch>
     </Layout>;

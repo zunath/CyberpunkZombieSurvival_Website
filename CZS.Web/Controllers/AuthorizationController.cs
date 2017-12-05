@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
 using CZS.Web.Data;
 using CZS.Web.Data.Entities;
@@ -13,7 +11,7 @@ namespace CZS.Web.Controllers
     public class AuthorizationController : Controller
     {
         private readonly DataContext _db;
-
+        
         public AuthorizationController(DataContext db)
         {
             _db = db;

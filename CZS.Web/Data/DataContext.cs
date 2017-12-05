@@ -24,7 +24,7 @@ namespace CZS.Web.Data
         public virtual DbSet<CraftLevels> CraftLevels { get; set; }
         public virtual DbSet<Crafts> Crafts { get; set; }
         public virtual DbSet<CustomEffects> CustomEffects { get; set; }
-        public virtual DbSet<DMRoleDomain> DMRoleDomain { get; set; }
+        public virtual DbSet<DmroleDomain> DMRoleDomain { get; set; }
         public virtual DbSet<Downloads> Downloads { get; set; }
         public virtual DbSet<FameRegions> FameRegions { get; set; }
         public virtual DbSet<ForcedSPResetDates> ForcedSPResetDates { get; set; }
@@ -563,7 +563,7 @@ namespace CZS.Web.Data
                     .HasMaxLength(64);
             });
 
-            modelBuilder.Entity<DMRoleDomain>(entity =>
+            modelBuilder.Entity<DmroleDomain>(entity =>
             {
                 entity.ToTable("DMRoleDomain");
 
@@ -2153,8 +2153,12 @@ namespace CZS.Web.Data
                 entity.HasKey(e => e.UserId);
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
-                
-                entity.Property(e => e.DiscordUserId).HasColumnName("DiscordUserID");
+
+                entity.Property(e => e.AvatarHash).IsRequired();
+
+                entity.Property(e => e.DiscordUserId)
+                    .IsRequired()
+                    .HasColumnName("DiscordUserID");
 
                 entity.Property(e => e.Discriminator)
                     .IsRequired()
@@ -2162,12 +2166,19 @@ namespace CZS.Web.Data
 
                 entity.Property(e => e.Email).IsRequired();
 
+                entity.Property(e => e.RoleId)
+                    .HasColumnName("RoleID")
+                    .HasDefaultValueSql("((3))");
+
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(32);
 
-                entity.Property(e => e.AvatarHash).IsRequired();
-
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_Users_RoleID");
             });
 
             modelBuilder.Entity<ZombieClothes>(entity =>

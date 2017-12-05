@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
 using CZS.Web.Data;
+using CZS.Web.Models;
+using CZS.Web.Models.Contracts;
 using DotNetify;
 using DotNetify.Security;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -19,13 +21,16 @@ namespace CZS.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, 
+            IHostingEnvironment hostingEnvironment)
         {
             Configuration = configuration;
+            HostingEnvironment = hostingEnvironment;
         }
 
         public IConfiguration Configuration { get; }
-
+        public IHostingEnvironment HostingEnvironment { get; }
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -34,11 +39,10 @@ namespace CZS.Web
             services.AddDotNetify();
 
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")),
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")),
                 ServiceLifetime.Transient,
                 ServiceLifetime.Transient);
-
-
+            
             services.AddAuthentication(options =>
                 {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -49,7 +53,6 @@ namespace CZS.Web
                     options.LoginPath = "/Authorization/Login";
                     options.LogoutPath = "/Authorization/Logout";
                 })
-
                 .AddDiscord(options =>
                 {
                     options.ClientId = Configuration.GetValue<string>("DiscordOAuthClientID");
@@ -58,7 +61,7 @@ namespace CZS.Web
                     options.Scope.Add("identify email");
                     options.ClaimActions.Add(new JsonKeyClaimAction("Discriminator", typeof(string).ToString(), "discriminator"));
                     options.ClaimActions.Add(new JsonKeyClaimAction("Avatar", typeof(string).ToString(), "avatar"));
-
+                    
                     options.Events.OnRemoteFailure = (context) =>
                     {
                         if (context.Failure.Message.Contains("access_denied"))
@@ -74,11 +77,16 @@ namespace CZS.Web
             services.AddMvc();
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<ICurrentUser, CurrentUser>();
 
-            services.Configure<MvcOptions>(options =>
+            if (HostingEnvironment.IsProduction())
             {
-                options.Filters.Add(new RequireHttpsAttribute());
-            });
+                services.Configure<MvcOptions>(options =>
+                {
+                    options.Filters.Add(new RequireHttpsAttribute());
+                });
+            }
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,7 +119,7 @@ namespace CZS.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
+            
 
             app.MapWhen(x => !x.Request.Path.Value.StartsWith("/dotnetify"), builder =>
             {
@@ -122,7 +130,7 @@ namespace CZS.Web
                         defaults: new { controller = "Home", action = "Index" });
                 });
             });
-
+            
             // Dotnetify / SignalR / WebSockets
             app.UseWebSockets();
             app.UseSignalR(routes => routes.MapDotNetifyHub());
@@ -131,7 +139,6 @@ namespace CZS.Web
                 config.UseFilter<AuthorizeFilter>();
 
             });
-
         }
     }
 }

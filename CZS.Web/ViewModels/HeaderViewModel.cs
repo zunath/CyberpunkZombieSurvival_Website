@@ -1,25 +1,16 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
-using CZS.Web.Data;
+﻿using CZS.Web.Models.Contracts;
 using DotNetify;
-using Microsoft.AspNetCore.Http;
 
 namespace CZS.Web.ViewModels
 {
     public class HeaderViewModel : BaseVM
     {
-        public HeaderViewModel(DataContext db, IHttpContextAccessor httpContextAccessor)
+        public HeaderViewModel(ICurrentUser currentUser)
         {
-            var context = httpContextAccessor.HttpContext;
-            string discordUserID = context.User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).SingleOrDefault();
-
-            if (!string.IsNullOrWhiteSpace(discordUserID))
+            if (currentUser.IsAuthenticated)
             {
-                var user = db.Users.Single(x => x.DiscordUserId == discordUserID);
-                Username = user.Username;
+                Username = currentUser.Username;
             }
-
         }
 
         public string Username
