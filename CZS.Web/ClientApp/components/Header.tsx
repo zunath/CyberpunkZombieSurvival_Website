@@ -12,7 +12,7 @@ export default class Header extends React.Component<any, any> {
         this.vm = dotnetify.react.connect('HeaderViewModel', this);
         this.dispatchState = state => this.vm.$dispatch(state);
 
-        this.state = { Username: '', Role: '' }
+        this.state = { Username: '', Role: 0 }
 
         this.confirmLogout = this.confirmLogout.bind(this);
     }
@@ -37,6 +37,7 @@ export default class Header extends React.Component<any, any> {
                     </Link>
                 </li>;
             }
+            return '';
         }
 
         return (

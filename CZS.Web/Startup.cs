@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using CZS.Web.Data;
+using CZS.Web.Middleware;
 using CZS.Web.Models;
 using CZS.Web.Models.Contracts;
 using DotNetify;
-using DotNetify.Security;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Builder;
@@ -47,7 +47,6 @@ namespace CZS.Web
                 {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 })
-
                 .AddCookie(options =>
                 {
                     options.LoginPath = "/Authorization/Login";
@@ -73,11 +72,8 @@ namespace CZS.Web
                         return Task.FromResult(0);
                     };
                 });
-
+            
             services.AddMvc();
-
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<ICurrentUser, CurrentUser>();
 
             if (HostingEnvironment.IsProduction())
             {
@@ -86,7 +82,10 @@ namespace CZS.Web
                     options.Filters.Add(new RequireHttpsAttribute());
                 });
             }
-            
+
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<ICurrentUser, CurrentUser>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -136,8 +135,7 @@ namespace CZS.Web
             app.UseSignalR(routes => routes.MapDotNetifyHub());
             app.UseDotNetify(config =>
             {
-                config.UseFilter<AuthorizeFilter>();
-
+                config.UseMiddleware<AuthorizationMiddleware>();
             });
         }
     }
