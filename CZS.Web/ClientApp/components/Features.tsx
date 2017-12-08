@@ -2,6 +2,7 @@
 import * as dotnetify from 'dotnetify';
 import AbilityViewer from './AbilityViewer';
 import SkillViewer from './SkillViewer';
+import { Link } from 'react-router-dom'
 
 export default class Features extends React.Component<any, any> {
     vm: any;
@@ -34,10 +35,13 @@ export default class Features extends React.Component<any, any> {
                         <div className="sidebar">
                             <h4 className="center">Quick Links</h4>
                             <div className="list-group" id="topics">
-                                <a href="/features#survival" className="list-group-item list-group-item-action">
+                                <a href="/features/#story" className="list-group-item list-group-item-action"> 
+                                    Story
+                                </a>
+                                <a href="/features/#survival" className="list-group-item list-group-item-action">
                                     Survival
                                 </a>
-                                <a href="/features#character-progression" className="list-group-item list-group-item-action">
+                                <a href="/features/#character-progression" className="list-group-item list-group-item-action">
                                     Character Progression
                                 </a>
                                 <a href="/features#structure-building" className="list-group-item list-group-item-action">
@@ -57,7 +61,49 @@ export default class Features extends React.Component<any, any> {
 
                     <div className="col-9">
                         <div data-spy="scroll" data-target="#topics" data-offset="0">
-                            
+
+                            <h4 className="center" id="story">Story</h4>
+                            <p>
+                                Almost a decade after the human race arrived on planet Avantasia, the dust had far from settled.
+                            </p>
+                            <p>
+                                Racial tensions were high, each with their own problems, goals, and agendas.
+                            </p>
+                            <p>
+                                Humans, newly arrived from their own ravaged planet were met with suspicion.
+                            </p>
+                            <p>
+                                The Elves, selfish and aloof in their ways, their self-entitled attitude isolating them from the rest.
+                            </p>
+                            <p>
+                                The Dwarves, steeped in tradition and the old ways of Avantasia making them unrelatable to many of the other inhabitants of the planet.
+                            </p>
+                            <p>
+                                The Orcs, bio-engineered creations of the Elves, slaves to their own genetic coding.
+                            </p>
+                            <p>
+                                The Gnomes, mad geniuses in their own rights, forward thinkers and free spirits.
+                            </p>
+                            <p>
+                                The Halflings, salt of the earth, hard working folk with little time for the intrigues of their fellows.
+                            </p>
+                            <p>
+                                Six distinct peoples with their own motivations and traditions.
+                            </p>
+                            <p>
+                                Now though, a new threat sweeps across the planet; The Shu'rhat. The dead now walk the surface of Avantasia, motivated only by their need to feed. 
+                            </p>
+                            <p>
+                                Can the six races cohabiting on Avantasia settle their differences, or at least put them aside long enough to tackle the disease that is a threat to them all? Or will old hostilities, coupled with the shambling undead be the undoing of the humans, elves, dwarves, orcs, gnomes and halflings sharing the planet?
+                            </p>
+                            <p>
+                                Join Cyberpunk Zombie Survival now and become part of the story, and help shape the future of Avantasia!
+                            </p>
+
+
+
+                            <hr />
+
                             <h4 className="center" id="survival">Survival</h4>
                             <p>
                                 Cyberpunk Zombie Survival is a survival game first and foremost. This means a few things...
