@@ -35,13 +35,13 @@ export default class Features extends React.Component<any, any> {
                         <div className="sidebar">
                             <h4 className="center">Quick Links</h4>
                             <div className="list-group" id="topics">
-                                <a href="/features/#story" className="list-group-item list-group-item-action"> 
+                                <a href="/features#story" className="list-group-item list-group-item-action"> 
                                     Story
                                 </a>
-                                <a href="/features/#survival" className="list-group-item list-group-item-action">
+                                <a href="/features#survival" className="list-group-item list-group-item-action">
                                     Survival
                                 </a>
-                                <a href="/features/#character-progression" className="list-group-item list-group-item-action">
+                                <a href="/features#character-progression" className="list-group-item list-group-item-action">
                                     Character Progression
                                 </a>
                                 <a href="/features#structure-building" className="list-group-item list-group-item-action">
