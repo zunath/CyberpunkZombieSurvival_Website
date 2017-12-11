@@ -97,7 +97,7 @@ export default class Header extends React.Component<any, any> {
                                         <i className="fa fa-user fa-lg" /> {this.state.Username}
                                     </Link>
                                     <div className="dropdown-menu">
-                                        <Link className="dropdown-item" to="#">
+                                        <Link className="dropdown-item" to="/user-profile">
                                             <i className="fa fa-user" /> Profile
                                         </Link>
                                         <Link className="dropdown-item" to="#" data-toggle="modal" data-target="#logoutModal">

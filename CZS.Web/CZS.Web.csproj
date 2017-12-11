@@ -31,6 +31,7 @@
     <None Remove="ClientApp\components\Header.tsx" />
     <None Remove="ClientApp\components\NotFound.tsx" />
     <None Remove="ClientApp\components\ProfessionViewer.tsx" />
+    <None Remove="ClientApp\components\UserProfile.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\UserProfile.tsx" />
     <TypeScriptCompile Include="ClientApp\components\ProfessionViewer.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Admin.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Downloads.tsx" />

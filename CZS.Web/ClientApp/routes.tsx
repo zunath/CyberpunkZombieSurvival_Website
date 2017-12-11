@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import Home from './components/Home';
+import UserProfile from './components/UserProfile';
 import Logs from './components/admin/logs/Logs';
 import ChatLogs from './components/admin/logs/ChatLogs';
 import ConnectionLogs from './components/admin/logs/ConnectionLogs';
@@ -21,6 +22,7 @@ export const routes =
             <Route exact path="/features" component={Features} />
             <Route exact path="/admin" component={Admin} />
             <Route exact path="/downloads" component={Downloads} />
+            <Route exact path="/user-profile" component={UserProfile} />
             <Route exact path="/admin/logs" component={Logs} />
             <Route exact path="/admin/chat-logs" component={ChatLogs} />
             <Route exact path="/admin/connection-logs" component={ConnectionLogs} />
