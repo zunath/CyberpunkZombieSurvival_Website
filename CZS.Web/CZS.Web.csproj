@@ -30,6 +30,7 @@
     <None Remove="ClientApp\components\Footer.tsx" />
     <None Remove="ClientApp\components\Header.tsx" />
     <None Remove="ClientApp\components\NotFound.tsx" />
+    <None Remove="ClientApp\components\ProfessionViewer.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\ProfessionViewer.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Admin.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Downloads.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Features.tsx" />

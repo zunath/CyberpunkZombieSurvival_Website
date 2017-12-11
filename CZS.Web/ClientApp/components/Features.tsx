@@ -2,6 +2,7 @@
 import * as dotnetify from 'dotnetify';
 import AbilityViewer from './AbilityViewer';
 import SkillViewer from './SkillViewer';
+import ProfessionViewer from './ProfessionViewer';
 import { Link } from 'react-router-dom'
 
 export default class Features extends React.Component<any, any> {
@@ -10,7 +11,7 @@ export default class Features extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.vm = dotnetify.react.connect('FeaturesViewModel', this);
-        this.state = { Skills: [], Abilities: [] }
+        this.state = { Skills: [], Abilities: [], Professions: [] }
     }
 
     componentWillUnmount() {
@@ -26,6 +27,8 @@ export default class Features extends React.Component<any, any> {
                         <h2 className="center">Features</h2>
                     </div>
                 </div>
+
+                <hr />
 
                 <div className="row">&nbsp;</div>
 
@@ -53,6 +56,10 @@ export default class Features extends React.Component<any, any> {
                                 <a href="/features#crafting" className="list-group-item list-group-item-action">
                                     Crafting
                                 </a>
+                                <a href="/features#professions" className="list-group-item list-group-item-action">
+                                    Professions
+                                </a>
+
                             </div>
                         </div>
                         
@@ -212,6 +219,22 @@ export default class Features extends React.Component<any, any> {
                             <p>
                                 You are never limited with our crafting system. If you put in the time and effort you can become a master of all of them!
                             </p>
+
+                            <hr />
+
+                            <h4 id="professions" className="center">Professions</h4>
+
+                            <p>
+                                What kind of character were you before the outbreak? Professions let you pick a background for your character which grants some starting bonuses.
+                            </p>
+
+                            <p>
+                                Don't like the options? Simply select Vagabond and create a character of your very own!
+                            </p>
+
+                            <ProfessionViewer professions={this.state.Professions} />
+
+                            <hr />
 
                         </div>
 

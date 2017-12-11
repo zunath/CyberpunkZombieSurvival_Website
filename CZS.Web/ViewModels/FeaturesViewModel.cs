@@ -22,6 +22,14 @@ namespace CZS.Web.ViewModels
             set => Set(value);
         }
 
+        public string Professions_itemkey => nameof(ProfessionsDomain.ProfessionId);
+
+        public IEnumerable<dynamic> Professions
+        {
+            get => Get<IEnumerable<dynamic>>();
+            set => Set(value);
+        }
+
 
         public FeaturesViewModel(DataContext db)
         {
@@ -42,6 +50,15 @@ namespace CZS.Web.ViewModels
                     ManaCost = x.BaseManaCost,
                     CategoryName = x.AbilityCategory.Name
                 }).ToList();
+
+            Professions = db.ProfessionsDomain.Where(x => x.IsActive).OrderBy(x => x.Name)
+                .Select(x => new
+                {
+                    x.Name,
+                    ProfessionID = x.ProfessionId,
+                    x.Bonuses,
+                    x.Description
+                });
         }
     }
 }
