@@ -1,13 +1,24 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cyberpunk Zombie Survival - A NeverWinter Nights Server</title>
-    <base href="~/" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-40674039-7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/dist/site.css" asp-append-version="true" />
+        gtag('config', 'UA-40674039-7');
+    </script>
+
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cyberpunk Zombie Survival - A NeverWinter Nights Server</title>
+    <base href="~/"/>
+
+    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/dist/site.css" asp-append-version="true"/>
 </head>
 <body>
     @RenderBody()
