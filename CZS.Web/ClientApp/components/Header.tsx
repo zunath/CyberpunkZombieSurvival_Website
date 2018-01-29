@@ -77,10 +77,19 @@ export default class Header extends React.Component<any, any> {
                                     <i className="fa fa-wikipedia-w fa-lg" /> Wiki
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="https://github.com/zunath/CyberpunkZombieSurvival_JVM" target="_blank">
-                                    <i className="fa fa-code fa-lg" /> Source Code
+
+                            <li className="nav-item dropdown">
+                                <Link id="serverInfoDropdown" className="nav-link dropdown-toggle" to="#" data-toggle="dropdown" role="button">
+                                    <i className="fa fa-code" /> Source Code
                                 </Link>
+                                <div className="dropdown-menu">
+                                    <a className="dropdown-item" href="https://github.com/zunath/CyberpunkZombieSurvival_JVM" target="_blank">
+                                        <i className="fa fa-code" /> Server Source Code
+                                    </a>
+                                    <a className="dropdown-item" href="https://github.com/zunath/CyberpunkZombieSurvival_Website" target="_blank">
+                                        <i className="fa fa-code" /> Website Source Code
+                                    </a>
+                                </div>
                             </li>
 
                             {renderAdmin()}
