@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import Home from './components/Home';
+import Lore from './components/Lore';
 import UserProfile from './components/UserProfile';
 import Logs from './components/admin/logs/Logs';
 import ChatLogs from './components/admin/logs/ChatLogs';
@@ -19,6 +20,7 @@ export const routes =
             /* Client Routes */
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/lore" component={Lore} />
             <Route exact path="/features" component={Features} />
             <Route exact path="/admin" component={Admin} />
             <Route exact path="/downloads" component={Downloads} />

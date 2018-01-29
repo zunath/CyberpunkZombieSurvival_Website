@@ -29,6 +29,16 @@
     <None Remove="ClientApp\components\admin\logs\Logs.tsx" />
     <None Remove="ClientApp\components\Footer.tsx" />
     <None Remove="ClientApp\components\Header.tsx" />
+    <None Remove="ClientApp\components\HumanityBeforeAvantasia.tsx" />
+    <None Remove="ClientApp\components\Lore.tsx" />
+    <None Remove="ClientApp\components\lore\AMPTechnology.tsx" />
+    <None Remove="ClientApp\components\lore\AvantasiaBeforeHumanity.tsx" />
+    <None Remove="ClientApp\components\lore\Dwarves.tsx" />
+    <None Remove="ClientApp\components\lore\Elves.tsx" />
+    <None Remove="ClientApp\components\lore\Gnomes.tsx" />
+    <None Remove="ClientApp\components\lore\Halflings.tsx" />
+    <None Remove="ClientApp\components\lore\Humans.tsx" />
+    <None Remove="ClientApp\components\lore\Orcs.tsx" />
     <None Remove="ClientApp\components\NotFound.tsx" />
     <None Remove="ClientApp\components\ProfessionViewer.tsx" />
     <None Remove="ClientApp\components\UserProfile.tsx" />
@@ -44,6 +54,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\lore\Halflings.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\lore\Gnomes.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\lore\Dwarves.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\lore\AMPTechnology.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\lore\Orcs.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\lore\Elves.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\lore\Humans.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\lore\AvantasiaBeforeHumanity.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\lore\HumanityBeforeAvantasia.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Lore.tsx" />
     <TypeScriptCompile Include="ClientApp\components\UserProfile.tsx" />
     <TypeScriptCompile Include="ClientApp\components\ProfessionViewer.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Admin.tsx" />

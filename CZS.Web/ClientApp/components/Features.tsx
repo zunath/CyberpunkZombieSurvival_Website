@@ -22,8 +22,7 @@ export default class Features extends React.Component<any, any> {
         return (
             <div>
                 <div className="row">
-                    <div className="col-3"></div>
-                    <div className="col-9">
+                    <div className="col-12">
                         <h2 className="center">Features</h2>
                     </div>
                 </div>

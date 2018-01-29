@@ -53,6 +53,11 @@ export default class Header extends React.Component<any, any> {
                     <div className="navbar">
                         <ul className="navbar-nav">
                             <li className="nav-item">
+                                <Link className="nav-link" to="/lore">
+                                    <i className="fa fa-book fa-lg" /> Lore
+                                </Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/features">
                                     <i className="fa fa-info-circle fa-lg" /> Features
                                 </Link>
@@ -70,11 +75,6 @@ export default class Header extends React.Component<any, any> {
                             <li className="nav-item">
                                 <Link className="nav-link" to="http://czs.wikia.com/" target="_blank">
                                     <i className="fa fa-wikipedia-w fa-lg" /> Wiki
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="http://czs.boards.net/" target="_blank">
-                                    <i className="fa fa-th-list fa-lg" /> Forums
                                 </Link>
                             </li>
                             <li className="nav-item">
