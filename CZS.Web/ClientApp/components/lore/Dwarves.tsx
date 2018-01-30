@@ -22,12 +22,7 @@ export default class Dwarves extends React.Component<any, any> {
                     In Dwarven culture, it is common for many families to come together to form a "House". These Houses bonds are often strengthened through marriage. In Dwarven politics, when the old Queen dies, the strongest house can put forward their Matriarch for new Queenship, as succession does not guarantee anything. It is therefore common that the largest house receives the most votes, hence the reason why it is so important.
                     <br />
                     <br />
-
-                    After settling, their fleet was decommissioned and re-purposed into the great city of New London. Attitudes changed amongst the humans, as the discovery of new races and civilizations shone a new perspective on a history of competition that spanned centuries. Humans were now one people, regardless of colour or religion, and they thrived on Avantasia. They settled into careers as traders, politicians, farmers, craftspeople and more. The variety of the old world was combined with a sense of unity that humanity had never felt on this scale and things were good. Renewable energy and sustainable farming took the place of fossil fuels and fracking, and a more cohesive and sustainable relationship with their environment was formed. Cityscapes became an amalgam of Earth's Eastern and Western styles, and artistic expression took on the same characteristics.
-                    <br />
-                    <br />
-
-
+                    
                     <h5 className="center">Physical Description</h5>
 
                     Dwarves are a short, stout race, with heights often ranging from between 4' and 5', with no discernible difference between genders. Males tend to grow beards, with red and brown being the most common hair colour. Eyes are often a muddy brown, though black is not uncommon. Dwarves live to around 110 years old. 

@@ -27,12 +27,7 @@ export default class Elves extends React.Component<any, any> {
                     They have a tendency to see themselves as superior to the other races of Avantasia, who do not share in their reverence of perfection, and therefore are not as close to it. This means that many of their kind are somewhat Xenophobic, and Elven society as a whole is somewhat introvert.
                     <br />
                     <br />
-
-                    After settling, their fleet was decommissioned and re-purposed into the great city of New London. Attitudes changed amongst the humans, as the discovery of new races and civilizations shone a new perspective on a history of competition that spanned centuries. Humans were now one people, regardless of colour or religion, and they thrived on Avantasia. They settled into careers as traders, politicians, farmers, craftspeople and more. The variety of the old world was combined with a sense of unity that humanity had never felt on this scale and things were good. Renewable energy and sustainable farming took the place of fossil fuels and fracking, and a more cohesive and sustainable relationship with their environment was formed. Cityscapes became an amalgam of Earth's Eastern and Western styles, and artistic expression took on the same characteristics.
-                    <br />
-                    <br />
-
-
+                    
                     <h5 className="center">Physical Description</h5>
 
                     Elves tend to range between 5' and 5'10", with males being slightly taller than females. They are generally slender and slight of frame, though more muscular body types are not uncommon. Eye colours are vivid, and they have no discernable pupil or iris, but rather the whole visible eye is one colour, with green, brown and blue being their natural colours. While Elves rarely tinker with their own DNA outside of medical practice, it was a fashion trend, particularly among younger Elves, to alter their eyes to red, purple and other colours. Their hair grows straight, with brown and black being the most common, and rarely, blonde. Elves age slightly more slowly than humans, reaching ages of approximately 150 years, though they reach maturity at a rate comparable to humankind.
