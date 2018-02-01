@@ -27,6 +27,7 @@
   <ItemGroup>
     <None Remove="ClientApp\components\Admin.tsx" />
     <None Remove="ClientApp\components\admin\logs\Logs.tsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\quest-editor.tsx" />
     <None Remove="ClientApp\components\Footer.tsx" />
     <None Remove="ClientApp\components\Header.tsx" />
     <None Remove="ClientApp\components\HumanityBeforeAvantasia.tsx" />
@@ -47,13 +48,13 @@
   <ItemGroup>
     <Folder Include="ClientApp\components\admin\dm-management\" />
     <Folder Include="ClientApp\components\admin\loot-table-editor\" />
-    <Folder Include="ClientApp\components\admin\quest-editor\" />
     <Folder Include="Extensions\" />
     <Folder Include="Services\Contracts\" />
     <Folder Include="Wiki\" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\quest-editor.tsx" />
     <TypeScriptCompile Include="ClientApp\components\lore\Halflings.tsx" />
     <TypeScriptCompile Include="ClientApp\components\lore\Gnomes.tsx" />
     <TypeScriptCompile Include="ClientApp\components\lore\Dwarves.tsx" />
