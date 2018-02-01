@@ -11,8 +11,8 @@ export default class Halflings extends React.Component<any, any> {
     render() {
         return (
             <div>
+                <h5 className="center">Culture</h5>
                 <p>
-                    <h5 className="center">Culture</h5>
                     Halfling society is one build around agriculture. They are the least technologically dependent race on Avantasia, and they are arguably the most in tune with the land. They live in towns, with little need for currency aside from trade with the other races, preferring to barter in goods and services instead. Halflings are great farmers and creators of exquisite foods. Their beers, wines and spirits are renowned.
                     <br />
                     <br />
@@ -25,29 +25,27 @@ export default class Halflings extends React.Component<any, any> {
                     Halflings love to share in a good story, with poets, singers, writers and their ilk being the centre of any good party, of which the Halflings have many. They value the company of others, and love to regale in events gone by and toast to their achievements.
                     <br />
                     <br />
-
-
-                    <h5 className="center">Physical Description</h5>
-
+                </p>
+                <h5 className="center">Physical Description</h5>
+                <p>
                     Halflings, as their name suggests, are around half the size of a human. They range from around 2'10" to around 3'10" with no difference between the genders. They tend to have darker hair and eye colours. They are the shortest lived of all of the Avantasian races, with a Halfling reaching 65 being a rarity.
                     <br />
                     <br />
-
-
-                    <h5 className="center">Religion</h5>
-
+                </p>
+                <h5 className="center">Religion</h5>
+                <p>
                     Halflings worship Avantasia herself as their God. They believe that the world on which they stand created them, as it creates all that they need to sustain them. Natural disasters are a result of her displeasure, while a bountiful crop is her blessing. When a Halfling dies, they are never cremated, but always buried. It is important to a Halfling to be allowed to rejoin the cycle of creation in death. Because of this, the idea of animated remains are deeply upsetting to a Halfling, as the cycle is not complete until a body returns to the ground from which it came.
                     <br />
                     <br />
-
-                    <h5 className="center">Alignment</h5>
-
+                </p>
+                <h5 className="center">Alignment</h5>
+                <p>
                     Halflings lean more towards Good and Neutrality. They harbour a deep respect for their kin, with friendship and community being an important part of society. Therefore, all life on Avantasia is respected, as long as it shows respect in turn. Before the breakdown, Halflings displaying signs of Evil were banished from society, marked Gaddom, or "loner".
                     <br />
                     <br />
-
-
-                    <h5 className="center">Relationships</h5>
+                </p>
+                <h5 className="center">Relationships</h5>
+                <p>
                     Halflings are the most commonly underestimated of the Avantasian races. Their lack of dependence on technology is construed as a lack of ability to create it, and therefore stupidity. Gnomes in particular find this strange, bordering on worrisome.
                     <br />
                     <br />

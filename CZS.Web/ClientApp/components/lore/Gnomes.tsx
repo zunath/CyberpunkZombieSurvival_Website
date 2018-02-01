@@ -11,8 +11,8 @@ export default class Gnomes extends React.Component<any, any> {
     render() {
         return (
             <div>
+                <h5 className="center">Culture</h5>
                 <p>
-                    <h5 className="center">Culture</h5>
                     The most industrious of the Avantasian races; Gnomes were renowned for their inventive aptitude. Artistically, they preferred sculpture to painting, and grand statues and mosaics were common in the streets, city halls and churches. They were a reckless bunch, often disregarding personal safety in the pursuit of inventive greatness. It was for this reason that their great cities spanned miles upon miles, with factories and laboratories given a wide berth, for it was not uncommon for experiments to go awry, and sometimes with disastrous consequence.
                     <br />
                     <br />
@@ -22,29 +22,27 @@ export default class Gnomes extends React.Component<any, any> {
                     An individual's worth was based heavily on his achievement within the field of invention and creation, although it was not unknown for a distinctly average Gnome to be held in high esteem because he was descended from a better man or woman than he. Gnomish families tended to be very large and close knit, often with many generations sharing one roof. 
                     <br />
                     <br />
-
-
-                    <h5 className="center">Physical Description</h5>
-
+                </p>
+                <h5 className="center">Physical Description</h5>
+                <p>
                     Gnomish height varied very little. They ranged from around 3'8" to 4', with no apparent distinction between the sexes on this front. Hues of honey and amber were most common for eye colour, though green was rarely seen too, and the belief was often held that those of green eye were gifted with particular creative genius. Their hair was extremely thick, and lighter shades were most common, though Gnomes in particular had a tendency to dye it. When twins or triplets were born, they were always identical, down to the last freckle and even fingerprint. Their lifespan was shorter than that of a human, with a Gnome who reached 70 years to be an uncommon sight.
                     <br />
                     <br />
-
-
-                    <h5 className="center">Religion</h5>
-
+                </p>
+                <h5 className="center">Religion</h5>
+                <p>
                     Steeped in scientific belief, Gnomes had no religion of their own. Occasionally they would worship the Dwarven Pantheon, though this was uncommon.
                     <br />
                     <br />
-                    
-                    <h5 className="center">Alignment</h5>
-
+                </p>
+                <h5 className="center">Alignment</h5>
+                <p>
                     Gnomes leaned more towards Chaos, Good and Neutrality. Their disregard for safety was not a malicious thing, but simply based around the philosophy that with success, came risk. As with all the races, the potential for the full spectrum of alignment existed, but any act against a fellow Gnome or anything seen as a hinderance to progress was dealt with swiftly.
                     <br />
                     <br />
-
-
-                    <h5 className="center">Relationships</h5>
+                </p>
+                <h5 className="center">Relationships</h5>
+                <p>
                     With the exception of the Dwarves, and later the Humans, the Gnomes mostly treated the other races with indifference. The Gnomes and Dwarves had a closer bond than most, for the Dwarves held most of the resources Gnomes needed, while Gnomish inventions were pivotal to extracting these raw minerals safely from Avantasia. Humans, on the other hand, brought AMP technology. This tech was a great help to the Gnomes, and as a result generated an air of general likability between them.
                     <br />
                     <br />

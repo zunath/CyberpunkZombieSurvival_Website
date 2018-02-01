@@ -11,8 +11,8 @@ export default class Dwarves extends React.Component<any, any> {
     render() {
         return (
             <div>
+                <h5 className="center">Culture</h5>
                 <p>
-                    <h5 className="center">Culture</h5>
                     Probably the most "typical" of the Avantasian races by Human standards, the Dwarves of Avantasia prized fine metal and gemwork above all else. Art was made up of gemstone statues, grand murals of gilded metal finery, and fine decorative pieces of metal, stone and crystal.
                     <br />
                     <br />
@@ -22,16 +22,16 @@ export default class Dwarves extends React.Component<any, any> {
                     In Dwarven culture, it is common for many families to come together to form a "House". These Houses bonds are often strengthened through marriage. In Dwarven politics, when the old Queen dies, the strongest house can put forward their Matriarch for new Queenship, as succession does not guarantee anything. It is therefore common that the largest house receives the most votes, hence the reason why it is so important.
                     <br />
                     <br />
-                    
-                    <h5 className="center">Physical Description</h5>
+                </p>
+                <h5 className="center">Physical Description</h5>
+                <p>
 
                     Dwarves are a short, stout race, with heights often ranging from between 4' and 5', with no discernible difference between genders. Males tend to grow beards, with red and brown being the most common hair colour. Eyes are often a muddy brown, though black is not uncommon. Dwarves live to around 110 years old. 
                     <br />
                     <br />
-
-
-                    <h5 className="center">Religion</h5>
-
+                </p>
+                <h5 className="center">Religion</h5>
+                <p>
                     Dwarves worship three Gods; The Crystal Mother, The Stone Father, and the Maiden of Metal. They represent the family unit that Dwarves hold so dear, as well as the minerals that brought them prosperity through their own endeavours.
                     <br />
                     <br />
@@ -47,17 +47,15 @@ export default class Dwarves extends React.Component<any, any> {
                     The Maiden of Metal is the daughter that makes up the family unit. Her youth is represented by the relative malleability of metal compared to her parents. She encompasses the best of both of them, with a capability to be beautiful and deadly in equal measure.
                     <br />
                     <br />
-
-
-                    <h5 className="center">Alignment</h5>
-
+                </p>
+                <h5 className="center">Alignment</h5>
+                <p>
                     Dwarves scope the entire range of the alignment spectrum. While their society is a neutral one, males tend to lean towards chaos without a strong female to guide them, as they have a comparatively short fuse, balanced only by their deep respect for females of their race. 
                     <br />
                     <br />
-
-
-                    <h5 className="center">Relationships</h5>
-
+                </p>
+                <h5 className="center">Relationships</h5>
+                <p>
                     Dwarves are wary of most other races, with the exception of perhaps the Gnomes, for whom they bare a respect for their understanding of mining and the properties of metal and crystal. It is perhaps odd that these races get on so well, with Gnomes being so comparatively outlandish.
                     <br />
                     <br />
