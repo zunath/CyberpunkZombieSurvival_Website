@@ -85,9 +85,12 @@ export default class Admin extends React.Component {
                             <h4 className="card-title">Quest Editor</h4>
                             <p className="card-text">Add, remove, and edit quest information.</p>
 
-                            <a className="btn btn-primary" href="/admin/quest-editor" role="button">
+                            <Link
+                                className="btn btn-primary"
+                                to="/admin/quest-editor"
+                                role="button">
                                 Edit Quests
-                            </a>
+                            </Link>
                         </div>
 
                     </div>

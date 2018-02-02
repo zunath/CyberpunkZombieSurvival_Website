@@ -29,19 +29,19 @@ export default class Downloads extends React.Component {
                         <tbody>
                             {this.state.DownloadList.map(function (obj) {
                                 return <tr key={obj.DownloadId}>
-                                    <td>
-                                        {obj.Name}
-                                    </td>
-                                    <td>
-                                        {obj.Description}
-                                    </td>
-                                    <td>
-                                        <a className="btn btn-outline-primary" href={obj.Url}>
-                                            Download
-                                        </a>
+                                           <td>
+                                               {obj.Name}
+                                           </td>
+                                           <td>
+                                               {obj.Description}
+                                           </td>
+                                           <td>
+                                               <a className="btn btn-outline-primary" href={obj.Url}>
+                                                   Download
+                                               </a>
 
-                                    </td>
-                                </tr>
+                                           </td>
+                                       </tr>;
                             })}
                         </tbody>
                     </table>

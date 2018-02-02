@@ -25,8 +25,8 @@ export default class Logs extends React.Component {
     render() {
         return <div>
             <ul className="nav nav-tabs" role="tablist">
-                <li className="nav-item active">
-                    <Link className="nav-link" data-toggle="tab" to="#nav-chatlogs" role="tab">Chat Logs</Link>
+                <li className="nav-item">
+                    <Link className="nav-link active" data-toggle="tab" to="#nav-chatlogs" role="tab">Chat Logs</Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" data-toggle="tab" to="#nav-connectionlogs" role="tab">Connection Logs</Link>

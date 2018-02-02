@@ -27,7 +27,11 @@
   <ItemGroup>
     <None Remove="ClientApp\components\Admin.jsx" />
     <None Remove="ClientApp\components\admin\logs\Logs.jsx" />
-    <None Remove="ClientApp\components\admin\quest-editor\quest-editor.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestDetails.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestEditor.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestPrerequisites.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestRewards.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestStates.jsx" />
     <None Remove="ClientApp\components\Footer.jsx" />
     <None Remove="ClientApp\components\Header.jsx" />
     <None Remove="ClientApp\components\HumanityBeforeAvantasia.tsx" />
@@ -54,7 +58,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\quest-editor.jsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestRewards.jsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestStates.jsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestPrerequisites.jsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestDetails.jsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestEditor.jsx" />
     <TypeScriptCompile Include="ClientApp\components\lore\Halflings.jsx" />
     <TypeScriptCompile Include="ClientApp\components\lore\Gnomes.jsx" />
     <TypeScriptCompile Include="ClientApp\components\lore\Dwarves.jsx" />
