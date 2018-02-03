@@ -101,7 +101,9 @@ export default class QuestEditor extends React.Component {
                                     keyItems={this.state.KeyItems} />
                             </div>
                             <div className="tab-pane" id="nav-prerequisites" role="tabpanel">
-                                <QuestPrerequisites details={this.state.ActiveQuest} />
+                                <QuestPrerequisites
+                                    prerequisites={this.state.ActiveQuest.Prerequisites}
+                                    quests={this.state.Quests} />
                             </div>
                             <div className="tab-pane" id="nav-states" role="tabpanel">
                                 <QuestStates details={this.state.ActiveQuest} />
@@ -113,6 +115,23 @@ export default class QuestEditor extends React.Component {
                     </div>
 
                 </div>
+
+                <div className="row">&nbsp;</div>
+                <div className="row">
+
+                    <div className="col-5">
+                        <button type="button" className="btn btn-primary btn-block">
+                            Save Changes
+                        </button>
+                    </div>
+                    <div className="col-5">
+                        <button type="button" className="btn btn-outline-primary btn-block">
+                            Discard Changes
+                        </button>
+                        &nbsp;
+                    </div>
+                </div>
+
 
 
             </div>

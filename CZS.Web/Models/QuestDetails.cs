@@ -1,4 +1,6 @@
-﻿namespace CZS.Web.Models
+﻿using System.Collections.Generic;
+
+namespace CZS.Web.Models
 {
     public class QuestDetails
     {
@@ -17,6 +19,8 @@
         public int StartKeyItemID { get; set; }
         public bool RemoveStartKeyItemAfterCompletion { get; set; }
 
+        public List<QuestPrerequisiteDetail> Prerequisites { get; set; }
+
         public QuestDetails()
         {
             QuestID = 0;
@@ -33,6 +37,8 @@
             MapNoteTag = string.Empty;
             StartKeyItemID = -1;
             RemoveStartKeyItemAfterCompletion = false;
+
+            Prerequisites = new List<QuestPrerequisiteDetail>();
         }
     }
 

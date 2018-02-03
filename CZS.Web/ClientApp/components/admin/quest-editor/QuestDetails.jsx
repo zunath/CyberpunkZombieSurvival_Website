@@ -177,9 +177,7 @@ export default class QuestDetails extends React.Component {
                             </div>
                         </div>
 
-
                         <div className="row">&nbsp;</div>
-
 
                     </div>
 
