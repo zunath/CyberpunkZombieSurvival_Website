@@ -1,6 +1,7 @@
-﻿namespace CZS.Web.Models
+﻿
+namespace CZS.Web.Models.UI.QuestEditor
 {
-    public class QuestKeyItem
+    public class QuestKeyItemUI
     {
         public int KeyItemID { get; set; }
         public string Name { get; set; }

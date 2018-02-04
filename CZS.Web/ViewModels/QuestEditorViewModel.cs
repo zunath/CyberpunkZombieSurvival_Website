@@ -6,6 +6,7 @@ using CZS.Web.Constants;
 using CZS.Web.Data;
 using CZS.Web.Data.Entities;
 using CZS.Web.Models;
+using CZS.Web.Models.UI.QuestEditor;
 using DotNetify;
 
 namespace CZS.Web.ViewModels
@@ -15,23 +16,23 @@ namespace CZS.Web.ViewModels
     {
         private readonly DataContext _db;
 
-        public string Quests_itemkey => nameof(QuestInfo.QuestID);
-        public IEnumerable<QuestInfo> Quests
+        public string Quests_itemkey => nameof(QuestInfoUI.QuestID);
+        public IEnumerable<QuestInfoUI> Quests
         {
-            get => Get<IEnumerable<QuestInfo>>();
+            get => Get<IEnumerable<QuestInfoUI>>();
             set => Set(value);
         }
         
-        public QuestDetails ActiveQuest
+        public QuestDetailsUI ActiveQuest
         {
-            get => Get<QuestDetails>();
+            get => Get<QuestDetailsUI>();
             set => Set(value);
         }
 
-        public string KeyItems_itemkey => nameof(QuestKeyItem.KeyItemID);
-        public IEnumerable<QuestKeyItem> KeyItems
+        public string KeyItems_itemkey => nameof(QuestKeyItemUI.KeyItemID);
+        public IEnumerable<QuestKeyItemUI> KeyItems
         {
-            get => Get<IEnumerable<QuestKeyItem>>();
+            get => Get<IEnumerable<QuestKeyItemUI>>();
             set => Set(value);
         }
 
@@ -40,13 +41,13 @@ namespace CZS.Web.ViewModels
             _db = db;
 
             var quests = _db.Quests.OrderBy(o => o.Name)
-                .Select(x => new QuestInfo
+                .Select(x => new QuestInfoUI
                 {
                     Name = x.Name,
                     QuestID = x.QuestId
                 }).ToList();
 
-            QuestInfo selectOption = new QuestInfo()
+            QuestInfoUI selectOption = new QuestInfoUI()
             {
                 Name = "Select a quest...",
                 QuestID = -1
@@ -55,16 +56,16 @@ namespace CZS.Web.ViewModels
             quests.Insert(0, selectOption);
 
             Quests = quests;
-            ActiveQuest = new QuestDetails{QuestID = -1};
+            ActiveQuest = new QuestDetailsUI{QuestID = -1};
 
             var keyItems = _db.KeyItems.OrderBy(x => x.Name)
-                .Select(x => new QuestKeyItem
+                .Select(x => new QuestKeyItemUI
                 {
                     Name = x.Name,
                     KeyItemID = x.KeyItemId
                 }).ToList();
 
-            QuestKeyItem selectKeyItem = new QuestKeyItem
+            QuestKeyItemUI selectKeyItem = new QuestKeyItemUI
             {
                 Name = "None",
                 KeyItemID = -1
@@ -78,7 +79,7 @@ namespace CZS.Web.ViewModels
         {
             if (questID <= -1)
             {
-                ActiveQuest = new QuestDetails { QuestID = -1 };
+                ActiveQuest = new QuestDetailsUI { QuestID = -1 };
                 return;
             }
 
@@ -87,11 +88,15 @@ namespace CZS.Web.ViewModels
 
             if (quest == null)
             {
-                ActiveQuest = new QuestDetails();
+                ActiveQuest = new QuestDetailsUI();
                 return;
             }
+            ActiveQuest = BuildQuestUIObject(quest);
+        };
 
-            ActiveQuest = new QuestDetails
+        private static QuestDetailsUI BuildQuestUIObject(Quests quest)
+        {
+            var uiQuest = new QuestDetailsUI
             {
                 QuestID = quest.QuestId,
                 Name = quest.Name,
@@ -99,15 +104,30 @@ namespace CZS.Web.ViewModels
                 FameRegionID = quest.FameRegionId,
                 RequiredFameAmount = quest.RequiredFameAmount,
                 AllowRewardSelection = quest.AllowRewardSelection,
-                RewardGold = quest.RewardGold,
-                RewardXP = quest.RewardXp,
-                RewardKeyItemID = quest.RewardKeyItemId ?? -1,
-                RewardFame = quest.RewardFame,
                 IsRepeatable = quest.IsRepeatable,
                 MapNoteTag = quest.MapNoteTag,
                 StartKeyItemID = quest.StartKeyItemId ?? -1,
-                RemoveStartKeyItemAfterCompletion = quest.RemoveStartKeyItemAfterCompletion
+                RemoveStartKeyItemAfterCompletion = quest.RemoveStartKeyItemAfterCompletion,
+                Rewards = new QuestRewardsUI
+                {
+                    Fame = quest.RewardFame,
+                    Gold = quest.RewardGold,
+                    KeyItemID = quest.RewardKeyItemId ?? -1,
+                    XP = quest.RewardXp,
+                    RewardItems = quest.QuestRewardItems.Select(x => new QuestRewardItemUI()
+                    {
+                        Quantity = x.Quantity,
+                        Resref = x.Resref
+                    }).ToList()
+                }
             };
-        };
+            
+            foreach (var prereq in quest.QuestPrerequisitesQuest)
+            {
+                uiQuest.PrerequisiteQuestIDs.Add(prereq.RequiredQuestId);
+            }
+            
+            return uiQuest;
+        }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace CZS.Web.Models
+namespace CZS.Web.Models.UI.QuestEditor
 {
-    public class QuestDetails
+    public class QuestDetailsUI
     {
         public int QuestID { get; set; }
         public string Name { get; set; }
@@ -10,18 +10,15 @@ namespace CZS.Web.Models
         public int FameRegionID { get; set; }
         public int RequiredFameAmount { get; set; }
         public bool AllowRewardSelection { get; set; }
-        public int RewardGold { get; set; }
-        public int RewardXP { get; set; }
-        public int RewardKeyItemID { get; set; }
-        public int RewardFame { get; set; }
         public bool IsRepeatable { get; set; }
         public string MapNoteTag { get; set; }
         public int StartKeyItemID { get; set; }
         public bool RemoveStartKeyItemAfterCompletion { get; set; }
 
-        public List<QuestPrerequisiteDetail> Prerequisites { get; set; }
+        public List<int> PrerequisiteQuestIDs { get; set; }
+        public QuestRewardsUI Rewards { get; set; }
 
-        public QuestDetails()
+        public QuestDetailsUI()
         {
             QuestID = 0;
             Name = string.Empty;
@@ -29,16 +26,12 @@ namespace CZS.Web.Models
             FameRegionID = 0;
             RequiredFameAmount = 0;
             AllowRewardSelection = false;
-            RewardGold = 0;
-            RewardXP = 0;
-            RewardKeyItemID = -1;
-            RewardFame = 0;
             IsRepeatable = false;
             MapNoteTag = string.Empty;
             StartKeyItemID = -1;
             RemoveStartKeyItemAfterCompletion = false;
 
-            Prerequisites = new List<QuestPrerequisiteDetail>();
+            PrerequisiteQuestIDs = new List<int>();
         }
     }
 

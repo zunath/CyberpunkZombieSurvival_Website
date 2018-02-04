@@ -102,14 +102,19 @@ export default class QuestEditor extends React.Component {
                             </div>
                             <div className="tab-pane" id="nav-prerequisites" role="tabpanel">
                                 <QuestPrerequisites
-                                    prerequisites={this.state.ActiveQuest.Prerequisites}
-                                    quests={this.state.Quests} />
+                                    prerequisiteQuestIDs={this.state.ActiveQuest.PrerequisiteQuestIDs}
+                                    quests={this.state.Quests}
+                                    enableControls={this.state.activeQuestID <= 0 ? false : true}/>
                             </div>
                             <div className="tab-pane" id="nav-states" role="tabpanel">
-                                <QuestStates details={this.state.ActiveQuest} />
+                                <QuestStates details={this.state.ActiveQuest}
+                                             enableControls={this.state.activeQuestID <= 0 ? false : true} />
                             </div>
                             <div className="tab-pane" id="nav-rewards" role="tabpanel">
-                                <QuestRewards details={this.state.ActiveQuest} />
+                                <QuestRewards
+                                    rewards={this.state.ActiveQuest.Rewards}
+                                    keyItems={this.state.KeyItems}
+                                    enableControls={this.state.activeQuestID <= 0 ? false : true}/>
                             </div>
                         </div>
                     </div>

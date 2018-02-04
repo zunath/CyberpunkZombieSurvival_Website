@@ -25,14 +25,6 @@ export default class QuestDetails extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.changeKeyItem = this.changeKeyItem.bind(this);
     }
-
-    componentWillMount() {
-
-    }
-
-    componentWillUnmount() {
-
-    }
     
     componentWillReceiveProps(newProps) {
         this.setState({
