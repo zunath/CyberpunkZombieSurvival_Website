@@ -29,7 +29,6 @@
     <None Remove="ClientApp\components\admin\logs\Logs.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestDetails.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestEditor.jsx" />
-    <None Remove="ClientApp\components\admin\quest-editor\QuestPrerequisiteDetail.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestPrerequisites.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestRewards.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestStates.jsx" />
@@ -59,7 +58,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestPrerequisiteDetail.jsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestRewards.jsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestStates.jsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestPrerequisites.jsx" />
