@@ -5,7 +5,6 @@ using CZS.Web.Attributes;
 using CZS.Web.Constants;
 using CZS.Web.Data;
 using CZS.Web.Data.Entities;
-using CZS.Web.Models;
 using CZS.Web.Models.UI.QuestEditor;
 using DotNetify;
 
@@ -33,6 +32,21 @@ namespace CZS.Web.ViewModels
         public IEnumerable<QuestKeyItemUI> KeyItems
         {
             get => Get<IEnumerable<QuestKeyItemUI>>();
+            set => Set(value);
+        }
+
+        public string FameRegions_itemkey => nameof(QuestFameRegionUI.FameRegionID);
+        public IEnumerable<QuestFameRegionUI> FameRegions
+        {
+            get => Get<IEnumerable<QuestFameRegionUI>>();
+            set => Set(value);
+        }
+
+        public string QuestTypes_itemkey => nameof(QuestTypeUI.QuestTypeID);
+
+        public IEnumerable<QuestTypeUI> QuestTypes
+        {
+            get => Get<IEnumerable<QuestTypeUI>>();
             set => Set(value);
         }
 
@@ -73,6 +87,29 @@ namespace CZS.Web.ViewModels
             keyItems.Insert(0, selectKeyItem);
 
             KeyItems = keyItems;
+
+            var fameRegions = _db.FameRegions.OrderBy(x => x.Name)
+                .Select(x => new QuestFameRegionUI
+                {
+                    Name = x.Name,
+                    FameRegionID = x.FameRegionId
+                }).ToList();
+
+            QuestFameRegionUI selectFameRegion = new QuestFameRegionUI
+            {
+                Name = "None",
+                FameRegionID = -1
+            };
+            fameRegions.Insert(0, selectFameRegion);
+
+            FameRegions = fameRegions;
+
+            QuestTypes = _db.QuestTypeDomain.OrderBy(x => x.QuestTypeId)
+                .Select(x => new QuestTypeUI
+                {
+                    QuestTypeID = x.QuestTypeId,
+                    Name = x.Name
+                }).ToList();
         }
 
         public Action<int> ChangeQuest => questID =>

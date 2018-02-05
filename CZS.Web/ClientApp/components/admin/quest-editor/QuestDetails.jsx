@@ -19,7 +19,8 @@ export default class QuestDetails extends React.Component {
             StartKeyItemID: -1,
             RemoveStartKeyItemAfterCompletion: false,
 
-            KeyItems: []
+            KeyItems: [],
+            FameRegions: []
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -43,8 +44,8 @@ export default class QuestDetails extends React.Component {
             StartKeyItemID: newProps.details.StartKeyItemID,
             RemoveStartKeyItemAfterCompletion: newProps.details.RemoveStartKeyItemAfterCompletion,
 
-            KeyItems: newProps.keyItems
-
+            KeyItems: newProps.keyItems,
+            FameRegions: newProps.fameRegions
         });
     }
 
@@ -94,6 +95,21 @@ export default class QuestDetails extends React.Component {
                                        onChange={this.handleChange}
                                        disabled={this.state.QuestID === -1 ? true : false}>
                                 </input>
+                                <label htmlFor="fameRegion">Fame Region:</label>
+                                <select id="fameRegion"
+                                        className="form-control"
+                                        onChange={this.changeFameRegion}
+                                        value={this.state.FameRegionID}
+                                        disabled={this.state.QuestID === -1 ? true : false}>
+                                    {this.state.FameRegions.map(function (fameRegion) {
+                                        return <option
+                                            key={fameRegion.FameRegionID}
+                                            value={fameRegion.FameRegionID}>
+                                            {fameRegion.Name}
+                                        </option>;
+                                    })};
+                                </select>
+
                                 <label htmlFor="requiredFame">Required Fame:</label>
                                 <input type="text" id="requiredFame" name="RequiredFameAmount"
                                        className="form-control"

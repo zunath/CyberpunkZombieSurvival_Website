@@ -211,6 +211,31 @@ export default class QuestRewards extends React.Component {
 
                 <div className="row">&nbsp;</div>
 
+                <div className="row">
+                    <div className="col-2">
+                        <div className="center">
+                            <label>ID</label>
+                        </div>
+                    </div>
+                    <div className="col-4">
+                        <div className="center">
+                            <label>Resref</label>
+                        </div>
+                    </div>
+                    <div className="col-4">
+                        <div className="center">
+                            <label>Quantity</label>
+                        </div>
+                    </div>
+                    <div className="col-2">
+                        <div className="center">
+                            <label>Actions</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">&nbsp;</div>
+
                 {this.state.Items.length <= 0 &&
                     <div className="row">
                         <span className="center">

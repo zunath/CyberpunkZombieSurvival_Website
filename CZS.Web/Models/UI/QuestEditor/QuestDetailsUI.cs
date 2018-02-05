@@ -17,6 +17,7 @@ namespace CZS.Web.Models.UI.QuestEditor
 
         public List<int> PrerequisiteQuestIDs { get; set; }
         public QuestRewardsUI Rewards { get; set; }
+        public List<QuestStateUI> QuestStates { get; set; }
 
         public QuestDetailsUI()
         {
@@ -32,6 +33,7 @@ namespace CZS.Web.Models.UI.QuestEditor
             RemoveStartKeyItemAfterCompletion = false;
 
             PrerequisiteQuestIDs = new List<int>();
+            QuestStates = new List<QuestStateUI>();
         }
     }
 

@@ -17,7 +17,9 @@ export default class QuestEditor extends React.Component {
             Quests: [],
             activeQuestID: 0,
             ActiveQuest: {},
-            KeyItems: []
+            KeyItems: [],
+            FameRegions: [],
+            QuestTypes: []
         }
 
         this.changeQuest = this.changeQuest.bind(this);
@@ -98,7 +100,8 @@ export default class QuestEditor extends React.Component {
                             <div className="tab-pane active" id="nav-details" role="tabpanel">
                                 <QuestDetails
                                     details={this.state.ActiveQuest}
-                                    keyItems={this.state.KeyItems} />
+                                    keyItems={this.state.KeyItems}
+                                    fameRegions={this.state.FameRegions} />
                             </div>
                             <div className="tab-pane" id="nav-prerequisites" role="tabpanel">
                                 <QuestPrerequisites
@@ -107,8 +110,10 @@ export default class QuestEditor extends React.Component {
                                     enableControls={this.state.activeQuestID <= 0 ? false : true}/>
                             </div>
                             <div className="tab-pane" id="nav-states" role="tabpanel">
-                                <QuestStates details={this.state.ActiveQuest}
-                                             enableControls={this.state.activeQuestID <= 0 ? false : true} />
+                                <QuestStates 
+                                    questTypes={this.state.QuestTypes}
+                                    enableControls={this.state.activeQuestID <= 0 ? false : true}
+                                    questStates={this.state.ActiveQuest.QuestStates} />
                             </div>
                             <div className="tab-pane" id="nav-rewards" role="tabpanel">
                                 <QuestRewards

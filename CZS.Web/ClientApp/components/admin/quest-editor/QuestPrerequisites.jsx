@@ -117,6 +117,26 @@ export default class QuestPrerequisites extends React.Component {
 
                 <div className="row">&nbsp;</div>
 
+                <div className="row">
+                    <div className="col-2">
+                        <div className="center">
+                            <label>ID</label>
+                        </div>
+                    </div>
+                    <div className="col-8">
+                        <div className="center">
+                            <label>Quest</label>
+                        </div>
+                    </div>
+                    <div className="col-2">
+                        <div className="center">
+                            <label>Actions</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">&nbsp;</div>
+
                 {this.state.prerequisiteQuestIDs.length <= 0 &&
                     <div className="row">
                         <span className="center">
