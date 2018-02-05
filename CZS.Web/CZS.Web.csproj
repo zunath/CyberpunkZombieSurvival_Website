@@ -27,11 +27,17 @@
   <ItemGroup>
     <None Remove="ClientApp\components\Admin.jsx" />
     <None Remove="ClientApp\components\admin\logs\Logs.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestCollectItems.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestDetails.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestEditor.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestExploreArea.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestKillTarget.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestPrerequisites.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestRewards.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestStates.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestTalkToNPC.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestUseItem.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestUseObject.jsx" />
     <None Remove="ClientApp\components\Footer.jsx" />
     <None Remove="ClientApp\components\Header.jsx" />
     <None Remove="ClientApp\components\HumanityBeforeAvantasia.tsx" />
@@ -58,6 +64,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestUseItem.jsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestExploreArea.jsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestCollectItems.jsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestUseObject.jsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestTalkToNPC.jsx" />
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestKillTarget.jsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestRewards.jsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestStates.jsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestPrerequisites.jsx" />
