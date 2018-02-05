@@ -43,10 +43,16 @@ namespace CZS.Web.ViewModels
         }
 
         public string QuestTypes_itemkey => nameof(QuestTypeUI.QuestTypeID);
-
         public IEnumerable<QuestTypeUI> QuestTypes
         {
             get => Get<IEnumerable<QuestTypeUI>>();
+            set => Set(value);
+        }
+
+        public string NPCGroups_itemkey => nameof(QuestNPCGroupUI.NPCGroupID);
+        public IEnumerable<QuestNPCGroupUI> NPCGroups
+        {
+            get => Get<IEnumerable<QuestNPCGroupUI>>();
             set => Set(value);
         }
 
@@ -110,6 +116,14 @@ namespace CZS.Web.ViewModels
                     QuestTypeID = x.QuestTypeId,
                     Name = x.Name
                 }).ToList();
+
+            NPCGroups = _db.NPCGroups.OrderBy(x => x.NpcgroupId)
+                .Select(x => new QuestNPCGroupUI
+                {
+                    NPCGroupID = x.NpcgroupId,
+                    Name = x.Name
+                }).ToList();
+
         }
 
         public Action<int> ChangeQuest => questID =>

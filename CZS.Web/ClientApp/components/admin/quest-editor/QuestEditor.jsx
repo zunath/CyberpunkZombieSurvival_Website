@@ -19,7 +19,8 @@ export default class QuestEditor extends React.Component {
             ActiveQuest: {},
             KeyItems: [],
             FameRegions: [],
-            QuestTypes: []
+            QuestTypes: [],
+            NPCGroups: []
         }
 
         this.changeQuest = this.changeQuest.bind(this);
@@ -113,7 +114,8 @@ export default class QuestEditor extends React.Component {
                                 <QuestStates 
                                     questTypes={this.state.QuestTypes}
                                     enableControls={this.state.activeQuestID <= 0 ? false : true}
-                                    questStates={this.state.ActiveQuest.QuestStates} />
+                                    questStates={this.state.ActiveQuest.QuestStates}
+                                    npcGroups={this.state.NPCGroups}/>
                             </div>
                             <div className="tab-pane" id="nav-rewards" role="tabpanel">
                                 <QuestRewards

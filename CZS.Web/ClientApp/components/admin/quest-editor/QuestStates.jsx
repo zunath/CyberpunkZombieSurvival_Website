@@ -6,7 +6,8 @@ export default class QuestStates extends React.Component {
         this.state = {
             QuestTypes: [],
             EnableControls: false,
-            QuestStates: []
+            QuestStates: [],
+            NPCGroups: []
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -22,25 +23,39 @@ export default class QuestStates extends React.Component {
         this.buildCollectItemsOptions = this.buildCollectItemsOptions.bind(this);
         this.buildExploreAreaOptions = this.buildExploreAreaOptions.bind(this);
         this.buildUseItemOptions = this.buildUseItemOptions.bind(this);
+
+        this.addKillTarget = this.addKillTarget.bind(this);
+        this.handleChangeKillTarget = this.handleChangeKillTarget.bind(this);
+        this.handleDeleteKillTarget = this.handleDeleteKillTarget.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
         this.setState({
             QuestTypes: newProps.questTypes,
             EnableControls: newProps.enableControls,
-            QuestStates: newProps.questStates
+            QuestStates: newProps.questStates,
+            NPCGroups: newProps.npcGroups
         });
     }
 
     handleChange(event, index) {
         const newQuestStates = this.state.QuestStates;
         newQuestStates[index][event.target.name] = event.target.value;
-        
+
         this.setState({
             QuestStates: newQuestStates
         });
     }
 
+    handleChangeKillTarget(event, ktIndex, questStateIndex) {
+        const newQuestStates = this.state.QuestStates;
+        newQuestStates[questStateIndex]['KillTargets'][ktIndex][event.target.name] = event.target.value;
+
+        this.setState({
+            QuestStates: newQuestStates
+        });
+    }
+    
     handleChangeQuestType(event, index) {
         const newQuestStates = this.state.QuestStates;
         newQuestStates[index].QuestTypeID = event.target.value;
@@ -67,7 +82,7 @@ export default class QuestStates extends React.Component {
     handleMoveDown(event, index) {
         const newQuestStates = this.state.QuestStates;
         let newIndex = index + 1;
-        if (newIndex > this.state.QuestStates.length-1) newIndex = this.state.QuestStates.length-1;
+        if (newIndex > this.state.QuestStates.length - 1) newIndex = this.state.QuestStates.length - 1;
 
         const element = newQuestStates[index];
         newQuestStates.splice(index, 1);
@@ -87,92 +102,103 @@ export default class QuestStates extends React.Component {
         });
     }
 
+    handleDeleteKillTarget(questStateIndex, ktIndex) {
+        const newQuestStates = this.state.QuestStates;
+        newQuestStates[questStateIndex].KillTargets.splice(ktIndex, 1);
+
+        this.setState({
+            QuestStates: newQuestStates
+        });
+    }
+
     buildQuestState(questState, index) {
         return <div key={index}>
-            <div className="row">
-                <div className="col-1">
+
+            <div className="card">
+                <div className="card-body">
                     <div className="row">
-                        <button
-                            className="btn-sm btn-outline-primary h-25"
-                            onClick={(event) => this.handleMoveUp(event, index)}>
-                            <i className="fa fa-caret-up fa-lg"></i>
-                        </button>
-                        <button
-                            className="btn-sm btn-outline-primary h-25"
-                            onClick={(event) => this.handleMoveDown(event, index)}>
-                            <i className="fa fa-caret-down fa-lg"></i>
-                        </button>
+                        <div className="col-1">
+                            <div className="row">
+                                <button
+                                    className="btn-sm btn-outline-primary h-25"
+                                    onClick={(event) => this.handleMoveUp(event, index)}>
+                                    <i className="fa fa-caret-up fa-lg"></i>
+                                </button>
+                                <button
+                                    className="btn-sm btn-outline-primary h-25"
+                                    onClick={(event) => this.handleMoveDown(event, index)}>
+                                    <i className="fa fa-caret-down fa-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="col-2">
+                            <input type="text"
+                                className="form-control"
+                                readOnly={true}
+                                value={index + 1} />
+
+                        </div>
+                        <div className="col-4">
+                            <select id="selectQuestType"
+                                name="QuestTypeID"
+                                className="form-control"
+                                disabled={!this.state.EnableControls}
+                                onChange={(event) => this.handleChange(event, index)}
+                                value={questState.QuestTypeID}>
+                                {this.state.QuestTypes.map((questType) => {
+                                    return <option
+                                        key={questType.QuestTypeID}
+                                        value={questType.QuestTypeID}>
+                                        {questType.Name}
+                                    </option>;
+                                })};
+                            </select>
+                        </div>
+                        <div className="col-2">
+                            <input type="text"
+                                className="form-control"
+                                name="JournalStateID"
+                                value={questState.JournalStateID}
+                                onChange={(event) => this.handleChange(event, index)}
+                                placeholder="Journal State ID">
+                            </input>
+                        </div>
+                        <div className="col-3">
+                            <button className="btn btn-outline-primary btn-block" onClick={(event) => this.handleDelete(event, index)}>
+                                Delete
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div className="col-2">
-                    <input type="text"
-                        className="form-control"
-                        readOnly={true}
-                        value={index + 1} />
 
-                </div>
-                <div className="col-4">
-                    <select id="selectQuestType"
-                        name="QuestTypeID"
-                        className="form-control"
-                        disabled={!this.state.EnableControls}
-                        onChange={(event) => this.handleChange(event, index)}
-                        value={questState.QuestTypeID}>
-                        {this.state.QuestTypes.map((questType) => {
-                            return <option
-                                key={questType.QuestTypeID}
-                                value={questType.QuestTypeID}>
-                                {questType.Name}
-                            </option>;
-                        })};
-                    </select>
-                </div>
-                <div className="col-2">
-                    <input type="text"
-                           className="form-control"
-                           name="JournalStateID"
-                           value={questState.JournalStateID}
-                           onChange={(event) => this.handleChange(event, index)}
-                           placeholder="Journal State ID">
-                    </input>
-                </div>
-                <div className="col-3">
-                    <button className="btn btn-outline-primary btn-block" onClick={(event) => this.handleDelete(event, index)}>
-                        Delete
-                    </button>
-                </div>
-                {questState.QuestTypeID === '1' &&
-                    this.buildKillEnemiesOptions(questState)}
-                {questState.QuestTypeID === '2' &&
-                    this.buildTalkToNPCOptions(questState)}
-                {questState.QuestTypeID === '3' &&
-                    this.buildUseObjectOptions(questState)}
-                {questState.QuestTypeID === '4' &&
-                    this.buildCollectItemsOptions(questState)}
-                {questState.QuestTypeID === '5' &&
-                    this.buildExploreAreaOptions(questState)}
-                {questState.QuestTypeID === '6' &&
-                    this.buildUseItemOptions(questState)}
+                    <div className="row">
+                        <div className="col-11 offset-1">
+                            {questState.QuestTypeID === '1' &&
+                                this.buildKillEnemiesOptions(questState, index)}
+                            {questState.QuestTypeID === '2' &&
+                                this.buildTalkToNPCOptions(questState, index)}
+                            {questState.QuestTypeID === '3' &&
+                                this.buildUseObjectOptions(questState, index)}
+                            {questState.QuestTypeID === '4' &&
+                                this.buildCollectItemsOptions(questState, index)}
+                            {questState.QuestTypeID === '5' &&
+                                this.buildExploreAreaOptions(questState, index)}
+                            {questState.QuestTypeID === '6' &&
+                                this.buildUseItemOptions(questState, index)}
+                        </div>
 
+                    </div>
+                    <div className="row">&nbsp;</div>
+                </div>
             </div>
-
-            <div className="row">&nbsp;</div>
+             <div className="row">&nbsp;</div>
         </div>;
     }
 
     addQuestState() {
-        // Only add a new state if the last one has been set.
-        //const lastIndex = this.state.QuestStates.length - 1;
-        //if (lastIndex >= 0) {
-        //    if (this.state.QuestStates[lastIndex] <= 0) {
-        //        return;
-        //    }
-        //}
-
         const newElement = {
             QuestTypeID: 0,
             JournalStateID: 0,
-            IsFinalState: false
+            KillTargets: []
         };
 
         this.setState(prevState => ({
@@ -180,10 +206,98 @@ export default class QuestStates extends React.Component {
         }));
     }
 
-    buildKillEnemiesOptions(questState) {
+    addKillTarget(questState, questStateIndex) {
+        const newElement = {
+            NPCGroupID: 0,
+            Quantity: 0
+        };
 
-        return <div className="row">
+        const newQuestStates = this.state.QuestStates;
+        newQuestStates[questStateIndex].KillTargets.push(newElement);
 
+        this.setState({
+            QuestStates: newQuestStates
+        });
+    }
+
+
+    buildKillEnemiesOptions(questState, questStateIndex) {
+
+        return <div>
+            <div className="row">&nbsp;</div>
+            <div className="row">
+                <label className="center">
+                    Kill Enemies Details:
+                </label>
+            </div>
+            <div className="row">
+                <button
+                    className="btn btn-primary btn-block"
+                    disabled={!this.state.EnableControls}
+                    onClick={(killTarget) => this.addKillTarget(killTarget, questStateIndex)}>
+                    Add Kill Target
+                </button>
+            </div>
+            <div className="row">&nbsp;</div>
+
+            <div className="row">
+                <div className="col-2">
+                    ID
+                </div>
+                <div className="col-6">
+                    NPC Group
+                </div>
+                <div className="col-2">
+                    Quantity
+                </div>
+                <div className="col-2">
+                    Actions
+                </div>
+            </div>
+            <div className="row">&nbsp;</div>
+
+            {questState.KillTargets.map((killTarget, ktIndex) => {
+                return <div key={ktIndex}>
+                    <div className="row">
+                        <div className="col-2">
+                            <input type="text"
+                                   className="form-control"
+                                   readOnly={true}
+                                   value={ktIndex + 1} />
+                        </div>
+                        <div className="col-6">
+                            <select id="selectNPCGroup"
+                                    name="NPCGroupID"
+                                    className="form-control"
+                                    disabled={!this.state.EnableControls}
+                                    onChange={(event) => this.handleChangeKillTarget(event, ktIndex, questStateIndex)}
+                                    value={killTarget.NPCGroupID}>
+                                {this.state.NPCGroups.map((npcGroup) => {
+                                    return <option
+                                        key={npcGroup.NPCGroupID}
+                                        value={npcGroup.NPCGroupID}>
+                                        {npcGroup.Name}
+                                    </option>;
+                                })};
+                            </select>
+                        </div>
+                        <div className="col-2">
+                            <input type="text"
+                                className="form-control"
+                                name="Quantity"
+                                value={killTarget.Quantity}
+                                onChange={(event) => this.handleChangeKillTarget(event, ktIndex, questStateIndex)}/>
+                        </div>
+                        <div className="col-2">
+                            <button className="btn btn-outline-primary btn-block"
+                                onClick={() => this.handleDeleteKillTarget(questStateIndex, ktIndex)}> 
+                                Delete
+                            </button>
+                        </div>
+
+                    </div>
+                </div>;
+            })}
         </div>;
 
     }

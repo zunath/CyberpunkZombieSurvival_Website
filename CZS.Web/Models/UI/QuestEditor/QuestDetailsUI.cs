@@ -18,6 +18,7 @@ namespace CZS.Web.Models.UI.QuestEditor
         public List<int> PrerequisiteQuestIDs { get; set; }
         public QuestRewardsUI Rewards { get; set; }
         public List<QuestStateUI> QuestStates { get; set; }
+        public List<QuestNPCGroupUI> NPCGroups { get; set; }
 
         public QuestDetailsUI()
         {
@@ -34,6 +35,7 @@ namespace CZS.Web.Models.UI.QuestEditor
 
             PrerequisiteQuestIDs = new List<int>();
             QuestStates = new List<QuestStateUI>();
+            NPCGroups = new List<QuestNPCGroupUI>();
         }
     }
 
