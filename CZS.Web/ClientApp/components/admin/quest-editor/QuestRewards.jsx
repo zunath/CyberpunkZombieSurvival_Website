@@ -1,4 +1,5 @@
 ﻿import * as React from 'react';
+import QuestItemDetails from './QuestItemDetails';
 
 export default class QuestRewards extends React.Component {
     constructor(props) {
@@ -10,15 +11,13 @@ export default class QuestRewards extends React.Component {
             Fame: 0,
             Items: [],
             KeyItems: [],
-            enableControls: false
+            EnableControls: false
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.addItemReward = this.addItemReward.bind(this);
-        this.buildItemReward = this.buildItemReward.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.handleChangeItemResref = this.handleChangeItemResref.bind(this);
-        this.handleChangeItemQuantity = this.handleChangeItemQuantity.bind(this);
+        this.changeItem = this.changeItem.bind(this);
     }
 
     componentWillUnmount() {
@@ -27,13 +26,13 @@ export default class QuestRewards extends React.Component {
 
     componentWillReceiveProps(newProps) {
         this.setState({
-            Gold: newProps.rewards == null ? 0 : newProps.rewards.Gold,
-            XP: newProps.rewards == null ? 0 : newProps.rewards.XP,
-            KeyItemID: newProps.rewards == null ? -1 : newProps.rewards.KeyItemID,
-            Fame: newProps.rewards == null ? 0 : newProps.rewards.Fame,
-            Items: newProps.rewards == null ? [] : newProps.rewards.RewardItems,
-            KeyItems: newProps.keyItems,
-            enableControls: newProps.enableControls
+            Gold: newProps.rewards == null ? 0 : newProps.Rewards.Gold,
+            XP: newProps.rewards == null ? 0 : newProps.Rewards.XP,
+            KeyItemID: newProps.rewards == null ? -1 : newProps.Rewards.KeyItemID,
+            Fame: newProps.rewards == null ? 0 : newProps.Rewards.Fame,
+            Items: newProps.rewards == null ? [] : newProps.Rewards.RewardItems,
+            KeyItems: newProps.KeyItems,
+            EnableControls: newProps.EnableControls
         });
     }
 
@@ -43,25 +42,16 @@ export default class QuestRewards extends React.Component {
         });
     }
 
-    handleChangeItemResref(event, index) {
+    changeItem(index, name, value) {
         const newItems = this.state.Items;
-        newItems[index].Resref = event.target.value;
+        newItems[index][name] = value;
 
         this.setState({
             Items: newItems
         });
     }
 
-    handleChangeItemQuantity(event, index) {
-        const newItems = this.state.Items;
-        newItems[index].Quantity = event.target.value;
-
-        this.setState({
-            Items: newItems
-        });
-    }
-
-    handleDelete(event, index) {
+    handleDelete(index) {
         const newItems = this.state.Items;
         newItems.splice(index, 1);
 
@@ -90,54 +80,7 @@ export default class QuestRewards extends React.Component {
             Items: [...prevState.Items, newElement]
         }));
     }
-
-
-    buildItemReward(resref, quantity, index) {
-        return <div key={index}>
-            <div className="row">
-                <div className="col-2">
-                    <input type="text"
-                        className="form-control"
-                        readOnly={true}
-                        value={index + 1} />
-
-                </div>
-                <div className="col-4">
-                    <input type="text"
-                           className="form-control"
-                           name="Resref"
-                           value={resref}
-                           onChange={(event) => this.handleChangeItemResref(event, index)}
-                           placeholder="Resref">
-                    </input>
-
-
-                </div>
-                <div className="col-4">
-                    <input type="text"
-                           className="form-control"
-                           name="Quantity"
-                           value={quantity}
-                           onChange={(event) => this.handleChangeItemQuantity(event, index)}
-                           placeholder="Quantity">
-                    </input>
-
-
-                </div>
-                <div className="col-2">
-                    <button className="btn btn-outline-primary" onClick={(event) => this.handleDelete(event, index)}>
-                        Delete
-                    </button>
-
-                </div>
-
-            </div>
-
-            <div className="row">&nbsp;</div>
-        </div>;
-
-    }
-
+    
     render() {
         return (
             <div>
@@ -150,7 +93,7 @@ export default class QuestRewards extends React.Component {
                             className="form-control"
                             value={this.state.Gold}
                             onChange={this.handleChange}
-                            disabled={!this.state.enableControls}>
+                            disabled={!this.state.EnableControls}>
                         </input>
                     </div>
                 </div>
@@ -164,7 +107,7 @@ export default class QuestRewards extends React.Component {
                             className="form-control"
                             value={this.state.XP}
                             onChange={this.handleChange}
-                            disabled={!this.state.enableControls}>
+                            disabled={!this.state.EnableControls}>
                         </input>
                     </div>
                 </div>
@@ -178,7 +121,7 @@ export default class QuestRewards extends React.Component {
                             className="form-control"
                             value={this.state.Fame}
                             onChange={this.handleChange}
-                            disabled={!this.state.enableControls}>
+                            disabled={!this.state.EnableControls}>
                         </input>
                     </div>
                 </div>
@@ -189,7 +132,7 @@ export default class QuestRewards extends React.Component {
                     className="form-control"
                     value={this.state.KeyItemID}
                     onChange={this.handleChange}
-                    disabled={!this.state.enableControls}>
+                    disabled={!this.state.EnableControls}>
                     {this.state.KeyItems.map(function (keyItem) {
                         return <option
                             key={keyItem.KeyItemID}
@@ -205,7 +148,7 @@ export default class QuestRewards extends React.Component {
                 <button
                     className="btn btn-primary btn-block"
                     onClick={this.addItemReward}
-                    disabled={!this.state.enableControls}>
+                    disabled={!this.state.EnableControls}>
                     Add Item Reward
                 </button>
 
@@ -245,7 +188,13 @@ export default class QuestRewards extends React.Component {
                 }
 
                 {this.state.Items.map((item, index) => {
-                    return this.buildItemReward(item.Resref, item.Quantity, index);
+                    return <QuestItemDetails
+                        key={index}
+                        Index={index}
+                        Resref={item.Resref}
+                        Quantity={item.Quantity}
+                        OnDeleteCallback={this.handleDelete}
+                        OnChangeCallback={this.changeItem}/>;
                 })}
             </div>
         );

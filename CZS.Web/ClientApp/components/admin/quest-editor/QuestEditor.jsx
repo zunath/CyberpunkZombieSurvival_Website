@@ -100,28 +100,29 @@ export default class QuestEditor extends React.Component {
                             <div className="row">&nbsp;</div>
                             <div className="tab-pane active" id="nav-details" role="tabpanel">
                                 <QuestDetails
-                                    details={this.state.ActiveQuest}
-                                    keyItems={this.state.KeyItems}
-                                    fameRegions={this.state.FameRegions} />
+                                    Details={this.state.ActiveQuest}
+                                    KeyItems={this.state.KeyItems}
+                                    FameRegions={this.state.FameRegions} />
                             </div>
                             <div className="tab-pane" id="nav-prerequisites" role="tabpanel">
                                 <QuestPrerequisites
-                                    prerequisiteQuestIDs={this.state.ActiveQuest.PrerequisiteQuestIDs}
-                                    quests={this.state.Quests}
-                                    enableControls={this.state.activeQuestID <= 0 ? false : true}/>
+                                    PrerequisiteQuestIDs={this.state.ActiveQuest.PrerequisiteQuestIDs}
+                                    Quests={this.state.Quests}
+                                    EnableControls={this.state.activeQuestID <= 0 ? false : true}/>
                             </div>
                             <div className="tab-pane" id="nav-states" role="tabpanel">
                                 <QuestStates 
-                                    questTypes={this.state.QuestTypes}
-                                    enableControls={this.state.activeQuestID <= 0 ? false : true}
-                                    questStates={this.state.ActiveQuest.QuestStates}
-                                    npcGroups={this.state.NPCGroups}/>
+                                    QuestTypes={this.state.QuestTypes}
+                                    EnableControls={this.state.activeQuestID <= 0 ? false : true}
+                                    QuestStates={this.state.ActiveQuest.QuestStates}
+                                    NPCGroups={this.state.NPCGroups}
+                                    KeyItems={this.state.KeyItems}/>
                             </div>
                             <div className="tab-pane" id="nav-rewards" role="tabpanel">
                                 <QuestRewards
-                                    rewards={this.state.ActiveQuest.Rewards}
-                                    keyItems={this.state.KeyItems}
-                                    enableControls={this.state.activeQuestID <= 0 ? false : true}/>
+                                    Rewards={this.state.ActiveQuest.Rewards}
+                                    KeyItems={this.state.KeyItems}
+                                    EnableControls={this.state.activeQuestID <= 0 ? false : true}/>
                             </div>
                         </div>
                     </div>

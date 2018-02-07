@@ -31,6 +31,7 @@
     <None Remove="ClientApp\components\admin\quest-editor\QuestDetails.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestEditor.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestExploreArea.jsx" />
+    <None Remove="ClientApp\components\admin\quest-editor\QuestItemDetails.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestKillTarget.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestPrerequisites.jsx" />
     <None Remove="ClientApp\components\admin\quest-editor\QuestRewards.jsx" />
@@ -64,6 +65,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestItemDetails.jsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestUseItem.jsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestExploreArea.jsx" />
     <TypeScriptCompile Include="ClientApp\components\admin\quest-editor\QuestCollectItems.jsx" />

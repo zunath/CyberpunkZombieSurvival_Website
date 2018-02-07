@@ -13,7 +13,8 @@ export default class QuestStates extends React.Component {
             QuestTypes: [],
             EnableControls: false,
             QuestStates: [],
-            NPCGroups: []
+            NPCGroups: [],
+            KeyItems: []
         }
 
         this.addQuestState = this.addQuestState.bind(this);
@@ -26,10 +27,10 @@ export default class QuestStates extends React.Component {
 
     componentWillReceiveProps(newProps) {
         this.setState({
-            QuestTypes: newProps.questTypes,
-            EnableControls: newProps.enableControls,
-            QuestStates: newProps.questStates,
-            NPCGroups: newProps.npcGroups
+            QuestTypes: newProps.QuestTypes,
+            EnableControls: newProps.EnableControls,
+            QuestStates: newProps.QuestStates,
+            NPCGroups: newProps.NPCGroups
         });
     }
 
@@ -192,7 +193,7 @@ export default class QuestStates extends React.Component {
                                                     {questType.Name}
                                                 </option>;
                                             })};
-                            </select>
+                                        </select>
                                     </div>
                                     <div className="col-2">
                                         <input type="text"
@@ -206,7 +207,7 @@ export default class QuestStates extends React.Component {
                                     <div className="col-3">
                                         <button className="btn btn-outline-primary btn-block" onClick={(event) => this.handleDelete(event, index)}>
                                             Delete
-                            </button>
+                                        </button>
                                     </div>
                                 </div>
 
@@ -221,7 +222,10 @@ export default class QuestStates extends React.Component {
                                         {questState.QuestTypeID === '3' &&
                                             <QuestUseObject />}
                                         {questState.QuestTypeID === '4' &&
-                                            <QuestCollectItems />}
+                                            <QuestCollectItems
+                                                KeyItems={this.state.KeyItems}
+                                                RequiredItems={questState.RequiredItems}
+                                                RequiredKeyItems={questState.RequiredKeyItems} />}
                                         {questState.QuestTypeID === '5' &&
                                             <QuestExploreArea />}
                                         {questState.QuestTypeID === '6' &&

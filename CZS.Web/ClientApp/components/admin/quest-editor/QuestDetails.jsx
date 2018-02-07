@@ -25,33 +25,40 @@ export default class QuestDetails extends React.Component {
         
         this.handleChange = this.handleChange.bind(this);
         this.changeKeyItem = this.changeKeyItem.bind(this);
+        this.changeFameRegion = this.changeFameRegion.bind(this);
     }
     
     componentWillReceiveProps(newProps) {
         this.setState({
-            QuestID: newProps.details.QuestID,
-            Name: newProps.details.Name,
-            JournalTag: newProps.details.JournalTag,
-            FameRegionID: newProps.details.FameRegionID,
-            RequiredFameAmount: newProps.details.RequiredFameAmount,
-            AllowRewardSelection: newProps.details.AllowRewardSelection,
-            RewardGold: newProps.details.RewardGold,
-            RewardXP: newProps.details.RewardXP,
-            RewardKeyItemID: newProps.details.RewardKeyItemID,
-            RewardFame: newProps.details.RewardFame,
-            IsRepeatable: newProps.details.IsRepeatable,
-            MapNoteTag: newProps.details.MapNoteTag,
-            StartKeyItemID: newProps.details.StartKeyItemID,
-            RemoveStartKeyItemAfterCompletion: newProps.details.RemoveStartKeyItemAfterCompletion,
+            QuestID: newProps.Details.QuestID,
+            Name: newProps.Details.Name,
+            JournalTag: newProps.Details.JournalTag,
+            FameRegionID: newProps.Details.FameRegionID,
+            RequiredFameAmount: newProps.Details.RequiredFameAmount,
+            AllowRewardSelection: newProps.Details.AllowRewardSelection,
+            RewardGold: newProps.Details.RewardGold,
+            RewardXP: newProps.Details.RewardXP,
+            RewardKeyItemID: newProps.Details.RewardKeyItemID,
+            RewardFame: newProps.Details.RewardFame,
+            IsRepeatable: newProps.Details.IsRepeatable,
+            MapNoteTag: newProps.Details.MapNoteTag,
+            StartKeyItemID: newProps.Details.StartKeyItemID,
+            RemoveStartKeyItemAfterCompletion: newProps.Details.RemoveStartKeyItemAfterCompletion,
 
-            KeyItems: newProps.keyItems,
-            FameRegions: newProps.fameRegions
+            KeyItems: newProps.KeyItems,
+            FameRegions: newProps.FameRegions
         });
     }
 
     changeKeyItem(e) {
         this.setState({
             StartKeyItemID: e.target.value
+        });
+    }
+
+    changeFameRegion(e) {
+        this.setState({
+            FameRegionID: e.target.value
         });
     }
 
@@ -97,6 +104,7 @@ export default class QuestDetails extends React.Component {
                                 </input>
                                 <label htmlFor="fameRegion">Fame Region:</label>
                                 <select id="fameRegion"
+                                        name="FameRegionID"
                                         className="form-control"
                                         onChange={this.changeFameRegion}
                                         value={this.state.FameRegionID}
