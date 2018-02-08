@@ -11,13 +11,15 @@ export default class QuestRewards extends React.Component {
             Fame: 0,
             Items: [],
             KeyItems: [],
-            EnableControls: false
+            EnableControls: false,
+            OnUpdateParent: props.OnUpdateParent
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.addItemReward = this.addItemReward.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.changeItem = this.changeItem.bind(this);
+        this.raiseParentChanges = this.raiseParentChanges.bind(this);
     }
 
     componentWillUnmount() {
@@ -26,20 +28,24 @@ export default class QuestRewards extends React.Component {
 
     componentWillReceiveProps(newProps) {
         this.setState({
-            Gold: newProps.rewards == null ? 0 : newProps.Rewards.Gold,
-            XP: newProps.rewards == null ? 0 : newProps.Rewards.XP,
-            KeyItemID: newProps.rewards == null ? -1 : newProps.Rewards.KeyItemID,
-            Fame: newProps.rewards == null ? 0 : newProps.Rewards.Fame,
-            Items: newProps.rewards == null ? [] : newProps.Rewards.RewardItems,
+            Gold: newProps.Rewards == null ? 0 : newProps.Rewards.Gold,
+            XP: newProps.Rewards == null ? 0 : newProps.Rewards.XP,
+            KeyItemID: newProps.Rewards == null ? -1 : newProps.Rewards.KeyItemID,
+            Fame: newProps.Rewards == null ? 0 : newProps.Rewards.Fame,
+            Items: newProps.Rewards == null ? [] : newProps.Rewards.RewardItems,
             KeyItems: newProps.KeyItems,
-            EnableControls: newProps.EnableControls
+            EnableControls: newProps.EnableControls,
+            OnUpdateParent: newProps.OnUpdateParent
         });
     }
 
     handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        
         this.setState({
-            [event.target.name]: event.target.value
-        });
+            [name]: value
+        }, this.raiseParentChanges);
     }
 
     changeItem(index, name, value) {
@@ -48,7 +54,22 @@ export default class QuestRewards extends React.Component {
 
         this.setState({
             Items: newItems
-        });
+        }, this.raiseParentChanges);
+    }
+
+    raiseParentChanges() {
+        if (this.state.OnUpdateParent) {
+            const reward = {
+                Gold: this.state.Gold,
+                XP: this.state.XP,
+                KeyItemID: this.state.KeyItemID,
+                Fame: this.state.Fame,
+                RewardItems: this.state.Items,
+                KeyItems: this.state.KeyItems
+            };
+
+            this.state.OnUpdateParent(reward);
+        }
     }
 
     handleDelete(index) {

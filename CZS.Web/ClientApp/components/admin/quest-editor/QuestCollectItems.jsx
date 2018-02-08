@@ -6,8 +6,10 @@ export default class QuestCollectItems extends React.Component {
         super(props);
         this.state = {
             KeyItems: props.KeyItems,
-            RequiredItems: props.RequiredItems === undefined ? [] : props.RequiredItems,
-            RequiredKeyItems: props.RequiredKeyItems === undefined ? [] : props.RequiredKeyItems
+            RequiredItems: this.props.RequiredItems,
+            RequiredKeyItems: this.props.RequiredKeyItems,
+
+            OnUpdateParent: this.props.OnUpdateParent
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -15,33 +17,18 @@ export default class QuestCollectItems extends React.Component {
         this.addKeyItem = this.addKeyItem.bind(this);
         this.deleteRequiredItem = this.deleteRequiredItem.bind(this);
         this.handleDeleteKeyItem = this.handleDeleteKeyItem.bind(this);
-        this.changeRequiredItem = this.changeRequiredItem.bind(this);
     }
     
-    componentWillUnmount() {
-    }
-
-    componentWillReceiveProps(newProps) {
-        //this.setState({
-        //    KeyItems: newProps.KeyItems,
-        //    RequiredItems: newProps.RequiredItems === undefined ? [] : newProps.RequiredItems,
-        //    RequiredKeyItems: newProps.RequiredKeyItems === undefined ? [] : newProps.RequiredKeyItems
-        //});
-    }
-
-    handleChange() {
-        
-    }
-
-    changeRequiredItem(index, name, value) {
+    handleChange(index, resref, quantity) {
         const newRequiredItems = this.state.RequiredItems;
-        newRequiredItems[index][name] = value;
-
+        newRequiredItems[index].Resref = resref;
+        newRequiredItems[index].Quantity = quantity;
+        
         this.setState({
             RequiredItems: newRequiredItems
         });
     }
-
+    
     addItem() {
 
         // Only add a new item if the last one has been set.
@@ -58,9 +45,12 @@ export default class QuestCollectItems extends React.Component {
             Quantity: 0
         };
 
-        this.setState(prevState => ({
-            RequiredItems: [...prevState.RequiredItems, newElement]
-        }));
+        const newRequiredItems = this.state.RequiredItems;
+        newRequiredItems.push(newElement);
+
+        this.setState({
+            RequiredItems: newRequiredItems
+        });
     }
 
     addKeyItem() {
@@ -139,7 +129,7 @@ export default class QuestCollectItems extends React.Component {
                         Resref={item.Resref}
                         Quantity={item.Quantity}
                         OnDeleteCallback={this.deleteRequiredItem}
-                        OnChangeCallback={this.changeRequiredItem}/>;
+                        OnChangeCallback={this.handleChange}/>;
                 })}
 
             </div>

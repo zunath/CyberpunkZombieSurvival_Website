@@ -4,15 +4,17 @@ export default class QuestPrerequisites extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            prerequisiteQuestIDs: [],
-            quests: [],
-            enableControls: false
+            PrerequisiteQuestIDs: [],
+            Quests: [],
+            EnableControls: false,
+            OnUpdateParent: props.OnUpdateParent
         }
 
         this.addPrerequisite = this.addPrerequisite.bind(this);
         this.buildDetail = this.buildDetail.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.raiseParentChanges = this.raiseParentChanges.bind(this);
     }
 
     componentWillUnmount() {
@@ -22,42 +24,49 @@ export default class QuestPrerequisites extends React.Component {
     componentWillReceiveProps(newProps) {
         
         this.setState({
-            prerequisiteQuestIDs: newProps.PrerequisiteQuestIDs,
-            quests: newProps.Quests,
-            enableControls: newProps.EnableControls
+            PrerequisiteQuestIDs: newProps.PrerequisiteQuestIDs,
+            Quests: newProps.Quests,
+            EnableControls: newProps.EnableControls,
+            OnUpdateParent: newProps.OnUpdateParent
         });
     }
 
     addPrerequisite() {
 
         // Only add a new prereq if the last one has been set.
-        const lastIndex = this.state.prerequisiteQuestIDs.length - 1;
+        const lastIndex = this.state.PrerequisiteQuestIDs.length - 1;
         if (lastIndex >= 0) {
-            if (this.state.prerequisiteQuestIDs[lastIndex] <= 0) {
+            if (this.state.PrerequisiteQuestIDs[lastIndex] <= 0) {
                 return;
             }
         }
         
         this.setState(prevState => ({
-            prerequisiteQuestIDs: [...prevState.prerequisiteQuestIDs, 0]
+            PrerequisiteQuestIDs: [...prevState.PrerequisiteQuestIDs, 0]
         }));
     }
 
     handleChange(event, prereqQuestID, index) {
-        const newPrerequisites = this.state.prerequisiteQuestIDs;
+        const newPrerequisites = this.state.PrerequisiteQuestIDs;
         newPrerequisites[index] = event.target.value;
 
         this.setState({
-            prerequisiteQuestIDs: newPrerequisites
-        });
+            PrerequisiteQuestIDs: newPrerequisites
+        }, this.raiseParentChanges);
+    }
+
+    raiseParentChanges() {
+        if (this.state.OnUpdateParent) {
+            this.state.OnUpdateParent(this.state.PrerequisiteQuestIDs);
+        }
     }
 
     handleDelete(event, index) {
-        const newPrerequisites = this.state.prerequisiteQuestIDs;
+        const newPrerequisites = this.state.PrerequisiteQuestIDs;
         newPrerequisites.splice(index, 1);
         
         this.setState({
-            prerequisiteQuestIDs: newPrerequisites
+            PrerequisiteQuestIDs: newPrerequisites
         });
     }
     
@@ -75,10 +84,10 @@ export default class QuestPrerequisites extends React.Component {
                     <select id="selectQuest"
                         name="prereqQuestID"
                         className="form-control"
-                        disabled={!this.state.enableControls}
+                        disabled={!this.state.EnableControls}
                         onChange={(event) => this.handleChange(event, prereqQuestID, index)}
                         value={prereqQuestID}>
-                        {this.state.quests.map((quest) => {
+                        {this.state.Quests.map((quest) => {
                             return <option
                                 key={quest.QuestID}
                                 value={quest.QuestID}>
@@ -109,7 +118,7 @@ export default class QuestPrerequisites extends React.Component {
                         <button
                             className="btn btn-primary btn-block"
                             onClick={this.addPrerequisite}
-                            disabled={!this.state.enableControls}>
+                            disabled={!this.state.EnableControls}>
                             Add Prerequisite
                         </button>
                     </div>
@@ -137,7 +146,7 @@ export default class QuestPrerequisites extends React.Component {
 
                 <div className="row">&nbsp;</div>
 
-                {this.state.prerequisiteQuestIDs.length <= 0 &&
+                {this.state.PrerequisiteQuestIDs.length <= 0 &&
                     <div className="row">
                         <span className="center">
                             No prerequisites set for this quest...
@@ -145,7 +154,7 @@ export default class QuestPrerequisites extends React.Component {
                     </div>
                 }
 
-                {this.state.prerequisiteQuestIDs.map((prereqQuestID, index) => {
+                {this.state.PrerequisiteQuestIDs.map((prereqQuestID, index) => {
                     return this.buildDetail(prereqQuestID, index);
                 })}
             </div>

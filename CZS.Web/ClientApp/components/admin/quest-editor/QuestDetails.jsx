@@ -20,12 +20,13 @@ export default class QuestDetails extends React.Component {
             RemoveStartKeyItemAfterCompletion: false,
 
             KeyItems: [],
-            FameRegions: []
+            FameRegions: [],
+
+            OnUpdateParent: props.OnUpdateParent
         }
         
         this.handleChange = this.handleChange.bind(this);
-        this.changeKeyItem = this.changeKeyItem.bind(this);
-        this.changeFameRegion = this.changeFameRegion.bind(this);
+        this.raiseParentChanges = this.raiseParentChanges.bind(this);
     }
     
     componentWillReceiveProps(newProps) {
@@ -46,22 +47,12 @@ export default class QuestDetails extends React.Component {
             RemoveStartKeyItemAfterCompletion: newProps.Details.RemoveStartKeyItemAfterCompletion,
 
             KeyItems: newProps.KeyItems,
-            FameRegions: newProps.FameRegions
+            FameRegions: newProps.FameRegions,
+
+            OnUpdateParent: newProps.OnUpdateParent
         });
     }
-
-    changeKeyItem(e) {
-        this.setState({
-            StartKeyItemID: e.target.value
-        });
-    }
-
-    changeFameRegion(e) {
-        this.setState({
-            FameRegionID: e.target.value
-        });
-    }
-
+    
     handleChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -69,7 +60,13 @@ export default class QuestDetails extends React.Component {
         
         this.setState({
             [name]: value
-        });
+        }, () => this.raiseParentChanges(name, value));
+    }
+
+    raiseParentChanges(name, value) {
+        if (this.state.OnUpdateParent) {
+            this.state.OnUpdateParent(name, value);
+        }
     }
 
     render() {
@@ -106,7 +103,7 @@ export default class QuestDetails extends React.Component {
                                 <select id="fameRegion"
                                         name="FameRegionID"
                                         className="form-control"
-                                        onChange={this.changeFameRegion}
+                                        onChange={this.handleChange}
                                         value={this.state.FameRegionID}
                                         disabled={this.state.QuestID === -1 ? true : false}>
                                     {this.state.FameRegions.map(function (fameRegion) {
@@ -135,7 +132,8 @@ export default class QuestDetails extends React.Component {
                                 <label htmlFor="selectStartingKeyItem">Starting Key Item:</label>
                                 <select id="selectStartingKeyItem"
                                     className="form-control"
-                                    onChange={this.changeKeyItem}
+                                    name="StartKeyItemID"
+                                    onChange={this.handleChange}
                                     value={this.state.StartKeyItemID}
                                     disabled={this.state.QuestID === -1 ? true : false}>
                                     {this.state.KeyItems.map(function(keyItem) {

@@ -24,6 +24,12 @@ export default class QuestEditor extends React.Component {
         }
 
         this.changeQuest = this.changeQuest.bind(this);
+        this.handleSaveChanges = this.handleSaveChanges.bind(this);
+        this.handleDiscardChanges = this.handleDiscardChanges.bind(this);
+        this.receiveDetailChanges = this.receiveDetailChanges.bind(this);
+        this.receivePrerequisiteChanges = this.receivePrerequisiteChanges.bind(this);
+        this.receiveQuestStateChanges = this.receiveQuestStateChanges.bind(this);
+        this.receiveQuestRewardsChanges = this.receiveQuestRewardsChanges.bind(this);
     }
 
     componentWillUnmount() {
@@ -36,7 +42,51 @@ export default class QuestEditor extends React.Component {
         });
         this.dispatch({ ChangeQuest: e.target.value });
     }
-    
+
+    handleSaveChanges() {
+        alert(JSON.stringify(this.state.ActiveQuest));
+    }
+
+    handleDiscardChanges() {
+        
+    }
+
+    receiveDetailChanges(name, value) {
+        const newActiveQuest = this.state.ActiveQuest;
+        newActiveQuest[name] = value;
+
+        this.setState({
+            ActiveQuest: newActiveQuest
+        });
+    }
+
+    receivePrerequisiteChanges(prerequisiteQuestIDs) {
+        const newActiveQuest = this.state.ActiveQuest;
+        newActiveQuest.PrerequisiteQuestIDs = prerequisiteQuestIDs;
+
+        this.setState({
+            ActiveQuest: newActiveQuest
+        });
+    }
+
+    receiveQuestStateChanges(questStates) {
+        const newActiveQuest = this.state.ActiveQuest;
+        newActiveQuest.QuestStates = questStates;
+
+        this.setState({
+            ActiveQuest: newActiveQuest
+        });
+    }
+
+    receiveQuestRewardsChanges(rewards) {
+        const newActiveQuest = this.state.ActiveQuest;
+        newActiveQuest.Rewards = rewards;
+
+        this.setState({
+            ActiveQuest: newActiveQuest
+        });
+    }
+
     render() {
         return (
             <div>
@@ -102,13 +152,15 @@ export default class QuestEditor extends React.Component {
                                 <QuestDetails
                                     Details={this.state.ActiveQuest}
                                     KeyItems={this.state.KeyItems}
-                                    FameRegions={this.state.FameRegions} />
+                                    FameRegions={this.state.FameRegions}
+                                    OnUpdateParent={this.receiveDetailChanges}/>
                             </div>
                             <div className="tab-pane" id="nav-prerequisites" role="tabpanel">
                                 <QuestPrerequisites
                                     PrerequisiteQuestIDs={this.state.ActiveQuest.PrerequisiteQuestIDs}
                                     Quests={this.state.Quests}
-                                    EnableControls={this.state.activeQuestID <= 0 ? false : true}/>
+                                    EnableControls={this.state.activeQuestID <= 0 ? false : true}
+                                    OnUpdateParent={this.receivePrerequisiteChanges}/>
                             </div>
                             <div className="tab-pane" id="nav-states" role="tabpanel">
                                 <QuestStates 
@@ -116,13 +168,15 @@ export default class QuestEditor extends React.Component {
                                     EnableControls={this.state.activeQuestID <= 0 ? false : true}
                                     QuestStates={this.state.ActiveQuest.QuestStates}
                                     NPCGroups={this.state.NPCGroups}
-                                    KeyItems={this.state.KeyItems}/>
+                                    KeyItems={this.state.KeyItems}
+                                    OnUpdateParent={this.receiveQuestStateChanges}/>
                             </div>
                             <div className="tab-pane" id="nav-rewards" role="tabpanel">
                                 <QuestRewards
                                     Rewards={this.state.ActiveQuest.Rewards}
                                     KeyItems={this.state.KeyItems}
-                                    EnableControls={this.state.activeQuestID <= 0 ? false : true}/>
+                                    EnableControls={this.state.activeQuestID <= 0 ? false : true}
+                                    OnUpdateParent={this.receiveQuestRewardsChanges}/>
                             </div>
                         </div>
                     </div>
@@ -133,12 +187,18 @@ export default class QuestEditor extends React.Component {
                 <div className="row">
 
                     <div className="col-5">
-                        <button type="button" className="btn btn-primary btn-block">
+                        <button
+                            type="button"
+                            className="btn btn-primary btn-block"
+                            onClick={this.handleSaveChanges}>
                             Save Changes
                         </button>
                     </div>
                     <div className="col-5">
-                        <button type="button" className="btn btn-outline-primary btn-block">
+                        <button
+                            type="button"
+                            className="btn btn-outline-primary btn-block"
+                            onClick={this.handleDiscardChanges}>
                             Discard Changes
                         </button>
                         &nbsp;

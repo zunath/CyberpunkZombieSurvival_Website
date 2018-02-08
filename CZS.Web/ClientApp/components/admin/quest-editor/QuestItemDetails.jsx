@@ -13,25 +13,31 @@ export default class QuestItemDetails extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.raiseDelete = this.raiseDelete.bind(this);
+        this.raiseParentChange = this.raiseParentChange.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
-        //this.setState({
-        //    Index: newProps.Index,
-        //    Resref: newProps.Resref,
-        //    Quantity: newProps.Quantity,
-        //    OnDeleteCallback: newProps.OnDeleteCallback,
-        //    OnChangeCallback: newProps.OnChangeCallback
-        //});
+        this.setState({
+            Index: newProps.Index,
+            Resref: newProps.Resref,
+            Quantity: newProps.Quantity,
+            OnDeleteCallback: newProps.OnDeleteCallback,
+            OnChangeCallback: newProps.OnChangeCallback
+        });
     }
 
     handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        
         this.setState({
-            [event.target.name]: event.target.value
-        });
+            [name]: value
+        }, this.raiseParentChange);
+    }
 
+    raiseParentChange() {
         if (this.state.OnChangeCallback != null) {
-            this.state.OnChangeCallback(this.state.Index, event.target.name, event.target.value);
+            this.state.OnChangeCallback(this.state.Index, this.state.Resref, this.state.Quantity);
         }
     }
 

@@ -14,7 +14,9 @@ export default class QuestStates extends React.Component {
             EnableControls: false,
             QuestStates: [],
             NPCGroups: [],
-            KeyItems: []
+            KeyItems: [],
+
+            OnUpdateParent: props.OnUpdateParent
         }
 
         this.addQuestState = this.addQuestState.bind(this);
@@ -22,7 +24,7 @@ export default class QuestStates extends React.Component {
         this.handleMoveUp = this.handleMoveUp.bind(this);
         this.handleMoveDown = this.handleMoveDown.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-
+        this.raiseParentChange = this.raiseParentChange.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -30,26 +32,28 @@ export default class QuestStates extends React.Component {
             QuestTypes: newProps.QuestTypes,
             EnableControls: newProps.EnableControls,
             QuestStates: newProps.QuestStates,
-            NPCGroups: newProps.NPCGroups
+            NPCGroups: newProps.NPCGroups,
+
+            OnUpdateParent: newProps.OnUpdateParent
         });
     }
 
     handleChange(event, index) {
+        const name = event.target.name;
+        const value = event.target.value;
+        
         const newQuestStates = this.state.QuestStates;
-        newQuestStates[index][event.target.name] = event.target.value;
+        newQuestStates[index][name] = value;
 
         this.setState({
             QuestStates: newQuestStates
-        });
+        }, this.raiseParentChange);
     }
-
-    handleChangeQuestType(event, index) {
-        const newQuestStates = this.state.QuestStates;
-        newQuestStates[index].QuestTypeID = event.target.value;
-
-        this.setState({
-            QuestStates: newQuestStates
-        });
+    
+    raiseParentChange() {
+        if (this.state.OnUpdateParent) {
+            this.state.OnUpdateParent(this.state.QuestStates);
+        }
     }
 
     handleMoveUp(event, index) {
@@ -93,7 +97,9 @@ export default class QuestStates extends React.Component {
         const newElement = {
             QuestTypeID: 0,
             JournalStateID: 0,
-            KillTargets: []
+            KillTargets: [],
+            RequiredItems: [],
+            RequiredKeyItems: []
         };
 
         this.setState(prevState => ({
@@ -225,7 +231,7 @@ export default class QuestStates extends React.Component {
                                             <QuestCollectItems
                                                 KeyItems={this.state.KeyItems}
                                                 RequiredItems={questState.RequiredItems}
-                                                RequiredKeyItems={questState.RequiredKeyItems} />}
+                                                RequiredKeyItems={questState.RequiredKeyItems}/>}
                                         {questState.QuestTypeID === '5' &&
                                             <QuestExploreArea />}
                                         {questState.QuestTypeID === '6' &&

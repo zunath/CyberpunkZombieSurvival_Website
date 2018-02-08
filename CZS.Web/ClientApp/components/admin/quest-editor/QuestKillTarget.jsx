@@ -22,7 +22,7 @@ export default class QuestKillTarget extends React.Component {
 
     handleAdd() {
         const newElement = {
-            NPCGroupID: 0,
+            NPCGroupID: 1,
             Quantity: 0
         };
 
