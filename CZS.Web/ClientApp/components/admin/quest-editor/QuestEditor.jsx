@@ -192,7 +192,7 @@ export default class QuestEditor extends React.Component {
                         <button
                             type="button"
                             className="btn btn-primary btn-block"
-                            disabled={this.state.activeQuestID <= 0 ? false : true}
+                            disabled={this.state.activeQuestID <= 0 ? true : false}
                             onClick={this.handleSaveChanges}>
                             Save Changes
                         </button>
@@ -201,7 +201,7 @@ export default class QuestEditor extends React.Component {
                         <button
                             type="button"
                             className="btn btn-outline-primary btn-block"
-                            disabled={this.state.activeQuestID <= 0 ? false : true}
+                            disabled={this.state.activeQuestID <= 0 ? true : false}
                             onClick={this.handleDiscardChanges}>
                             Discard Changes
                         </button>
