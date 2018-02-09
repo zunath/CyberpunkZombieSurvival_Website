@@ -9,13 +9,11 @@ namespace CZS.Web.Models.Validation
         {
             RuleFor(x => x.Gold)
                 .NotNull()
-                .NotEmpty()
                 .GreaterThanOrEqualTo(0)
                 .LessThanOrEqualTo(9999);
 
             RuleFor(x => x.XP)
                 .NotNull()
-                .NotEmpty()
                 .GreaterThanOrEqualTo(0)
                 .LessThanOrEqualTo(9999);
 
@@ -26,7 +24,6 @@ namespace CZS.Web.Models.Validation
 
             RuleFor(x => x.Fame)
                 .NotNull()
-                .NotEmpty()
                 .GreaterThanOrEqualTo(0)
                 .LessThanOrEqualTo(999);
 

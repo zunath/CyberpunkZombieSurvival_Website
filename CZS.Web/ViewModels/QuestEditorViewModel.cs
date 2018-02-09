@@ -87,16 +87,14 @@ namespace CZS.Web.ViewModels
             set => Set(value);
         }
 
-        public bool SaveSuccessful
+        public bool NotificationSuccessful
         {
             get => Get<bool>();
             set => Set(value);
         }
 
-        public QuestEditorViewModel(DataContext db)
+        private void LoadQuestList()
         {
-            _db = db;
-
             var quests = _db.Quests.OrderBy(o => o.Name)
                 .Select(x => new QuestInfoUI
                 {
@@ -113,6 +111,13 @@ namespace CZS.Web.ViewModels
             quests.Insert(0, selectOption);
 
             Quests = quests;
+        }
+
+        public QuestEditorViewModel(DataContext db)
+        {
+            _db = db;
+
+            LoadQuestList();
             ActiveQuest = new QuestDetailsUI{QuestID = -1};
 
             var keyItems = _db.KeyItems.OrderBy(x => x.Name)
@@ -162,6 +167,38 @@ namespace CZS.Web.ViewModels
                 }).ToList();
 
         }
+
+        public Action<int> DeleteQuest => questID =>
+        {
+            var dbQuest = _db.Quests.SingleOrDefault(x => x.QuestId == questID);
+            if (dbQuest == null) return;
+
+            _db.QuestRewardItems.RemoveRange(dbQuest.QuestRewardItems);
+            _db.QuestRequiredItemList.RemoveRange(dbQuest.QuestRequiredItemList);
+            _db.QuestRequiredKeyItemList.RemoveRange(dbQuest.QuestRequiredKeyItemList);
+            _db.QuestPrerequisites.RemoveRange(dbQuest.QuestPrerequisitesRequiredQuest);
+            _db.QuestKillTargetList.RemoveRange(dbQuest.QuestKillTargetList);
+            _db.QuestStates.RemoveRange(dbQuest.QuestStates);
+            _db.Quests.Remove(dbQuest);
+
+            try
+            {
+                _db.SaveChanges();
+                NotificationMessage = "Quest '" + dbQuest.Name + "' deleted successfully!";
+                NotificationSuccessful = true;
+                ShowNotification = true;
+
+                LoadQuestList();
+                ActiveQuest = new QuestDetailsUI { QuestID = -1 };
+            }
+            catch(Exception ex)
+            {
+                NotificationMessage = "Failed to delete quest '" + dbQuest.Name + "'..." + Environment.NewLine + "Reason: " + ex.Message;
+                NotificationSuccessful = false;
+                ShowNotification = true;
+            }
+            
+        };
 
         public Action<int> ChangeQuest => LoadQuestUIObject;
 
@@ -409,12 +446,12 @@ namespace CZS.Web.ViewModels
             {
                 _db.SaveChanges();
                 NotificationMessage = "Changes were saved successfully.";
-                SaveSuccessful = true;
+                NotificationSuccessful = true;
             }
             catch
             {
                 NotificationMessage = "Failed to save changes. Ensure all fields are entered in properly.";
-                SaveSuccessful = false;
+                NotificationSuccessful = false;
             }
             
             ShowNotification = true;

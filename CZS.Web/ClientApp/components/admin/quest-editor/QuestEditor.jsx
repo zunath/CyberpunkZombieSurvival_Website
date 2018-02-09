@@ -26,20 +26,28 @@ export default class QuestEditor extends React.Component {
             ServerValidationErrors: [],
             ShowNotification: false,
             NotificationMessage: '',
-            SaveSuccessful: false
+            NotificationSuccessful: false,
+
+            ModalHeader: '',
+            ModalBody: '',
+            ModalActionText: '',
+            ModalAction: null
         }
 
         this.changeQuest = this.changeQuest.bind(this);
         this.handleSaveChanges = this.handleSaveChanges.bind(this);
         this.handleDiscardChanges = this.handleDiscardChanges.bind(this);
+        this.handleDeleteQuest = this.handleDeleteQuest.bind(this);
         this.receiveDetailChanges = this.receiveDetailChanges.bind(this);
         this.receivePrerequisiteChanges = this.receivePrerequisiteChanges.bind(this);
         this.receiveQuestStateChanges = this.receiveQuestStateChanges.bind(this);
         this.receiveQuestRewardsChanges = this.receiveQuestRewardsChanges.bind(this);
+        this.confirmDiscardChanges = this.confirmDiscardChanges.bind(this);
+        this.confirmDeleteQuest = this.confirmDeleteQuest.bind(this);
     }
 
     notify() {
-        if (this.state.SaveSuccessful) {
+        if (this.state.NotificationSuccessful) {
             toast.success(this.state.NotificationMessage, {
                 position: toast.POSITION.TOP_RIGHT,
                 onOpen: () => this.setState({ ShowNotification: false })
@@ -70,8 +78,22 @@ export default class QuestEditor extends React.Component {
         });
     }
 
+    handleDeleteQuest() {
+        this.setState({
+            ModalHeader: 'Delete Quest?',
+            ModalBody: 'Are you sure you want to delete this quest? This is action irreversible!',
+            ModalActionText: 'Delete Quest',
+            ModalAction: this.confirmDeleteQuest
+        });
+    }
+
     handleDiscardChanges() {
-        this.dispatch({ DiscardChanges: this.state.activeQuestID });
+        this.setState({
+            ModalHeader: 'Discard Changes?',
+            ModalBody: 'Are you sure you want to discard all of your changes?',
+            ModalActionText: 'Discard Changes',
+            ModalAction: this.confirmDiscardChanges
+        });
     }
 
     receiveDetailChanges(name, value) {
@@ -110,12 +132,56 @@ export default class QuestEditor extends React.Component {
         });
     }
 
+    confirmDeleteQuest() {
+        this.dispatch({ DeleteQuest: this.state.activeQuestID });
+    }
+
+    confirmDiscardChanges() {
+        this.dispatch({ DiscardChanges: this.state.activeQuestID });
+    }
+
     render() {
         return (
             <div>
                 {this.state.ShowNotification && this.notify()}
 
                 <ToastContainer />
+                
+                <div
+                    className="modal fade"
+                    id="confirmModal"
+                    tabIndex="-1"
+                    role="dialog"
+                    aria-labelledby="confirmModalLabel"
+                    aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="confirmModalLabel">{this.state.ModalHeader}</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                {this.state.ModalBody}
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button"
+                                    className="btn btn-primary"
+                                    onClick={this.state.ModalAction}
+                                    data-dismiss="modal">
+                                    {this.state.ModalActionText}
+                                </button>
+                                <button type="button"
+                                    className="btn btn-outline-primary"
+                                    data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <label htmlFor="selectQuest">Quest:</label>
                 <div className="row">
@@ -135,9 +201,19 @@ export default class QuestEditor extends React.Component {
                     </div>
                     <div className="col-2">
                         <div className="btn-group">
-                            <button className="btn btn-primary">New</button>
+                            <button
+                                className="btn btn-primary">
+                                New
+                            </button>
                             <span>&nbsp;</span>
-                            <button className="btn btn-outline-primary">Delete</button>
+                            <button
+                                className="btn btn-outline-primary"
+                                data-target="#confirmModal"
+                                data-toggle="modal"
+                                onClick={this.handleDeleteQuest}
+                                disabled={this.state.activeQuestID <= 0 ? true : false}>
+                                Delete
+                            </button>
                         </div>
                         
                     </div>
@@ -227,7 +303,9 @@ export default class QuestEditor extends React.Component {
                             type="button"
                             className="btn btn-outline-primary btn-block"
                             disabled={this.state.activeQuestID <= 0 ? true : false}
-                            onClick={this.handleDiscardChanges}>
+                            onClick={this.handleDiscardChanges}
+                            data-target="#confirmModal"
+                            data-toggle="modal">
                             Discard Changes
                         </button>
                         &nbsp;

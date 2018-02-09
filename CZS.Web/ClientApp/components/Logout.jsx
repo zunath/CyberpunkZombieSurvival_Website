@@ -28,7 +28,7 @@ export default class Logout extends React.Component {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-primary" onClick={this.state.callback}>Log Out</button>
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" className="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
                     </div>
