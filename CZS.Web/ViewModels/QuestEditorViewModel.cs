@@ -58,6 +58,41 @@ namespace CZS.Web.ViewModels
             set => Set(value);
         }
 
+        public string ServerValidationErrors_itemkey => nameof(ServerValidationErrors);
+        public IEnumerable<string> ServerValidationErrors
+        {
+            get => Get<IEnumerable<string>>();
+            set => Set(value);
+        }
+
+        private bool _showNotification;
+        public bool ShowNotification
+        {
+            get
+            {
+                var value = _showNotification;
+                _showNotification = false;
+                return value;
+            }
+            set
+            {
+                _showNotification = value;
+                Changed(nameof(ShowNotification));
+            }
+        }
+
+        public string NotificationMessage
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public bool SaveSuccessful
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         public QuestEditorViewModel(DataContext db)
         {
             _db = db;
@@ -370,7 +405,19 @@ namespace CZS.Web.ViewModels
                 _db.Quests.Add(quest);
             }
 
-            _db.SaveChanges();
+            try
+            {
+                _db.SaveChanges();
+                NotificationMessage = "Changes were saved successfully.";
+                SaveSuccessful = true;
+            }
+            catch
+            {
+                NotificationMessage = "Failed to save changes. Ensure all fields are entered in properly.";
+                SaveSuccessful = false;
+            }
+            
+            ShowNotification = true;
         };
     }
 }

@@ -5,13 +5,14 @@ import QuestDetails from './QuestDetails';
 import QuestPrerequisites from './QuestPrerequisites';
 import QuestStates from './QuestStates';
 import QuestRewards from './QuestRewards';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default class QuestEditor extends React.Component {
     constructor(props) {
         super(props);
         this.vm = dotnetify.react.connect('QuestEditorViewModel', this);
         this.dispatch = state => this.vm.$dispatch(state);
-
+        
         this.state = {
             activeTab: '1',
             Quests: [],
@@ -20,7 +21,12 @@ export default class QuestEditor extends React.Component {
             KeyItems: [],
             FameRegions: [],
             QuestTypes: [],
-            NPCGroups: []
+            NPCGroups: [],
+
+            ServerValidationErrors: [],
+            ShowNotification: false,
+            NotificationMessage: '',
+            SaveSuccessful: false
         }
 
         this.changeQuest = this.changeQuest.bind(this);
@@ -31,6 +37,21 @@ export default class QuestEditor extends React.Component {
         this.receiveQuestStateChanges = this.receiveQuestStateChanges.bind(this);
         this.receiveQuestRewardsChanges = this.receiveQuestRewardsChanges.bind(this);
     }
+
+    notify() {
+        if (this.state.SaveSuccessful) {
+            toast.success(this.state.NotificationMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                onOpen: () => this.setState({ ShowNotification: false })
+            });
+        }
+        else {
+            toast.error(this.state.NotificationMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                onOpen: () => this.setState({ShowNotification: false})
+            });
+        }
+    } 
 
     componentWillUnmount() {
         this.vm.$destroy();
@@ -92,6 +113,10 @@ export default class QuestEditor extends React.Component {
     render() {
         return (
             <div>
+                {this.state.ShowNotification && this.notify()}
+
+                <ToastContainer />
+
                 <label htmlFor="selectQuest">Quest:</label>
                 <div className="row">
                     <div className="col-10">
