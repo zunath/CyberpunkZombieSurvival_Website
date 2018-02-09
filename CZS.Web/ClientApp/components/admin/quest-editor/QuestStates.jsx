@@ -5,6 +5,7 @@ import QuestUseObject from './QuestUseObject';
 import QuestCollectItems from './QuestCollectItems';
 import QuestExploreArea from './QuestExploreArea';
 import QuestUseItem from './QuestUseItem';
+import NumericInput from 'react-numeric-input';
 
 export default class QuestStates extends React.Component {
     constructor(props) {
@@ -21,6 +22,7 @@ export default class QuestStates extends React.Component {
 
         this.addQuestState = this.addQuestState.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeNumeric = this.handleChangeNumeric.bind(this);
         this.handleMoveUp = this.handleMoveUp.bind(this);
         this.handleMoveDown = this.handleMoveDown.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -49,7 +51,16 @@ export default class QuestStates extends React.Component {
             QuestStates: newQuestStates
         }, this.raiseParentChange);
     }
-    
+
+    handleChangeNumeric(index, name, value) {
+        const newQuestStates = this.state.QuestStates;
+        newQuestStates[index][name] = value;
+
+        this.setState({
+            QuestStates: newQuestStates
+        }, this.raiseParentChange);
+    }
+
     raiseParentChange() {
         if (this.state.OnUpdateParent) {
             this.state.OnUpdateParent(this.state.QuestStates);
@@ -202,13 +213,17 @@ export default class QuestStates extends React.Component {
                                         </select>
                                     </div>
                                     <div className="col-2">
-                                        <input type="text"
+                                        <NumericInput
                                             className="form-control"
                                             name="JournalStateID"
                                             value={questState.JournalStateID}
-                                            onChange={(event) => this.handleChange(event, index)}
-                                            placeholder="Journal State ID">
-                                        </input>
+                                            min={0}
+                                            max={9999}
+                                            onChange={(value) => this.handleChangeNumeric(index, 'JournalStateID', value)}
+                                            placeholder="Journal State ID"
+                                            required
+                                            strict>
+                                        </NumericInput>
                                     </div>
                                     <div className="col-3">
                                         <button className="btn btn-outline-primary btn-block" onClick={(event) => this.handleDelete(event, index)}>

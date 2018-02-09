@@ -1,4 +1,5 @@
 ﻿import * as React from 'react';
+import NumericInput from 'react-numeric-input';
 
 export default class QuestItemDetails extends React.Component {
     constructor(props) {
@@ -12,6 +13,7 @@ export default class QuestItemDetails extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeQuantity = this.handleChangeQuantity.bind(this);
         this.raiseDelete = this.raiseDelete.bind(this);
         this.raiseParentChange = this.raiseParentChange.bind(this);
     }
@@ -32,6 +34,12 @@ export default class QuestItemDetails extends React.Component {
         
         this.setState({
             [name]: value
+        }, this.raiseParentChange);
+    }
+
+    handleChangeQuantity(value) {
+        this.setState({
+            Quantity: value
         }, this.raiseParentChange);
     }
 
@@ -64,19 +72,25 @@ export default class QuestItemDetails extends React.Component {
                                name="Resref"
                                value={this.state.Resref}
                                onChange={(event) => this.handleChange(event)}
-                               placeholder="Resref">
+                               placeholder="Resref"
+                               required
+                               maxLength="16">
                         </input>
 
 
                     </div>
                     <div className="col-4">
-                        <input type="text"
+                        <NumericInput 
                                className="form-control"
                                name="Quantity"
                                value={this.state.Quantity}
-                               onChange={(event) => this.handleChange(event)}
-                               placeholder="Quantity">
-                        </input>
+                               onChange={this.handleChangeQuantity}
+                               min={0}
+                               max={99}
+                               placeholder="Quantity"
+                               required
+                               strict>
+                        </NumericInput>
 
 
                     </div>

@@ -1,4 +1,5 @@
 ﻿import * as React from 'react';
+import NumericInput from 'react-numeric-input';
 
 export default class QuestDetails extends React.Component {
     constructor(props) {
@@ -27,6 +28,7 @@ export default class QuestDetails extends React.Component {
         
         this.handleChange = this.handleChange.bind(this);
         this.raiseParentChanges = this.raiseParentChanges.bind(this);
+        this.handleChangeRequiredFame = this.handleChangeRequiredFame.bind(this);
     }
     
     componentWillReceiveProps(newProps) {
@@ -63,6 +65,13 @@ export default class QuestDetails extends React.Component {
         }, () => this.raiseParentChanges(name, value));
     }
 
+    handleChangeRequiredFame(value) {
+        const propName = 'RequiredFameAmount';
+        this.setState({
+            [propName]: value
+        }, () => this.raiseParentChanges(propName, value));
+    }
+
     raiseParentChanges(name, value) {
         if (this.state.OnUpdateParent) {
             this.state.OnUpdateParent(name, value);
@@ -85,19 +94,28 @@ export default class QuestDetails extends React.Component {
                                     disabled={this.state.QuestID === -1 ? true : false}
                                     readOnly={true}>
                                 </input>
-                                <label htmlFor="name">Name:</label>
-                                <input type="text" id="name" name="Name"
-                                       className="form-control"
-                                       value={this.state.QuestID === -1 ? '' : this.state.Name}
-                                       onChange={this.handleChange}
-                                       disabled={this.state.QuestID === -1 ? true : false}>
-                                </input>
+
+                                <div className="form-group">
+                                    <label htmlFor="name">Name:</label>
+                                    <input type="text" id="name" name="Name"
+                                           className="form-control"
+                                           value={this.state.QuestID === -1 ? '' : this.state.Name}
+                                           onChange={this.handleChange}
+                                           disabled={this.state.QuestID === -1 ? true : false}
+                                           maxLength="100"
+                                           required>
+                                    </input>
+                                    <div className="invalid-tooltip">Please enter a quest name.</div>
+                                </div>
+                                
                                 <label htmlFor="journalTag">Journal Tag:</label>
                                 <input type="text" id="journalTag" name="JournalTag"
                                        className="form-control"
                                        value={this.state.QuestID === -1 ? '' : this.state.JournalTag}
                                        onChange={this.handleChange}
-                                       disabled={this.state.QuestID === -1 ? true : false}>
+                                       disabled={this.state.QuestID === -1 ? true : false}
+                                       required
+                                       maxLength="32">
                                 </input>
                                 <label htmlFor="fameRegion">Fame Region:</label>
                                 <select id="fameRegion"
@@ -116,18 +134,25 @@ export default class QuestDetails extends React.Component {
                                 </select>
 
                                 <label htmlFor="requiredFame">Required Fame:</label>
-                                <input type="text" id="requiredFame" name="RequiredFameAmount"
-                                       className="form-control"
-                                       value={this.state.QuestID === -1 ? '' : this.state.RequiredFameAmount}
-                                       onChange={this.handleChange}
-                                       disabled={this.state.QuestID === -1 ? true : false}>
-                                </input>
+                                <NumericInput
+                                    id="requiredFame"
+                                    name="RequiredFameAmount"
+                                    className="form-control"
+                                    min={0}
+                                    max={9999}
+                                    value={this.state.QuestID === -1 ? 0 : this.state.RequiredFameAmount}
+                                    onChange={this.handleChangeRequiredFame}
+                                    disabled={this.state.QuestID === -1 ? true : false}
+                                    required
+                                    strict>
+                                </NumericInput>
                                 <label htmlFor="mapNoteTag">Map Note Tag:</label>
                                 <input type="text" id="mapNoteTag" name="MapNoteTag"
                                        className="form-control"
                                        value={this.state.QuestID === -1 ? '' : this.state.MapNoteTag}
                                        onChange={this.handleChange}
-                                       disabled={this.state.QuestID === -1 ? true : false}>
+                                       disabled={this.state.QuestID === -1 ? true : false}
+                                       maxLength="32">
                                 </input>
                                 <label htmlFor="selectStartingKeyItem">Starting Key Item:</label>
                                 <select id="selectStartingKeyItem"

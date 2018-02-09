@@ -126,7 +126,11 @@ namespace CZS.Web.ViewModels
 
         }
 
-        public Action<int> ChangeQuest => questID =>
+        public Action<int> ChangeQuest => LoadQuestUIObject;
+
+        public Action<int> DiscardChanges => LoadQuestUIObject;
+
+        private void LoadQuestUIObject(int questID)
         {
             if (questID <= -1)
             {
@@ -143,7 +147,7 @@ namespace CZS.Web.ViewModels
                 return;
             }
             ActiveQuest = BuildQuestUIObject(quest);
-        };
+        }
 
         private static QuestDetailsUI BuildQuestUIObject(Quests quest)
         {
@@ -180,5 +184,10 @@ namespace CZS.Web.ViewModels
             
             return uiQuest;
         }
+
+        public Action<QuestDetailsUI> SaveChanges => questDetails =>
+        {
+            
+        };
     }
 }

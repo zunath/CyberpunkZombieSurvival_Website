@@ -44,11 +44,13 @@ export default class QuestEditor extends React.Component {
     }
 
     handleSaveChanges() {
-        alert(JSON.stringify(this.state.ActiveQuest));
+        this.dispatch({
+            SaveChanges: this.state.ActiveQuest
+        });
     }
 
     handleDiscardChanges() {
-        
+        this.dispatch({ DiscardChanges: this.state.activeQuestID });
     }
 
     receiveDetailChanges(name, value) {
@@ -190,6 +192,7 @@ export default class QuestEditor extends React.Component {
                         <button
                             type="button"
                             className="btn btn-primary btn-block"
+                            disabled={this.state.activeQuestID <= 0 ? false : true}
                             onClick={this.handleSaveChanges}>
                             Save Changes
                         </button>
@@ -198,6 +201,7 @@ export default class QuestEditor extends React.Component {
                         <button
                             type="button"
                             className="btn btn-outline-primary btn-block"
+                            disabled={this.state.activeQuestID <= 0 ? false : true}
                             onClick={this.handleDiscardChanges}>
                             Discard Changes
                         </button>

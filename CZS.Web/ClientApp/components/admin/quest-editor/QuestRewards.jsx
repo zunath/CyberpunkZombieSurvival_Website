@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import QuestItemDetails from './QuestItemDetails';
+import NumericInput from 'react-numeric-input';
 
 export default class QuestRewards extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ export default class QuestRewards extends React.Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeNumeric = this.handleChangeNumeric.bind(this);
         this.addItemReward = this.addItemReward.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.changeItem = this.changeItem.bind(this);
@@ -48,9 +50,16 @@ export default class QuestRewards extends React.Component {
         }, this.raiseParentChanges);
     }
 
-    changeItem(index, name, value) {
+    handleChangeNumeric(name, value) {
+        this.setState({
+            [name]: value
+        }, this.raiseParentChanges);
+    }
+
+    changeItem(index, resref, quantity) {
         const newItems = this.state.Items;
-        newItems[index][name] = value;
+        newItems[index].Resref = resref;
+        newItems[index].Quantity = quantity;
 
         this.setState({
             Items: newItems
@@ -108,42 +117,54 @@ export default class QuestRewards extends React.Component {
                 <label htmlFor="gold">Gold:</label>
                 <div className="row">
                     <div className="col-12">
-                        <input type="text"
+                        <NumericInput 
                             id="gold"
                             name="Gold"
                             className="form-control"
                             value={this.state.Gold}
-                            onChange={this.handleChange}
-                            disabled={!this.state.EnableControls}>
-                        </input>
+                            min={0}
+                            max={9999}
+                            onChange={(value) => this.handleChangeNumeric('Gold', value)}
+                            disabled={!this.state.EnableControls}
+                            required
+                            strict>
+                        </NumericInput>
                     </div>
                 </div>
                 <div className="row">&nbsp;</div>
                 <label htmlFor="xp">XP:</label>
                 <div className="row">
                     <div className="col-12">
-                        <input type="text"
+                        <NumericInput 
                             id="xp"
                             name="XP"
                             className="form-control"
                             value={this.state.XP}
-                            onChange={this.handleChange}
-                            disabled={!this.state.EnableControls}>
-                        </input>
+                            min={0}
+                            max={9999}
+                            onChange={(value) => this.handleChangeNumeric('XP', value)}
+                            disabled={!this.state.EnableControls}
+                            required
+                            strict>
+                        </NumericInput>
                     </div>
                 </div>
                 <div className="row">&nbsp;</div>
                 <label htmlFor="fame">Fame:</label>
                 <div className="row">
                     <div className="col-12">
-                        <input type="text"
+                        <NumericInput 
                             id="fame"
                             name="Fame"
                             className="form-control"
                             value={this.state.Fame}
-                            onChange={this.handleChange}
-                            disabled={!this.state.EnableControls}>
-                        </input>
+                            min={0}
+                            max={999}
+                            onChange={(value) => this.handleChangeNumeric('Fame', value)}
+                            disabled={!this.state.EnableControls}
+                            required
+                            strict>
+                        </NumericInput>
                     </div>
                 </div>
                 <div className="row">&nbsp;</div>

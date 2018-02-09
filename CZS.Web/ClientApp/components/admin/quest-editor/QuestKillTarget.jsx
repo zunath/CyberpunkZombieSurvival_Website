@@ -1,4 +1,5 @@
 ﻿import * as React from 'react';
+import NumericInput from 'react-numeric-input';
 
 export default class QuestKillTarget extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class QuestKillTarget extends React.Component {
 
         this.handleAdd = this.handleAdd.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeQuantity = this.handleChangeQuantity.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
 
@@ -38,6 +40,15 @@ export default class QuestKillTarget extends React.Component {
     handleChange(event, index) {
         const newKillTargets = this.state.KillTargets;
         newKillTargets[index][event.target.name] = event.target.value;
+
+        this.setState({
+            KillTargets: newKillTargets
+        });
+    }
+
+    handleChangeQuantity(index, value) {
+        const newKillTargets = this.state.KillTargets;
+        newKillTargets[index].Quantity = value;
 
         this.setState({
             KillTargets: newKillTargets
@@ -112,11 +123,15 @@ export default class QuestKillTarget extends React.Component {
                             </select>
                             </div>
                             <div className="col-2">
-                                <input type="text"
+                                <NumericInput 
                                     className="form-control"
                                     name="Quantity"
                                     value={killTarget.Quantity}
-                                    onChange={(event) => this.handleChange(event, index)} />
+                                    onChange={(value) => this.handleChangeQuantity(index, value)}
+                                    min={0}
+                                    max={999}
+                                    required
+                                    strict />
                             </div>
                             <div className="col-2">
                                 <button className="btn btn-outline-primary btn-block"
