@@ -22,7 +22,6 @@ export default class QuestPrerequisites extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        
         this.setState({
             PrerequisiteQuestIDs: newProps.PrerequisiteQuestIDs,
             Quests: newProps.Quests,

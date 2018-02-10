@@ -89,7 +89,7 @@ export default class QuestDetails extends React.Component {
                                 <label htmlFor="questID">ID:</label>
                                 <input type="text" id="questID" name="QuestID"
                                     className="form-control"
-                                    value={this.state.QuestID === -1 ? '' : this.state.QuestID}
+                                    value={this.state.QuestID <= -1 ? '' : this.state.QuestID}
                                     onChange={this.handleChange}
                                     disabled={this.state.QuestID === -1 ? true : false}
                                     readOnly={true}>

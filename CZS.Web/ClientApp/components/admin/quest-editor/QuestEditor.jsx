@@ -16,14 +16,13 @@ export default class QuestEditor extends React.Component {
         this.state = {
             activeTab: '1',
             Quests: [],
-            activeQuestID: 0,
+            ActiveQuestID: 0,
             ActiveQuest: {},
             KeyItems: [],
             FameRegions: [],
             QuestTypes: [],
             NPCGroups: [],
-
-            ServerValidationErrors: [],
+            
             ShowNotification: false,
             NotificationMessage: '',
             NotificationSuccessful: false,
@@ -34,7 +33,8 @@ export default class QuestEditor extends React.Component {
             ModalAction: null
         }
 
-        this.changeQuest = this.changeQuest.bind(this);
+        this.handleAddQuest = this.handleAddQuest.bind(this);
+        this.handleChangeQuest = this.handleChangeQuest.bind(this);
         this.handleSaveChanges = this.handleSaveChanges.bind(this);
         this.handleDiscardChanges = this.handleDiscardChanges.bind(this);
         this.handleDeleteQuest = this.handleDeleteQuest.bind(this);
@@ -64,12 +64,48 @@ export default class QuestEditor extends React.Component {
     componentWillUnmount() {
         this.vm.$destroy();
     }
+    
+    handleChangeQuest(event) {
+        const questID = event.target.value;
+        if (this.state.ActiveQuestID === -2) {
 
-    changeQuest(e) {
+            const newQuests = this.state.Quests;
+            for (let i = newQuests.length - 1; i >= 0; --i) {
+                if (newQuests[i].QuestID === -2) {
+                    newQuests.splice(i, 1);
+                }
+            }
+
+            this.setState({
+                ActiveQuestID: questID,
+                Quests: newQuests
+            }, this.dispatch({ ChangeQuest: questID}));
+        }
+        else {
+            this.setState({
+                ActiveQuestID: questID
+            }, this.dispatch({ ChangeQuest: questID }));
+        }
+    }
+    
+    handleAddQuest() {
+        const newQuests = this.state.Quests;
+        for (let i = newQuests.length - 1; i >= 0; --i) {
+            if (newQuests[i].QuestID === -2) {
+                newQuests.splice(i, 1);
+            }
+        }
+        const newQuest = {
+            QuestID: -2,
+            Name: '<New Quest (UNSAVED)>'
+        };
+        newQuests.push(newQuest);
+
         this.setState({
-            activeQuestID: e.target.value
-        });
-        this.dispatch({ ChangeQuest: e.target.value });
+            Quests: newQuests,
+            ActiveQuestID: -2
+        }, this.dispatch({ ChangeQuest: newQuest.QuestID }));
+        
     }
 
     handleSaveChanges() {
@@ -133,11 +169,31 @@ export default class QuestEditor extends React.Component {
     }
 
     confirmDeleteQuest() {
-        this.dispatch({ DeleteQuest: this.state.activeQuestID });
+        if (this.state.ActiveQuestID === -2) {
+            const newQuests = this.state.Quests;
+            for (let i = newQuests.length - 1; i >= 0; --i) {
+                if (newQuests[i].QuestID === -2) {
+                    newQuests.splice(i, 1);
+                }
+            }
+            this.setState({
+                Quests: newQuests,
+                ActiveQuestID: -1
+            }, () => { this.dispatch({ ChangeQuest: -1 })});
+        }
+        else {
+            this.dispatch({ DeleteQuest: this.state.ActiveQuestID });
+        }
     }
 
     confirmDiscardChanges() {
-        this.dispatch({ DiscardChanges: this.state.activeQuestID });
+        if (this.state.ActiveQuestID === -2) {
+            this.handleAddQuest();
+        }
+        else {
+            this.dispatch({ DiscardChanges: this.state.ActiveQuestID });
+        }
+        
     }
 
     render() {
@@ -167,14 +223,14 @@ export default class QuestEditor extends React.Component {
                             </div>
                             <div className="modal-footer">
                                 <button type="button"
-                                    className="btn btn-primary"
-                                    onClick={this.state.ModalAction}
-                                    data-dismiss="modal">
+                                        className="btn btn-primary"
+                                        onClick={this.state.ModalAction}
+                                        data-dismiss="modal">
                                     {this.state.ModalActionText}
                                 </button>
                                 <button type="button"
-                                    className="btn btn-outline-primary"
-                                    data-dismiss="modal">
+                                        className="btn btn-outline-primary"
+                                        data-dismiss="modal">
                                     Close
                                 </button>
                             </div>
@@ -187,14 +243,15 @@ export default class QuestEditor extends React.Component {
                 <div className="row">
                     <div className="col-10">
                         <select id="selectQuest"
-                            className="form-control"
-                            onChange={this.changeQuest}
-                            value={this.state.activeQuestID}>
+                                className="form-control"
+                                onChange={this.handleChangeQuest}
+                                value={this.state.ActiveQuestID}>
                             {this.state.Quests.map(function (quest) {
                                 return <option
                                            key={quest.QuestID}
                                            value={quest.QuestID}>
-                                           {quest.Name}
+                                    {quest.QuestID > -1 && `#${quest.QuestID} - ${quest.Name}`}
+                                    {quest.QuestID <= -1 && '' + quest.Name}
                                        </option>;
                             })};
                         </select>
@@ -202,7 +259,8 @@ export default class QuestEditor extends React.Component {
                     <div className="col-2">
                         <div className="btn-group">
                             <button
-                                className="btn btn-primary">
+                                className="btn btn-primary"
+                                onClick={this.handleAddQuest}>
                                 New
                             </button>
                             <span>&nbsp;</span>
@@ -211,7 +269,7 @@ export default class QuestEditor extends React.Component {
                                 data-target="#confirmModal"
                                 data-toggle="modal"
                                 onClick={this.handleDeleteQuest}
-                                disabled={this.state.activeQuestID <= 0 ? true : false}>
+                                disabled={this.state.ActiveQuestID === -1 ? true : false}>
                                 Delete
                             </button>
                         </div>
@@ -262,13 +320,13 @@ export default class QuestEditor extends React.Component {
                                 <QuestPrerequisites
                                     PrerequisiteQuestIDs={this.state.ActiveQuest.PrerequisiteQuestIDs}
                                     Quests={this.state.Quests}
-                                    EnableControls={this.state.activeQuestID <= 0 ? false : true}
+                                    EnableControls={this.state.ActiveQuestID ===-1 ? false : true}
                                     OnUpdateParent={this.receivePrerequisiteChanges}/>
                             </div>
                             <div className="tab-pane" id="nav-states" role="tabpanel">
                                 <QuestStates 
                                     QuestTypes={this.state.QuestTypes}
-                                    EnableControls={this.state.activeQuestID <= 0 ? false : true}
+                                    EnableControls={this.state.ActiveQuestID === -1 ? false : true}
                                     QuestStates={this.state.ActiveQuest.QuestStates}
                                     NPCGroups={this.state.NPCGroups}
                                     KeyItems={this.state.KeyItems}
@@ -278,7 +336,7 @@ export default class QuestEditor extends React.Component {
                                 <QuestRewards
                                     Rewards={this.state.ActiveQuest.Rewards}
                                     KeyItems={this.state.KeyItems}
-                                    EnableControls={this.state.activeQuestID <= 0 ? false : true}
+                                    EnableControls={this.state.ActiveQuestID === -1 ? false : true}
                                     OnUpdateParent={this.receiveQuestRewardsChanges}/>
                             </div>
                         </div>
@@ -293,7 +351,7 @@ export default class QuestEditor extends React.Component {
                         <button
                             type="button"
                             className="btn btn-primary btn-block"
-                            disabled={this.state.activeQuestID <= 0 ? true : false}
+                            disabled={this.state.ActiveQuestID === -1 ? true : false}
                             onClick={this.handleSaveChanges}>
                             Save Changes
                         </button>
@@ -302,7 +360,7 @@ export default class QuestEditor extends React.Component {
                         <button
                             type="button"
                             className="btn btn-outline-primary btn-block"
-                            disabled={this.state.activeQuestID <= 0 ? true : false}
+                            disabled={this.state.ActiveQuestID === -1 ? true : false}
                             onClick={this.handleDiscardChanges}
                             data-target="#confirmModal"
                             data-toggle="modal">

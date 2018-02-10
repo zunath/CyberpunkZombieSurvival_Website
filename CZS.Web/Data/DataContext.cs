@@ -1838,7 +1838,7 @@ namespace CZS.Web.Data
 
                 entity.Property(e => e.QuestId)
                     .HasColumnName("QuestID")
-                    .ValueGeneratedNever();
+                    .UseSqlServerIdentityColumn();
 
                 entity.Property(e => e.FameRegionId).HasColumnName("FameRegionID");
 

@@ -24,7 +24,7 @@ namespace CZS.Web.Models.UI.QuestEditor
             QuestID = 0;
             Name = string.Empty;
             JournalTag = string.Empty;
-            FameRegionID = 0;
+            FameRegionID = 1;
             RequiredFameAmount = 0;
             AllowRewardSelection = false;
             IsRepeatable = false;
@@ -34,6 +34,7 @@ namespace CZS.Web.Models.UI.QuestEditor
 
             PrerequisiteQuestIDs = new List<int>();
             QuestStates = new List<QuestStateUI>();
+            Rewards = new QuestRewardsUI();
         }
     }
 

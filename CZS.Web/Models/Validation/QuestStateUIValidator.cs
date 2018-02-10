@@ -9,7 +9,6 @@ namespace CZS.Web.Models.Validation
         {
             RuleFor(x => x.QuestTypeID)
                 .NotNull()
-                .NotEmpty()
                 .GreaterThanOrEqualTo(-1);
 
             RuleFor(x => x.JournalStateID)

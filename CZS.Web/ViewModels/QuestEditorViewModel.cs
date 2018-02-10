@@ -23,7 +23,13 @@ namespace CZS.Web.ViewModels
             get => Get<IEnumerable<QuestInfoUI>>();
             set => Set(value);
         }
-        
+
+        public int ActiveQuestID
+        {
+            get => Get<int>();
+            set => Set(value);
+        }
+
         public QuestDetailsUI ActiveQuest
         {
             get => Get<QuestDetailsUI>();
@@ -57,14 +63,7 @@ namespace CZS.Web.ViewModels
             get => Get<IEnumerable<QuestNPCGroupUI>>();
             set => Set(value);
         }
-
-        public string ServerValidationErrors_itemkey => nameof(ServerValidationErrors);
-        public IEnumerable<string> ServerValidationErrors
-        {
-            get => Get<IEnumerable<string>>();
-            set => Set(value);
-        }
-
+        
         private bool _showNotification;
         public bool ShowNotification
         {
@@ -142,14 +141,7 @@ namespace CZS.Web.ViewModels
                     Name = x.Name,
                     FameRegionID = x.FameRegionId
                 }).ToList();
-
-            QuestFameRegionUI selectFameRegion = new QuestFameRegionUI
-            {
-                Name = "None",
-                FameRegionID = -1
-            };
-            fameRegions.Insert(0, selectFameRegion);
-
+            
             FameRegions = fameRegions;
 
             QuestTypes = _db.QuestTypeDomain.OrderBy(x => x.QuestTypeId)
@@ -176,7 +168,7 @@ namespace CZS.Web.ViewModels
             _db.QuestRewardItems.RemoveRange(dbQuest.QuestRewardItems);
             _db.QuestRequiredItemList.RemoveRange(dbQuest.QuestRequiredItemList);
             _db.QuestRequiredKeyItemList.RemoveRange(dbQuest.QuestRequiredKeyItemList);
-            _db.QuestPrerequisites.RemoveRange(dbQuest.QuestPrerequisitesRequiredQuest);
+            _db.QuestPrerequisites.RemoveRange(dbQuest.QuestPrerequisitesQuest);
             _db.QuestKillTargetList.RemoveRange(dbQuest.QuestKillTargetList);
             _db.QuestStates.RemoveRange(dbQuest.QuestStates);
             _db.Quests.Remove(dbQuest);
@@ -208,7 +200,7 @@ namespace CZS.Web.ViewModels
         {
             if (questID <= -1)
             {
-                ActiveQuest = new QuestDetailsUI { QuestID = -1 };
+                ActiveQuest = new QuestDetailsUI { QuestID = questID == -1 ? -1 : -2 };
                 return;
             }
 
@@ -221,7 +213,7 @@ namespace CZS.Web.ViewModels
                 return;
             }
             _db.Entry(quest)
-                .Collection(x => x.QuestPrerequisitesRequiredQuest)
+                .Collection(x => x.QuestPrerequisitesQuest)
                 .Load();
 
             _db.Entry(quest)
@@ -273,7 +265,7 @@ namespace CZS.Web.ViewModels
                         Resref = x.Resref
                     }).ToList()
                 },
-                PrerequisiteQuestIDs = quest.QuestPrerequisitesRequiredQuest.Select(x => x.RequiredQuestId).ToList(),
+                PrerequisiteQuestIDs = quest.QuestPrerequisitesQuest.Select(x => x.RequiredQuestId).ToList(),
                 QuestStates = quest.QuestStates.Select(x => new QuestStateUI
                 {
                     QuestTypeID = x.QuestTypeId,
@@ -301,12 +293,23 @@ namespace CZS.Web.ViewModels
 
         public Action<QuestDetailsUI> SaveChanges => questDetails =>
         {
+            int originalQuestID = questDetails.QuestID;
+
+            if (questDetails.QuestID < -1)
+                questDetails.QuestID = 0;
+
             QuestDetailsUIValidator validator = new QuestDetailsUIValidator();
             var result = validator.Validate(questDetails);
-
             if (!result.IsValid)
             {
-                // TODO: return error messages
+                NotificationMessage = "Error saving quest: " + Environment.NewLine + Environment.NewLine;
+                foreach (var error in result.Errors)
+                {
+                    NotificationMessage += error.ErrorMessage + Environment.NewLine;
+                }
+                NotificationSuccessful = false;
+                ShowNotification = true;
+                questDetails.QuestID = originalQuestID;
                 return;
             }
 
@@ -333,8 +336,8 @@ namespace CZS.Web.ViewModels
             quest.RemoveStartKeyItemAfterCompletion = questDetails.RemoveStartKeyItemAfterCompletion;
 
             // Prerequisites
-            _db.QuestPrerequisites.RemoveRange(quest.QuestPrerequisitesRequiredQuest);
-            quest.QuestPrerequisitesRequiredQuest.Clear();
+            _db.QuestPrerequisites.RemoveRange(quest.QuestPrerequisitesQuest);
+            quest.QuestPrerequisitesQuest.Clear();
             foreach (var prereq in questDetails.PrerequisiteQuestIDs)
             {
                 QuestPrerequisites dbPrereq = new QuestPrerequisites
@@ -343,7 +346,7 @@ namespace CZS.Web.ViewModels
                     Quest = quest
                 };
 
-                quest.QuestPrerequisitesRequiredQuest.Add(dbPrereq);
+                quest.QuestPrerequisitesQuest.Add(dbPrereq);
                 _db.Entry(dbPrereq).State = EntityState.Added;
             }
 
@@ -447,6 +450,9 @@ namespace CZS.Web.ViewModels
                 _db.SaveChanges();
                 NotificationMessage = "Changes were saved successfully.";
                 NotificationSuccessful = true;
+                LoadQuestList();
+                ActiveQuestID = quest.QuestId;
+                ActiveQuest = BuildQuestUIObject(quest);
             }
             catch
             {

@@ -23,7 +23,6 @@ namespace CZS.Web.Models.Validation
 
             RuleFor(x => x.FameRegionID)
                 .NotNull()
-                .NotEmpty()
                 .GreaterThanOrEqualTo(0);
 
             RuleFor(x => x.RequiredFameAmount)
