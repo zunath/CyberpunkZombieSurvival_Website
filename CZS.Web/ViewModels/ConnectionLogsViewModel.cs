@@ -19,16 +19,7 @@ namespace CZS.Web.ViewModels
 
         private static IEnumerable<dynamic> BuildClientData(DataContext db)
         {
-            return db.ClientLogEvents.OrderByDescending(o => o.DateOfEvent)
-                .Select(x => new
-                {
-                    ClientLogEventID = x.ClientLogEventId,
-                    DateOfEvent = x.DateOfEvent,
-                    EventTypeID = x.ClientLogEventTypeId,
-                    PlayerName = x.Player.CharacterName,
-                    CDKey = x.Cdkey,
-                    AccountName = x.AccountName
-                });
+            return db.ClientLogEvents.OrderByDescending(o => o.DateOfEvent);
         }
     }
 }

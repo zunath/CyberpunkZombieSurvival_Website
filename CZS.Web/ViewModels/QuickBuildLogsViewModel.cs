@@ -19,15 +19,7 @@ namespace CZS.Web.ViewModels
 
         private static IEnumerable<dynamic> BuildClientData(DataContext db)
         {
-            return db.StructureQuickBuildAudit.OrderByDescending(o => o.DateBuilt)
-                .Select(x => new
-                {
-                    QuickBuildID = x.StructureQuickBuildId,
-                    PCTerritoryFlagID = x.PcterritoryFlagId,
-                    PCStructureID = x.PcterritoryFlagStructureId,
-                    DMName = x.Dmname,
-                    DateBuilt = x.DateBuilt
-                });
+            return db.StructureQuickBuildAudit.OrderByDescending(o => o.DateBuilt);
         }
     }
 }

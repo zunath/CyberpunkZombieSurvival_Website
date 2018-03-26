@@ -21,21 +21,7 @@ namespace CZS.Web.ViewModels
 
         private static IEnumerable<dynamic> BuildClientData(DataContext db)
         {
-            return db.ChatLog.OrderByDescending(x => x.DateSent)
-                .Select(x => new
-                {
-                    ChatLogID = x.ChatLogId,
-                    SenderPlayerName = x.SenderPlayer.CharacterName,
-                    SenderAccountName = x.SenderAccountName,
-                    SenderCDKey = x.SenderCdkey,
-                    ReceiverPlayerName = x.ReceiverPlayer.CharacterName,
-                    ReceiverAccountName = x.ReceiverAccountName,
-                    ReceiverCDKey = x.ReceiverCdkey,
-                    Message = x.Message,
-                    DateSent = x.DateSent,
-                    SenderDMName = x.SenderDmname,
-                    ReceiverDMName = x.ReceiverDmname
-                });
+            return db.ChatLog.OrderByDescending(x => x.DateSent);
         }
 
     }

@@ -43,15 +43,15 @@ export default class QuickBuildLogs extends React.Component {
                     </thead>
                     <tbody>
                         {this.state.PaginatedItems.map(obj => {
-                            return <tr key={obj.QuickBuildID}>
+                            return <tr key={obj.StructureQuickBuildId}>
                                 <td>
-                                    {obj.PCTerritoryFlagID}
+                                    {obj.PcterritoryFlagId}
                                 </td>
                                 <td>
-                                    {obj.PCTerritoryFlagStructureID}
+                                    {obj.PcterritoryFlagStructureId}
                                 </td>
                                 <td>
-                                    {obj.DMName}
+                                    {obj.Dmname}
                                 </td>
                                 <td>
                                     {obj.DateBuilt}

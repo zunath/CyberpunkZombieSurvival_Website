@@ -52,18 +52,18 @@ export default class ConnectionLogs extends React.Component {
                         </tr>
                         </thead>
                         <tbody>
-                            {this.state.PaginatedItems.map(obj => <tr key={obj.ClientLogEventID}>
+                            {this.state.PaginatedItems.map(obj => <tr key={obj.ClientLogEventId}>
                                                                     <td>
                                                                         {obj.DateOfEvent}
                                                                     </td>
                                                                     <td>
-                                                                        {this.getTypeOfLogin(obj.EventTypeID)}
+                                                                        {this.getTypeOfLogin(obj.ClientLogEventTypeId)}
                                                                     </td>
                                                                     <td>
-                                                                        {obj.PlayerName}
+                                                                        {obj.Player === null ? '' : obj.Player.CharacterName}
                                                                     </td>
                                                                     <td>
-                                                                        {obj.CDKey}
+                                                                        {obj.Cdkey}
                                                                     </td>
                                                                     <td>
                                                                         {obj.AccountName}
