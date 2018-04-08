@@ -21,7 +21,7 @@ export default class Downloads extends React.Component {
                 <div className="card border-primary mb-3">
                     <div className="card-body">
                         <h4 className="card-title center">Automatic Downloads</h4>
-                        <p className="card-text">
+                        <div className="card-text">
                             <p>
                                 The recommended way to download our files is to subscribe to us on Steam. Simply click the button below, click "Subscribe" and the files will download automatically!
                             </p>
@@ -29,7 +29,7 @@ export default class Downloads extends React.Component {
                             <a className="btn btn-outline-primary btn-block" target="_blank" href="http://steamcommunity.com/sharedfiles/filedetails/?id=1323035693">
                                 Subscribe on Steam
                             </a>
-                         </p>
+                         </div>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@ export default class Downloads extends React.Component {
                 <div className="card border-primary mb-3">
                     <div className="card-body">
                         <h4 className="card-title center">Manual Downloads</h4>
-                        <p className="card-text">
+                        <div className="card-text">
                             <p>
                                 Don't use Steam, or prefer to manage the files yourself? No problem! Download all of the files below and place them into the appropriate location.
                             </p>
@@ -73,7 +73,7 @@ export default class Downloads extends React.Component {
                                     </tbody>
                                 </table>
                             </div>
-                        </p>
+                        </div>
                     </div>
                 </div>
                 

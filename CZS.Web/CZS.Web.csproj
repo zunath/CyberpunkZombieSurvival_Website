@@ -135,7 +135,7 @@
   </Target>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="webpack --config webpack.config.vendor.js" />
+    <Exec Command="webpack --config webpack.config.vendor.js&#xD;&#xA;webpack --config webpack.config.js" />
   </Target>
 
 </Project>
