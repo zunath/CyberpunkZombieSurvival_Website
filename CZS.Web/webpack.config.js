@@ -5,7 +5,7 @@ const merge = require('webpack-merge');
 
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
-
+    
     // Configuration in common to both client-side and server-side bundles
     const sharedConfig = () => ({
         stats: { modules: false },
@@ -20,7 +20,8 @@ module.exports = (env) => {
                 { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
             ]
         },
-        plugins: []
+        plugins: [],
+        mode: isDevBuild ? 'development' : 'production'
     });
 
     // Configuration for client-side bundle suitable for running in browsers
@@ -47,7 +48,7 @@ module.exports = (env) => {
             })
         ] : [
             // Plugins that apply in production builds only
-            new webpack.optimize.UglifyJsPlugin()
+            
         ])
     });
 

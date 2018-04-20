@@ -39,6 +39,7 @@ module.exports = (env) => {
             filename: '[name].js',
             library: '[name]_[hash]',
         },
+        mode: isDevBuild ? 'development' : 'production',
         plugins: [
 
             new webpack.ProvidePlugin({
@@ -68,7 +69,7 @@ module.exports = (env) => {
                 name: '[name]_[hash]'
             })
         ].concat(isDevBuild ? [] : [
-            new webpack.optimize.UglifyJsPlugin()
+            
         ])
     });
 
